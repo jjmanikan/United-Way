@@ -33,7 +33,8 @@ namespace WinnerWinnerChickenDinner
 
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
         List<Contestant> ContestantList = new List<Contestant>();
-        List<Contestant> UpdatedList = new List<Contestant>();
+        //List<Contestant> UpdatedList = new List<Contestant>();
+        List<Ticket<string>> TicketsList = new List<Ticket<string>>();
 
         public MainWindow()
         {
@@ -49,9 +50,7 @@ namespace WinnerWinnerChickenDinner
 
             ImportContestants();
             FillPrizeBoard();
-            UpdateList();
-
-            
+            //UpdateList();
 
             //testing
             //Console.WriteLine("Hello");
@@ -103,6 +102,13 @@ namespace WinnerWinnerChickenDinner
             Marshal.ReleaseComObject(xlWorkSheet);
             Marshal.ReleaseComObject(xlWorkBook);
             Marshal.ReleaseComObject(xlApp);
+
+            foreach (Contestant c in ContestantList.Skip(1))
+            {
+
+                Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
+                TicketsList.Add(contestant);
+            }
         }
 
 
@@ -125,18 +131,20 @@ namespace WinnerWinnerChickenDinner
         {
             try
             {
-                int rollCount = 50 + _rnd.Next(UpdatedList.Count);
+                // determines how many rolls there will be
+                int rollCount = 50 + _rnd.Next(ContestantList.Count);
 
                 int index = 0;
-                Random currentwinner = new Random();
+                Random randomname = new Random();
 
+                //rolling effect
                 for (int i = 0; i < rollCount; i++)
                 {
                     // get random index in list of contestant
                     //index = i % UpdatedList.Count;
-                    index = currentwinner.Next(0, UpdatedList.Count);
+                    index = randomname.Next(0, ContestantList.Count);
 
-                    txt_WheelName.Text = UpdatedList[index].FullName;
+                    txt_WheelName.Text = ContestantList[index].FullName;
 
                     //delay that gets longer and longer on each roll
                     var delay = 250 * i / rollCount;
@@ -146,44 +154,31 @@ namespace WinnerWinnerChickenDinner
 
                     //wait
                     await Task.Delay(delay);
-                }
+                } 
 
-                string winnername = UpdatedList[index].FullName;
+                //display each contestants probability of winning
+                Ticket<string>.GetProbabilities(TicketsList);
+
+                //final roll for winner, only roll that matters
+                string winnername = Ticket<string>.Pick(TicketsList);
+                txt_WheelName.Text = winnername;
+
+                Console.WriteLine("Winner: " + winnername);
+                //string winnername = UpdatedList[index].FullName;
                 PrizeBoardItem prizewinner = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
                 prizewinner.Winner = winnername;
                 lst_PrizeBoard.Items.Refresh();
-                System.Windows.MessageBox.Show($"and... The winner is... {UpdatedList[index].FullName}");
+                System.Windows.MessageBox.Show($"and... The winner is... {winnername}");
 
-                UpdatedList.RemoveAll(x => x.FullName == winnername);
-                
-                
-
-                foreach (Contestant x in UpdatedList)
+                //remove winner from list after they win
+                //UpdatedList.RemoveAll(x => x.FullName == winnername);
+      
+                /*foreach (Contestant x in UpdatedList)
                 {
                     Console.WriteLine(x.FullName);
-                }
-                //Simpler randomizer
-                /*Random winner = new Random();
-                int i = UpdatedList.Count;
+                } */
                 
-                int prizewinner = winner.Next(0, i);
-
-
-                string winnername = UpdatedList[prizewinner].FullName;
-
-                PrizeBoardItem currentwinner = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
-                currentwinner.Winner = winnername;
-                lst_PrizeBoard.Items.Refresh();
-                
-                Console.WriteLine("List Winner: " + currentwinner.Winner + "won" + currentwinner.PrizeName);
-                
-                //txt_FirstPlace.Text = winnername;
-
-                Console.WriteLine("Winner:" + winnername);
-
-                UpdatedList.RemoveAll(x => x.FullName == winnername);
-
-                */
+             
             }
             catch (ArgumentOutOfRangeException r)
             {
@@ -196,6 +191,7 @@ namespace WinnerWinnerChickenDinner
 
 
         /// <summary>
+        /// old way of finding winner
         /// function to update list iterating through each contestants number of tickets
         /// </summary>
         public void UpdateList()
@@ -207,7 +203,7 @@ namespace WinnerWinnerChickenDinner
                 for (int i = 0; i < ts; i++)
                 {
                     Console.WriteLine(contestant.FullName);
-                    UpdatedList.Add(new Contestant() { Tickets = "1", Prefix = contestant.Prefix, FirstName = contestant.FirstName, MiddleName = contestant.MiddleName, LastName = contestant.LastName, FullName = contestant.FullName, PhoneNumber = contestant.PhoneNumber, Email = contestant.Email });
+                    //UpdatedList.Add(new Contestant() { Tickets = "1", Prefix = contestant.Prefix, FirstName = contestant.FirstName, MiddleName = contestant.MiddleName, LastName = contestant.LastName, FullName = contestant.FullName, PhoneNumber = contestant.PhoneNumber, Email = contestant.Email });
 
                 }
 
