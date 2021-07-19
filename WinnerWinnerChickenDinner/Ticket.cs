@@ -20,7 +20,12 @@ namespace WinnerWinnerChickenDinner
             this.weight = weight;
         }
         
-     
+        
+        /// <summary>
+        /// get probabilities of each contestant
+        /// </summary>
+        /// <param name="tickets"></param>
+        /// <returns></returns>
         public static List<Ticket<T>> GetProbabilities(List<Ticket<T>> tickets)
         {
             int tSum = 0;
@@ -44,16 +49,39 @@ namespace WinnerWinnerChickenDinner
 
         public static T Pick(List<Ticket<T>> tickets)
         {
+            //sum of tickets
             int tSum = 0;
+
+            //number of contestants
             int count = tickets.Count();
 
+            //totals number of tickets
             for (int i = 0; i < count; i++)
             {
+                //will iterate through total number of tickets
+                //each contestant will have a set segment in the total number of tickets
+                int ticketSum2;
                 tSum += tickets[i].weight;
                 tickets[i].ticketSum = tSum;
+
+                //verification
+                if(i > 0)
+                {
+                    ticketSum2 = tickets[i - 1].ticketSum; 
+                }
+                else
+                {
+                    ticketSum2 = 0;
+                }
+
+                Console.WriteLine("Name: " + tickets[i].key + " Tickets: " + tickets[i].weight + " Number Range Section: Between " + ticketSum2 + " and " + tickets[i].ticketSum);
             }
 
+            //random number in total number of tickets
             double divSpot = random.NextDouble() * tSum;
+            Console.WriteLine("Winning Number: " + divSpot);
+
+            //picks closest ticket( by greater than i.e. if DivSpot is 10 a contestant with a ticketSum of 10 or greater will win and is the closest))
             Ticket<T> winner = tickets.FirstOrDefault(n => n.ticketSum >= divSpot);
             if (winner == null) throw new Exception("No winner, check algorithm");
             return winner.key;

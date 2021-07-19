@@ -157,7 +157,7 @@ namespace WinnerWinnerChickenDinner
                 } 
 
                 //display each contestants probability of winning
-                Ticket<string>.GetProbabilities(TicketsList);
+                //Ticket<string>.GetProbabilities(TicketsList);
 
                 //final roll for winner, only roll that matters
                 string winnername = Ticket<string>.Pick(TicketsList);
