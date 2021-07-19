@@ -1,0 +1,46 @@
+﻿<Window x:Class="WinnerWinnerChickenDinner.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
+        xmlns:local="clr-namespace:WinnerWinnerChickenDinner"
+        mc:Ignorable="d"
+        Title="Winner Winner Chicken Dinner!" Height="450" Width="800"
+        ResizeMode="NoResize">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.Background>
+            <VisualBrush>
+                <VisualBrush.Visual>
+                    <Image gif:ImageBehavior.AnimatedSource="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
+                           gif:ImageBehavior.AutoStart ="True"
+                           gif:ImageBehavior.RepeatBehavior="1"/>
+                </VisualBrush.Visual>
+            </VisualBrush>
+        </Grid.Background>
+
+        <Button Style="{StaticResource RoundButtonTemplate}" Content="ROLL" Margin="0,315,390,-99" FontWeight="ExtraBold" FontFamily="Calibri" Click="Button_Click" HorizontalAlignment="Right" Width="122" />
+        <Button Style="{StaticResource RoundButtonTemplate}" Content="NEW PRIZE" Margin="0,316,263,-99" FontWeight="ExtraBold" FontFamily="Calibri" HorizontalAlignment="Right" Width="122" Click="Button_Click_1"/>
+        <ListView Background= "Transparent"  FontWeight="Bold" FontSize="15" Foreground="DarkGoldenrod" FontFamily="Calibri" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lst_PrizeBoard" SelectionChanged="lst_PrizeBoard_SelectionChanged" Margin="0,15,0,31" HorizontalAlignment="Right" Width="300">
+            <ListView.View>
+                <GridView ColumnHeaderContainerStyle="{StaticResource HeaderStyle}">
+                    <GridViewColumn  DisplayMemberBinding="{Binding PrizeName}" Header="PRIZE" Width="150"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Winner}" Header="WINNER" Width="150"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock Foreground="DarkSlateGray" Name="txt_CurrentPrize" Margin="0,300,118,-66" TextWrapping="Wrap" Text="Prize" HorizontalAlignment="Right" Width="140"/>
+
+
+        <TextBlock Foreground="DarkSlateGray" FontSize="20" Margin="0,264,66,-37" TextWrapping="Wrap" Text="Current Prize" HorizontalAlignment="Right" Width="192"/>
+        <TextBlock FontWeight="ExtraBold" FontSize="13"  Foreground="DarkSlateGray" Name="txt_WheelName" Height="46" Margin="282,264,263,-48" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="249" TextAlignment="Center"/>
+
+
+
+
+    </Grid>
+</Window>
