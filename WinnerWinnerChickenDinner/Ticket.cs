@@ -78,11 +78,11 @@ namespace WinnerWinnerChickenDinner
             }
 
             //random number in total number of tickets
-            double divSpot = random.NextDouble() * tSum;
-            Console.WriteLine("Winning Number: " + divSpot);
+            double winningodd = random.NextDouble() * tSum;
+            Console.WriteLine("Winning Number: " + winningodd);
 
-            //picks closest ticket( by greater than i.e. if DivSpot is 10 a contestant with a ticketSum of 10 or greater will win and is the closest))
-            Ticket<T> winner = tickets.FirstOrDefault(n => n.ticketSum >= divSpot);
+            //picks closest ticket( by greater than i.e. if WinningOdd is 10 a contestant with a ticketSum of 10 or greater will win and is the closest))
+            Ticket<T> winner = tickets.FirstOrDefault(n => n.ticketSum >= winningodd);
             if (winner == null) throw new Exception("No winner, check algorithm");
             return winner.key;
         }
