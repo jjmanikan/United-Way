@@ -196,7 +196,6 @@ namespace WinnerWinnerChickenDinner
         /// </summary>
         public void UpdateList()
         {
-
             foreach (Contestant contestant in ContestantList.Skip(1))
             {
                 int ts = Int32.Parse(contestant.Tickets);
@@ -204,14 +203,9 @@ namespace WinnerWinnerChickenDinner
                 {
                     Console.WriteLine(contestant.FullName);
                     //UpdatedList.Add(new Contestant() { Tickets = "1", Prefix = contestant.Prefix, FirstName = contestant.FirstName, MiddleName = contestant.MiddleName, LastName = contestant.LastName, FullName = contestant.FullName, PhoneNumber = contestant.PhoneNumber, Email = contestant.Email });
-
                 }
-
-
             }
         }
-
-       
 
         /// <summary>
         /// selection change function
@@ -249,19 +243,25 @@ namespace WinnerWinnerChickenDinner
 
             System.Windows.Forms.Label txtLabel = new System.Windows.Forms.Label() { Left = 50, Top = 20, Text = text};
             System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox() { Left = 50, Top = 50, Width = 200 };
-            System.Windows.Forms.Button button = new System.Windows.Forms.Button() { Text = "Add", Left = 50, Width = 100, Top = 70, DialogResult = System.Windows.Forms.DialogResult.OK};
+            System.Windows.Forms.Button button = new System.Windows.Forms.Button() { Text = "Add and Go Back", Left = 50, Width = 110, Top = 70, DialogResult = System.Windows.Forms.DialogResult.OK};
             System.Windows.Forms.Button add = new System.Windows.Forms.Button()
             {
-                Image = System.Drawing.Image.FromFile(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\plus.jpg"),
+                Text="+",
                 Width = 50,
                 Top = 70,
-                Left = 150
+                Left = 160
             };
-            button.Click += (sender, e) => { prompt.Close(); };
+
+            add.Font = new System.Drawing.Font(button.Font.FontFamily, 20);
+            button.Click += (sender, e) => {
+                string t = textBox.Text;
+                AddNewPrize(t);
+                prompt.Close(); };
             add.Click += (sender, e) =>
             {
                 string t = textBox.Text;
                 AddNewPrize(t);
+                textBox.Text = "";
                 
             };
             prompt.Controls.Add(textBox);
@@ -274,11 +274,9 @@ namespace WinnerWinnerChickenDinner
 
         }
 
-       
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ShowDialog("New Prize", "Name new Prize:");
+            ShowDialog("Name new Prize:", "NEW PRIZE");
         }
     }
 
