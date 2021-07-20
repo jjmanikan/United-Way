@@ -33,7 +33,8 @@ namespace WinnerWinnerChickenDinner
 
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
         List<Contestant> ContestantList = new List<Contestant>();
-        List<Contestant> UpdatedList = new List<Contestant>();
+        //List<Contestant> UpdatedList = new List<Contestant>();
+        List<Ticket<string>> TicketsList = new List<Ticket<string>>();
 
         public MainWindow()
         {
@@ -49,9 +50,7 @@ namespace WinnerWinnerChickenDinner
 
             ImportContestants();
             FillPrizeBoard();
-            UpdateList();
-
-            
+            //UpdateList();
 
             //testing
             //Console.WriteLine("Hello");
@@ -76,6 +75,8 @@ namespace WinnerWinnerChickenDinner
             int cl = 0;
 
             xlApp = new Microsoft.Office.Interop.Excel.Application();
+            //absolute path, change when neccessary
+            //TODO: Change to dynamic asset folder
             xlWorkBook = xlApp.Workbooks.Open(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\iattend output.xlsx");
             xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
@@ -98,11 +99,19 @@ namespace WinnerWinnerChickenDinner
                 ContestantList.Add(contestant);
             }
 
+            //Closes workbook, excel will continue to run in the background if you don't
             xlWorkBook.Close(true, null, null);
             xlApp.Quit();
             Marshal.ReleaseComObject(xlWorkSheet);
             Marshal.ReleaseComObject(xlWorkBook);
             Marshal.ReleaseComObject(xlApp);
+
+            //skip first line since its the header
+            foreach (Contestant c in ContestantList.Skip(1))
+            {
+                Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
+                TicketsList.Add(contestant);
+            }
         }
 
 
@@ -117,105 +126,102 @@ namespace WinnerWinnerChickenDinner
         }
 
         /// <summary>
-        /// buttone lick function
+        /// Rolls button  click function, roll for winner
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
+            PrizeBoardItem selectedPrize = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
+            if (selectedPrize.Winner == "")
             {
-                int rollCount = 50 + _rnd.Next(UpdatedList.Count);
-
-                int index = 0;
-                Random currentwinner = new Random();
-
-                for (int i = 0; i < rollCount; i++)
+                try
                 {
-                    // get random index in list of contestant
-                    //index = i % UpdatedList.Count;
-                    index = currentwinner.Next(0, UpdatedList.Count);
+                    // determines how many rolls there will be
+                    int rollCount = 50 + _rnd.Next(ContestantList.Count);
 
-                    txt_WheelName.Text = UpdatedList[index].FullName;
+                    int index = 0;
+                    Random randomname = new Random();
 
-                    //delay that gets longer and longer on each roll
-                    var delay = 250 * i / rollCount;
+                    //rolling effect
+                    for (int i = 0; i < rollCount; i++)
+                    {
+                        // get random index in list of contestant
+                        //index = i % UpdatedList.Count;
+                        index = randomname.Next(0, ContestantList.Count);
 
-                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
-                    player.Play();
+                        txt_WheelName.Text = ContestantList[index].FullName;
 
-                    //wait
-                    await Task.Delay(delay);
+                        //TODO: Change to make more bearable  with larger contestant lists
+                        //delay that gets longer and longer on each roll
+                        var delay = 250 * i / rollCount;
+
+                        //TODO: change from absolute path to assets
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                        player.Play();
+
+                        //wait
+                        await Task.Delay(delay);
+                    }
+
+                    //display each contestants probability of winning
+                    //Ticket<string>.GetProbabilities(TicketsList);
+
+                    //final roll for winner, only roll that matters
+                    string winnername = Ticket<string>.Pick(TicketsList);
+                    txt_WheelName.Text = winnername;
+
+                    Console.WriteLine("Winner: " + winnername);
+
+                    //string winnername = UpdatedList[index].FullName;
+
+
+                    selectedPrize.Winner = winnername;
+                    lst_PrizeBoard.Items.Refresh();
+                    System.Windows.MessageBox.Show($"and... The winner is... {winnername}");
+
+                    //remove winner from list after they win
+                    //UpdatedList.RemoveAll(x => x.FullName == winnername);
+
+                    /*foreach (Contestant x in UpdatedList)
+                    {
+                        Console.WriteLine(x.FullName);
+                    } */
+
+
                 }
-
-                string winnername = UpdatedList[index].FullName;
-                PrizeBoardItem prizewinner = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
-                prizewinner.Winner = winnername;
-                lst_PrizeBoard.Items.Refresh();
-                System.Windows.MessageBox.Show($"and... The winner is... {UpdatedList[index].FullName}");
-
-                UpdatedList.RemoveAll(x => x.FullName == winnername);
-                
-                
-
-                foreach (Contestant x in UpdatedList)
+                catch (ArgumentOutOfRangeException r)
                 {
-                    Console.WriteLine(x.FullName);
+                    Console.WriteLine("Exception: " + r.Message);
+                    //throw new ArgumentOutOfRangeException("", r);
                 }
-                //Simpler randomizer
-                /*Random winner = new Random();
-                int i = UpdatedList.Count;
-                
-                int prizewinner = winner.Next(0, i);
-
-
-                string winnername = UpdatedList[prizewinner].FullName;
-
-                PrizeBoardItem currentwinner = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
-                currentwinner.Winner = winnername;
-                lst_PrizeBoard.Items.Refresh();
-                
-                Console.WriteLine("List Winner: " + currentwinner.Winner + "won" + currentwinner.PrizeName);
-                
-                //txt_FirstPlace.Text = winnername;
-
-                Console.WriteLine("Winner:" + winnername);
-
-                UpdatedList.RemoveAll(x => x.FullName == winnername);
-
-                */
             }
-            catch (ArgumentOutOfRangeException r)
+            else
             {
-                Console.WriteLine("Exception: " + r.Message);
-                //throw new ArgumentOutOfRangeException("", r);
+                System.Windows.MessageBox.Show($"{selectedPrize.Winner} already won {selectedPrize.PrizeName}! Select another prize!");
             }
+            
            
             
         }
 
 
         /// <summary>
+        /// old way of finding winner
         /// function to update list iterating through each contestants number of tickets
         /// </summary>
         public void UpdateList()
         {
-
             foreach (Contestant contestant in ContestantList.Skip(1))
             {
                 int ts = Int32.Parse(contestant.Tickets);
                 for (int i = 0; i < ts; i++)
                 {
                     Console.WriteLine(contestant.FullName);
-                    UpdatedList.Add(new Contestant() { Tickets = "1", Prefix = contestant.Prefix, FirstName = contestant.FirstName, MiddleName = contestant.MiddleName, LastName = contestant.LastName, FullName = contestant.FullName, PhoneNumber = contestant.PhoneNumber, Email = contestant.Email });
-
+                    //UpdatedList.Add(new Contestant() { Tickets = "1", Prefix = contestant.Prefix, FirstName = contestant.FirstName, MiddleName = contestant.MiddleName, LastName = contestant.LastName, FullName = contestant.FullName, PhoneNumber = contestant.PhoneNumber, Email = contestant.Email });
                 }
-
-
             }
         }
-
-       
 
         /// <summary>
         /// selection change function
@@ -253,19 +259,25 @@ namespace WinnerWinnerChickenDinner
 
             System.Windows.Forms.Label txtLabel = new System.Windows.Forms.Label() { Left = 50, Top = 20, Text = text};
             System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox() { Left = 50, Top = 50, Width = 200 };
-            System.Windows.Forms.Button button = new System.Windows.Forms.Button() { Text = "Add", Left = 50, Width = 100, Top = 70, DialogResult = System.Windows.Forms.DialogResult.OK};
+            System.Windows.Forms.Button button = new System.Windows.Forms.Button() { Text = "Add and Go Back", Left = 50, Width = 110, Top = 70, DialogResult = System.Windows.Forms.DialogResult.OK};
             System.Windows.Forms.Button add = new System.Windows.Forms.Button()
             {
-                Image = System.Drawing.Image.FromFile(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\plus.jpg"),
+                Text="+",
                 Width = 50,
                 Top = 70,
-                Left = 150
+                Left = 160
             };
-            button.Click += (sender, e) => { prompt.Close(); };
+
+            add.Font = new System.Drawing.Font(button.Font.FontFamily, 20);
+            button.Click += (sender, e) => {
+                string t = textBox.Text;
+                AddNewPrize(t);
+                prompt.Close(); };
             add.Click += (sender, e) =>
             {
                 string t = textBox.Text;
                 AddNewPrize(t);
+                textBox.Text = "";
                 
             };
             prompt.Controls.Add(textBox);
@@ -278,11 +290,9 @@ namespace WinnerWinnerChickenDinner
 
         }
 
-       
-
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            ShowDialog("New Prize", "Name new Prize:");
+            ShowDialog("Name new Prize:", "NEW PRIZE");
         }
     }
 

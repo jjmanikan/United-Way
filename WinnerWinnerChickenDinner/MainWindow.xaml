@@ -33,11 +33,24 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBlock Foreground="DarkSlateGray" Name="txt_CurrentPrize" Margin="0,300,118,-66" TextWrapping="Wrap" Text="Prize" HorizontalAlignment="Right" Width="140"/>
+        <TextBlock Foreground="DarkSlateGray" Name="txt_CurrentPrize" Margin="0,300,118,-66" TextWrapping="Wrap" Text="Select Prize" HorizontalAlignment="Right" Width="140"/>
 
 
-        <TextBlock Foreground="DarkSlateGray" FontSize="20" Margin="0,264,66,-37" TextWrapping="Wrap" Text="Current Prize" HorizontalAlignment="Right" Width="192"/>
-        <TextBlock FontWeight="ExtraBold" FontSize="13"  Foreground="DarkSlateGray" Name="txt_WheelName" Height="46" Margin="282,264,263,-48" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="249" TextAlignment="Center"/>
+        <TextBlock Foreground="DarkSlateGray" FontSize="20" Margin="0,264,66,-37" TextWrapping="Wrap" FontFamily="Calibri" Text="Current Prize:" HorizontalAlignment="Right" Width="192"/>
+        <TextBlock FontWeight="ExtraBold" FontSize="35"  Foreground="DarkSlateGray" Name="txt_WheelName" Height="46" Margin="282,264,263,-48" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="249" TextAlignment="Center"/>
+        <TextBlock FontFamily="Brush Script MT" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="United Way Campaign" VerticalAlignment="Top" Height="172" Width="186" FontSize="40" Foreground="HotPink">
+            <TextBlock.Effect>
+                <DropShadowEffect
+                    ShadowDepth="1"
+                    Direction="-25"
+                    Color="HotPink"
+                    Opacity="0.5"
+                    BlurRadius="20"
+                    
+                />
+            </TextBlock.Effect>
+        </TextBlock>
+
 
 
 
