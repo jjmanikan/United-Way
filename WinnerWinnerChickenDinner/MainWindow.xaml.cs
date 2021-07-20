@@ -75,6 +75,8 @@ namespace WinnerWinnerChickenDinner
             int cl = 0;
 
             xlApp = new Microsoft.Office.Interop.Excel.Application();
+            //absolute path, change when neccessary
+            //TODO: Change to dynamic asset folder
             xlWorkBook = xlApp.Workbooks.Open(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\iattend output.xlsx");
             xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
@@ -97,15 +99,16 @@ namespace WinnerWinnerChickenDinner
                 ContestantList.Add(contestant);
             }
 
+            //Closes workbook, excel will continue to run in the background if you don't
             xlWorkBook.Close(true, null, null);
             xlApp.Quit();
             Marshal.ReleaseComObject(xlWorkSheet);
             Marshal.ReleaseComObject(xlWorkBook);
             Marshal.ReleaseComObject(xlApp);
 
+            //skip first line since its the header
             foreach (Contestant c in ContestantList.Skip(1))
             {
-
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
                 TicketsList.Add(contestant);
             }
@@ -123,68 +126,81 @@ namespace WinnerWinnerChickenDinner
         }
 
         /// <summary>
-        /// buttone lick function
+        /// Rolls button  click function, roll for winner
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            try
+            PrizeBoardItem selectedPrize = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
+            if (selectedPrize.Winner == "")
             {
-                // determines how many rolls there will be
-                int rollCount = 50 + _rnd.Next(ContestantList.Count);
-
-                int index = 0;
-                Random randomname = new Random();
-
-                //rolling effect
-                for (int i = 0; i < rollCount; i++)
+                try
                 {
-                    // get random index in list of contestant
-                    //index = i % UpdatedList.Count;
-                    index = randomname.Next(0, ContestantList.Count);
+                    // determines how many rolls there will be
+                    int rollCount = 50 + _rnd.Next(ContestantList.Count);
 
-                    txt_WheelName.Text = ContestantList[index].FullName;
+                    int index = 0;
+                    Random randomname = new Random();
 
-                    //delay that gets longer and longer on each roll
-                    var delay = 250 * i / rollCount;
+                    //rolling effect
+                    for (int i = 0; i < rollCount; i++)
+                    {
+                        // get random index in list of contestant
+                        //index = i % UpdatedList.Count;
+                        index = randomname.Next(0, ContestantList.Count);
 
-                    System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
-                    player.Play();
+                        txt_WheelName.Text = ContestantList[index].FullName;
 
-                    //wait
-                    await Task.Delay(delay);
-                } 
+                        //TODO: Change to make more bearable  with larger contestant lists
+                        //delay that gets longer and longer on each roll
+                        var delay = 250 * i / rollCount;
 
-                //display each contestants probability of winning
-                //Ticket<string>.GetProbabilities(TicketsList);
+                        //TODO: change from absolute path to assets
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                        player.Play();
 
-                //final roll for winner, only roll that matters
-                string winnername = Ticket<string>.Pick(TicketsList);
-                txt_WheelName.Text = winnername;
+                        //wait
+                        await Task.Delay(delay);
+                    }
 
-                Console.WriteLine("Winner: " + winnername);
-                //string winnername = UpdatedList[index].FullName;
-                PrizeBoardItem prizewinner = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
-                prizewinner.Winner = winnername;
-                lst_PrizeBoard.Items.Refresh();
-                System.Windows.MessageBox.Show($"and... The winner is... {winnername}");
+                    //display each contestants probability of winning
+                    //Ticket<string>.GetProbabilities(TicketsList);
 
-                //remove winner from list after they win
-                //UpdatedList.RemoveAll(x => x.FullName == winnername);
-      
-                /*foreach (Contestant x in UpdatedList)
+                    //final roll for winner, only roll that matters
+                    string winnername = Ticket<string>.Pick(TicketsList);
+                    txt_WheelName.Text = winnername;
+
+                    Console.WriteLine("Winner: " + winnername);
+
+                    //string winnername = UpdatedList[index].FullName;
+
+
+                    selectedPrize.Winner = winnername;
+                    lst_PrizeBoard.Items.Refresh();
+                    System.Windows.MessageBox.Show($"and... The winner is... {winnername}");
+
+                    //remove winner from list after they win
+                    //UpdatedList.RemoveAll(x => x.FullName == winnername);
+
+                    /*foreach (Contestant x in UpdatedList)
+                    {
+                        Console.WriteLine(x.FullName);
+                    } */
+
+
+                }
+                catch (ArgumentOutOfRangeException r)
                 {
-                    Console.WriteLine(x.FullName);
-                } */
-                
-             
+                    Console.WriteLine("Exception: " + r.Message);
+                    //throw new ArgumentOutOfRangeException("", r);
+                }
             }
-            catch (ArgumentOutOfRangeException r)
+            else
             {
-                Console.WriteLine("Exception: " + r.Message);
-                //throw new ArgumentOutOfRangeException("", r);
+                System.Windows.MessageBox.Show($"{selectedPrize.Winner} already won {selectedPrize.PrizeName}! Select another prize!");
             }
+            
            
             
         }

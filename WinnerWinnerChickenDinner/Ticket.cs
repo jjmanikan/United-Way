@@ -14,6 +14,7 @@ namespace WinnerWinnerChickenDinner
        
         private static Random random = new Random();
         
+        //key will be full name
         public Ticket(T key, int weight)
         {
             this.key = key;
