@@ -19,6 +19,7 @@ using System.Windows.Shapes;
 
 
 
+
 namespace WinnerWinnerChickenDinner
 {
     
@@ -28,9 +29,12 @@ namespace WinnerWinnerChickenDinner
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
+
+        
         string output = "{0,-20}\t{1,-40}";
         int prizecount = 0;
 
+        public static List<PrizeBoardItem> prizeList = new List<PrizeBoardItem>();
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
         List<Contestant> ContestantList = new List<Contestant>();
         //List<Contestant> UpdatedList = new List<Contestant>();
@@ -39,6 +43,7 @@ namespace WinnerWinnerChickenDinner
         public MainWindow()
         {
             InitializeComponent();
+            
 
             //testing purposes
             /*ContestantList.Add(new Contestant() { Tickets = 10, Prefix = "", FirstName = "Justine", MiddleName = "Kyle Soriano", LastName = "Manikan", FullName = "Justine Kyle Soriano Manikan", PhoneNumber = "2113442423", Email = "j@gmail.com" });
@@ -77,7 +82,7 @@ namespace WinnerWinnerChickenDinner
             xlApp = new Microsoft.Office.Interop.Excel.Application();
             //absolute path, change when neccessary
             //TODO: Change to dynamic asset folder
-            xlWorkBook = xlApp.Workbooks.Open(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\iattend output.xlsx");
+            xlWorkBook = xlApp.Workbooks.Open(@"D:\MSILaptop\work\United-Way\WinnerWinnerChickenDinner\iattend output.xlsx");
             xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             range = xlWorkSheet.UsedRange;
@@ -121,8 +126,8 @@ namespace WinnerWinnerChickenDinner
         private void FillPrizeBoard()
         {
             this.lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = "Cup", Winner = "" });
-            this.lst_PrizeBoard.Items.Add(new PrizeBoardItem{ PrizeName = "Cup2", Winner = "" });
-            this.lst_PrizeBoard.Items.Add(new PrizeBoardItem{ PrizeName = "Cup3", Winner = "" });
+            this.lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = "Cup2", Winner = "" });
+            this.lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = "Cup3", Winner = "" });
         }
 
         /// <summary>
@@ -132,6 +137,7 @@ namespace WinnerWinnerChickenDinner
         /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+            //error check that
             PrizeBoardItem selectedPrize = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
             if (selectedPrize.Winner == "")
             {
@@ -157,7 +163,7 @@ namespace WinnerWinnerChickenDinner
                         var delay = 250 * i / rollCount;
 
                         //TODO: change from absolute path to assets
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"D:\MSILaptop\work\United-Way\\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
                         player.Play();
 
                         //wait
@@ -181,7 +187,7 @@ namespace WinnerWinnerChickenDinner
                     System.Windows.MessageBox.Show($"and... The winner is... {winnername}");
 
                     //remove winner from list after they win
-                    //UpdatedList.RemoveAll(x => x.FullName == winnername);
+                    ContestantList.RemoveAll(x => x.FullName == winnername);
 
                     /*foreach (Contestant x in UpdatedList)
                     {
@@ -240,59 +246,85 @@ namespace WinnerWinnerChickenDinner
         /// add new prize
         /// </summary>
         /// <param name="prize"></param>
-        public void AddNewPrize(string prize)
-        {
-            lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = prize, Winner = "" });
-        }
+        /// 
+
+        //public void AddNewPrize(string prize)
+        //{
+        //    lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = prize, Winner = "" });
+        //}
         //static
-        public string ShowDialog(string text, string caption)
-        {
-            Form prompt = new Form()
-            {
-                Width = 300,
-                Height = 150,
-                BackColor = System.Drawing.Color.MistyRose,
-                FormBorderStyle = FormBorderStyle.FixedDialog,
-                Text = caption,
-                StartPosition = FormStartPosition.CenterParent
-            };
 
-            System.Windows.Forms.Label txtLabel = new System.Windows.Forms.Label() { Left = 50, Top = 20, Text = text};
-            System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox() { Left = 50, Top = 50, Width = 200 };
-            System.Windows.Forms.Button button = new System.Windows.Forms.Button() { Text = "Add and Go Back", Left = 50, Width = 110, Top = 70, DialogResult = System.Windows.Forms.DialogResult.OK};
-            System.Windows.Forms.Button add = new System.Windows.Forms.Button()
-            {
-                Text="+",
-                Width = 50,
-                Top = 70,
-                Left = 160
-            };
 
-            add.Font = new System.Drawing.Font(button.Font.FontFamily, 20);
-            button.Click += (sender, e) => {
-                string t = textBox.Text;
-                AddNewPrize(t);
-                prompt.Close(); };
-            add.Click += (sender, e) =>
-            {
-                string t = textBox.Text;
-                AddNewPrize(t);
-                textBox.Text = "";
+        //public string ShowDialog(string text, string caption)
+        //{
+        //    Form prompt = new Form()
+        //    {
+        //        Width = 300,
+        //        Height = 150,
+        //        BackColor = System.Drawing.Color.MistyRose,
+        //        FormBorderStyle = FormBorderStyle.FixedDialog,
+        //        Text = caption,
+        //        StartPosition = FormStartPosition.CenterParent
+        //    };
+
+        //    System.Windows.Forms.Label txtLabel = new System.Windows.Forms.Label() { Left = 50, Top = 20, Text = text};
+        //    System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox() { Left = 50, Top = 50, Width = 200 };
+        //    System.Windows.Forms.Button button = new System.Windows.Forms.Button() { Text = "Add and Go Back", Left = 50, Width = 110, Top = 70, DialogResult = System.Windows.Forms.DialogResult.OK};
+        //    System.Windows.Forms.Button add = new System.Windows.Forms.Button()
+        //    {
+        //        Text="+",
+        //        Width = 50,
+        //        Top = 70,
+        //        Left = 160
+        //    };
+
+        //    add.Font = new System.Drawing.Font(button.Font.FontFamily, 20);
+        //    button.Click += (sender, e) => {
+        //        string t = textBox.Text;
+        //        AddNewPrize(t);
+        //        prompt.Close(); };
+        //    add.Click += (sender, e) =>
+        //    {
+        //        string t = textBox.Text;
+        //        AddNewPrize(t);
+        //        textBox.Text = "";
                 
-            };
-            prompt.Controls.Add(textBox);
-            prompt.Controls.Add(button);
-            prompt.Controls.Add(add);
-            prompt.Controls.Add(txtLabel);
-            prompt.AcceptButton = button;
+        //    };
+        //    prompt.Controls.Add(textBox);
+        //    prompt.Controls.Add(button);
+        //    prompt.Controls.Add(add);
+        //    prompt.Controls.Add(txtLabel);
+        //    prompt.AcceptButton = button;
 
-            return prompt.ShowDialog() == System.Windows.Forms.DialogResult.OK ? textBox.Text : "";
+        //    return prompt.ShowDialog() == System.Windows.Forms.DialogResult.OK ? textBox.Text : "";
 
+        //}
+
+        //private void Button_Click_1(object sender, RoutedEventArgs e)
+        //{
+        //    ShowDialog("Name new Prize:", "NEW PRIZE");
+        //}
+
+
+        private void BtnOpenSettings(object sender, RoutedEventArgs e)
+        {
+            SettingsWindow openSettings = new SettingsWindow();
+            //SettingsWindow w1 = new SettingsWindow();
+            openSettings.Owner = this;
+            //openSettings.AppMainWindow = this;
+            openSettings.Show();
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void OpenInitialSettings(object sender, RoutedEventArgs e)
         {
-            ShowDialog("Name new Prize:", "NEW PRIZE");
+            SettingsWindow openSettings = new SettingsWindow();
+            openSettings.Owner = this;
+            openSettings.Show();
+        }
+
+        public static void AddList(List<PrizeBoardItem> var_list)
+        {
+
         }
     }
 

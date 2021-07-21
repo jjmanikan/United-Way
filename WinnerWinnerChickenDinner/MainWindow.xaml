@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:WinnerWinnerChickenDinner"
         mc:Ignorable="d"
         Title="Winner Winner Chicken Dinner!" Height="450" Width="800"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Loaded="OpenInitialSettings">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
         <Grid.Background>
             <VisualBrush>
                 <VisualBrush.Visual>
-                    <Image gif:ImageBehavior.AnimatedSource="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
+                    <Image gif:ImageBehavior.AnimatedSource="D:\MSILaptop\work\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
                            gif:ImageBehavior.AutoStart ="True"
                            gif:ImageBehavior.RepeatBehavior="1"/>
                 </VisualBrush.Visual>
@@ -24,8 +24,8 @@
         </Grid.Background>
 
         <Button Style="{StaticResource RoundButtonTemplate}" Content="ROLL" Margin="0,315,390,-99" FontWeight="ExtraBold" FontFamily="Calibri" Click="Button_Click" HorizontalAlignment="Right" Width="122" />
-        <Button Style="{StaticResource RoundButtonTemplate}" Content="NEW PRIZE" Margin="0,316,263,-99" FontWeight="ExtraBold" FontFamily="Calibri" HorizontalAlignment="Right" Width="122" Click="Button_Click_1"/>
-        <ListView Background= "Transparent"  FontWeight="Bold" FontSize="15" Foreground="DarkGoldenrod" FontFamily="Calibri" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lst_PrizeBoard" SelectionChanged="lst_PrizeBoard_SelectionChanged" Margin="0,15,0,31" HorizontalAlignment="Right" Width="300">
+        <!--<Button Style="{StaticResource RoundButtonTemplate}" Content="NEW PRIZE" Margin="0,316,263,-99" FontWeight="ExtraBold" FontFamily="Calibri" HorizontalAlignment="Right" Width="122" Click="Button_Click_1"/>-->
+        <ListView Background= "Transparent"  FontWeight="Bold" FontSize="15" Foreground="DarkGoldenrod" FontFamily="Calibri" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lst_PrizeBoard" SelectionChanged="lst_PrizeBoard_SelectionChanged" Margin="0,48,0,-1" HorizontalAlignment="Right" Width="300">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource HeaderStyle}">
                     <GridViewColumn  DisplayMemberBinding="{Binding PrizeName}" Header="PRIZE" Width="150"/>
@@ -33,12 +33,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBlock Foreground="DarkSlateGray" Name="txt_CurrentPrize" Margin="0,300,118,-66" TextWrapping="Wrap" Text="Select Prize" HorizontalAlignment="Right" Width="140"/>
+        <TextBlock Foreground="DarkSlateGray" Name="txt_CurrentPrize" Margin="0,330,118,-96" TextWrapping="Wrap" Text="Select Prize" HorizontalAlignment="Right" Width="140"/>
 
 
-        <TextBlock Foreground="DarkSlateGray" FontSize="20" Margin="0,264,66,-37" TextWrapping="Wrap" FontFamily="Calibri" Text="Current Prize:" HorizontalAlignment="Right" Width="192"/>
+        <TextBlock Foreground="DarkSlateGray" FontSize="20" Margin="0,291,66,-64" TextWrapping="Wrap" FontFamily="Calibri" Text="Current Prize:" HorizontalAlignment="Right" Width="192"/>
         <TextBlock FontWeight="ExtraBold" FontSize="35"  Foreground="DarkSlateGray" Name="txt_WheelName" Height="46" Margin="282,264,263,-48" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="249" TextAlignment="Center"/>
-        <TextBlock FontFamily="Brush Script MT" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="United Way Campaign" VerticalAlignment="Top" Height="172" Width="186" FontSize="40" Foreground="HotPink">
+        <TextBlock FontFamily="Brush Script MT" HorizontalAlignment="Left" Margin="10,81,0,0" TextWrapping="Wrap" Text="United Way Campaign" VerticalAlignment="Top" Height="172" Width="186" FontSize="40" Foreground="HotPink">
             <TextBlock.Effect>
                 <DropShadowEffect
                     ShadowDepth="1"
@@ -50,10 +50,15 @@
                 />
             </TextBlock.Effect>
         </TextBlock>
-
-
-
-
+        <Button x:Name="settingsBtn"
+                HorizontalAlignment="Left"
+                Margin="741,10,0,0"
+                VerticalAlignment="Top"
+                Height="33" Width="34"
+                BorderThickness="0"   
+                Click="BtnOpenSettings">
+            <Image Source="pack://application:,,,/Assets/settings.png"  />
+        </Button>
 
     </Grid>
 </Window>
