@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms;
-
+using System.IO;
 
 namespace WinnerWinnerChickenDinner
 {
@@ -21,7 +21,9 @@ namespace WinnerWinnerChickenDinner
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        
+        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+
+
         public SettingsWindow()
         {
             InitializeComponent();
@@ -96,6 +98,55 @@ namespace WinnerWinnerChickenDinner
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             
+        }
+
+        private void btnUploadFile_Click(object sender, RoutedEventArgs e)
+        {
+
+
+
+
+            int size = -1;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog
+            {
+
+                Title = "Browse Contenstant Data",
+
+                CheckFileExists = true,
+                CheckPathExists = true,
+
+                DefaultExt = "xlsx",
+                Filter = "Excel files (*.xlsx)|*.xlsx",
+                FilterIndex = 2,
+                RestoreDirectory = true,
+
+                ReadOnlyChecked = true,
+                ShowReadOnly = true
+            };
+
+
+
+            if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+
+                MainWindow mainWindow = new MainWindow();
+
+                string file = openFileDialog1.FileName;
+                MainWindow.filePath = file;
+                try
+                {
+                    string text = File.ReadAllText(file);
+                    size = text.Length;
+                    mainWindow.ImportContestants();
+                    mainWindow.FillPrizeBoard();
+                }
+                catch (IOException)
+                {
+
+                }
+            }
+
+
         }
     }
 

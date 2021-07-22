@@ -16,7 +16,7 @@
         <Grid.Background>
             <VisualBrush>
                 <VisualBrush.Visual>
-                    <Image gif:ImageBehavior.AnimatedSource="D:\MSILaptop\work\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
+                    <Image gif:ImageBehavior.AnimatedSource="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
                            gif:ImageBehavior.AutoStart ="True"
                            gif:ImageBehavior.RepeatBehavior="1"/>
                 </VisualBrush.Visual>
@@ -57,7 +57,7 @@
                 Height="33" Width="34"
                 BorderThickness="0"   
                 Click="BtnOpenSettings">
-            <Image Source="pack://application:,,,/Assets/settings.png"  />
+            <Image Source="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\settings.png"  />
         </Button>
 
     </Grid>

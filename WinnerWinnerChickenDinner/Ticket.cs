@@ -55,6 +55,7 @@ namespace WinnerWinnerChickenDinner
 
             //number of contestants
             int count = tickets.Count();
+            Console.WriteLine("Ticket Count : " + count);
 
             //totals number of tickets
             for (int i = 0; i < count; i++)

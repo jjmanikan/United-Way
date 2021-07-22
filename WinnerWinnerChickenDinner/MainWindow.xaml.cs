@@ -33,18 +33,21 @@ namespace WinnerWinnerChickenDinner
         
         string output = "{0,-20}\t{1,-40}";
         int prizecount = 0;
+        public static string filePath = "";
 
         public static List<PrizeBoardItem> prizeList = new List<PrizeBoardItem>();
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
-        List<Contestant> ContestantList = new List<Contestant>();
+        public static  List<Contestant> ContestantList = new List<Contestant>();
         //List<Contestant> UpdatedList = new List<Contestant>();
-        List<Ticket<string>> TicketsList = new List<Ticket<string>>();
+       public static List<Ticket<string>> TicketsList = new List<Ticket<string>>();
 
         public MainWindow()
         {
             InitializeComponent();
-            
 
+           
+
+            FillPrizeBoard();
             //testing purposes
             /*ContestantList.Add(new Contestant() { Tickets = 10, Prefix = "", FirstName = "Justine", MiddleName = "Kyle Soriano", LastName = "Manikan", FullName = "Justine Kyle Soriano Manikan", PhoneNumber = "2113442423", Email = "j@gmail.com" });
             ContestantList.Add(new Contestant() { Tickets = 5, Prefix = "", FirstName = "Js", MiddleName = "", LastName = "Man", FullName = "Js Man", PhoneNumber = "2113442423", Email = "j@gmail.com" });
@@ -53,8 +56,7 @@ namespace WinnerWinnerChickenDinner
             */
 
 
-            ImportContestants();
-            FillPrizeBoard();
+
             //UpdateList();
 
             //testing
@@ -65,11 +67,16 @@ namespace WinnerWinnerChickenDinner
             }*/
         }
 
+
+
+        
         /// <summary>
         /// import contestants from excel
         /// </summary>
-        private void ImportContestants()
+        public void ImportContestants()
         {
+
+            Console.WriteLine("Calling this method");
             Microsoft.Office.Interop.Excel.Application xlApp;
             Workbook xlWorkBook;
             Worksheet xlWorkSheet;
@@ -82,7 +89,7 @@ namespace WinnerWinnerChickenDinner
             xlApp = new Microsoft.Office.Interop.Excel.Application();
             //absolute path, change when neccessary
             //TODO: Change to dynamic asset folder
-            xlWorkBook = xlApp.Workbooks.Open(@"D:\MSILaptop\work\United-Way\WinnerWinnerChickenDinner\iattend output.xlsx");
+            xlWorkBook = xlApp.Workbooks.Open(filePath);
             xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             range = xlWorkSheet.UsedRange;
@@ -104,6 +111,10 @@ namespace WinnerWinnerChickenDinner
                 ContestantList.Add(contestant);
             }
 
+
+            Console.WriteLine("Count is : " +ContestantList.Count);
+
+
             //Closes workbook, excel will continue to run in the background if you don't
             xlWorkBook.Close(true, null, null);
             xlApp.Quit();
@@ -123,7 +134,7 @@ namespace WinnerWinnerChickenDinner
         /// <summary>
         /// fill prize board with test prizes
         /// </summary>
-        private void FillPrizeBoard()
+        public void FillPrizeBoard()
         {
             this.lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = "Cup", Winner = "" });
             this.lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = "Cup2", Winner = "" });
@@ -137,6 +148,8 @@ namespace WinnerWinnerChickenDinner
         /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
+
+            Console.WriteLine("Total Count is :"+ContestantList.Count);
             //error check that
             PrizeBoardItem selectedPrize = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
             if (selectedPrize.Winner == "")
@@ -163,7 +176,7 @@ namespace WinnerWinnerChickenDinner
                         var delay = 250 * i / rollCount;
 
                         //TODO: change from absolute path to assets
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"D:\MSILaptop\work\United-Way\\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
                         player.Play();
 
                         //wait

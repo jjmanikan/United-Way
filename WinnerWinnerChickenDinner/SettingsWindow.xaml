@@ -21,6 +21,7 @@
         </ListView>
         <Button Content="Add Prize" HorizontalAlignment="Left" Margin="141.5,285,0,0" VerticalAlignment="Top" Width="93" Click="AddPrizeBtn" Grid.Column="1"/>
         <Button Content="SavePrizes" HorizontalAlignment="Left" Margin="141.5,310,0,0" VerticalAlignment="Top" Width="93" Click="savePrizesBtn" Grid.Column="1"/>
+        <Button x:Name="btnUploadFile" Content="Upload File" HorizontalAlignment="Left" Margin="150,216,0,0" VerticalAlignment="Top" Width="75" Click="btnUploadFile_Click"/>
 
     </Grid>
 </Window>
