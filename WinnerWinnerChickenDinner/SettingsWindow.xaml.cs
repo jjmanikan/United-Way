@@ -30,7 +30,7 @@ namespace WinnerWinnerChickenDinner
             //prizeBoard.ItemsSource = MainWindow.prizeList;
         }
 
-        private void AddPrizeBtn(object sender, RoutedEventArgs e)
+        private void AddPrize(object sender, RoutedEventArgs e)
         {
             ShowDialog("Name new Prize:", "NEW PRIZE");
         }
@@ -39,7 +39,11 @@ namespace WinnerWinnerChickenDinner
         {
             //MainWindow.prizeList.Add(new PrizeBoardItem { PrizeName = prize, Winner = "" });
             //SettingsWindow();
-            prizeBoard.Items.Add(new PrizeBoardItem { PrizeName = prize });
+            if (prize != "")
+            {
+                prizeBoard.Items.Add(new PrizeBoardItem { PrizeName = prize });
+            }
+            
         }
 
         public string ShowDialog(string text, string caption)
@@ -88,23 +92,14 @@ namespace WinnerWinnerChickenDinner
 
         }
 
-        //saves all the added prizes into static list to be populating scoreboard in maind window
-        private void savePrizesBtn(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
         //save the state when window is closing for the next time it is opened sp all changes are still there
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            
+            System.Windows.Forms.Application.Exit();
         }
 
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
-
-
-
 
             int size = -1;
             OpenFileDialog openFileDialog1 = new OpenFileDialog
@@ -135,6 +130,7 @@ namespace WinnerWinnerChickenDinner
                 MainWindow.filePath = file;
                 try
                 {
+                    filePathBox.Text = file;
                     string text = File.ReadAllText(file);
                     size = text.Length;
                     mainWindow.ImportContestants();
@@ -146,6 +142,10 @@ namespace WinnerWinnerChickenDinner
                 }
             }
 
+
+        }
+        private void savePrizes(object sender, RoutedEventArgs e)
+        {
 
         }
     }

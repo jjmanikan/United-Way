@@ -12,16 +12,23 @@
             <ColumnDefinition Width="270*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView Background= "Transparent" IsEnabled="False" FontWeight="Bold" FontSize="15" Foreground="DarkGoldenrod" FontFamily="Calibri" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="prizeBoard" Margin="0,10,10,139" HorizontalAlignment="Right" Width="150" Grid.Column="1">
+        <ListView Background= "Transparent" IsEnabled="False" FontWeight="Bold" FontSize="15" Foreground="DarkGoldenrod" FontFamily="Calibri" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="prizeBoard" Margin="0,165,36,107" HorizontalAlignment="Right" Width="150" Grid.Column="1">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource HeaderStyle}">
                     <GridViewColumn  DisplayMemberBinding="{Binding PrizeName}" Header="PRIZES" Width="150"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Add Prize" HorizontalAlignment="Left" Margin="141.5,285,0,0" VerticalAlignment="Top" Width="93" Click="AddPrizeBtn" Grid.Column="1"/>
-        <Button Content="SavePrizes" HorizontalAlignment="Left" Margin="141.5,310,0,0" VerticalAlignment="Top" Width="93" Click="savePrizesBtn" Grid.Column="1"/>
-        <Button x:Name="btnUploadFile" Content="Upload File" HorizontalAlignment="Left" Margin="150,216,0,0" VerticalAlignment="Top" Width="75" Click="btnUploadFile_Click"/>
+        <Button x:Name="AddPrizeBtn" Content="Add Prize" HorizontalAlignment="Left" Margin="115,324,0,0" VerticalAlignment="Top" Width="93" Click="AddPrize" Grid.Column="1"/>
+        <Button x:Name="savePrizesBtn" Content="Save" HorizontalAlignment="Left" Margin="114,352,0,0" VerticalAlignment="Top" Width="92" Click="savePrizes" Grid.Column="1"/>
+        <Button x:Name="btnUploadFile" Content="Upload File" HorizontalAlignment="Left" Margin="471,100,0,0" VerticalAlignment="Top" Width="75" Click="btnUploadFile_Click" Grid.ColumnSpan="2"/>
+        <TextBox x:Name="filePathBox" HorizontalAlignment="Left" Height="23" Margin="28,101,0,0" TextWrapping="Wrap" Text="Choose a file..." VerticalAlignment="Top" Width="426" IsEnabled="false"/>
+        <ListBox x:Name="contestantsListView" HorizontalAlignment="Left" Height="207" Margin="28,165,0,0" VerticalAlignment="Top" Width="426"/>
+        <Label x:Name="contestantsListLabel" Content="Current Contestants in the Raffle" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="25" Margin="28,135,0,0" VerticalAlignment="Top" Width="426"/>
+        <TextBox x:Name="contestName" HorizontalAlignment="Left" Height="23"  Margin="84,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="146" Grid.Column="1" Foreground="#FF898989"/>
+        <Label Content="Contest Name" Grid.Column="1" HorizontalAlignment="Left" Margin="84,68,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="146" Height="28"/>
+        <Label x:Name="ConestTitle" Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="193,18,0,0" VerticalAlignment="Top" Width="390" Grid.ColumnSpan="2" FontSize="20"/>
+        <CheckBox Content="Allow Multiple Wins" Grid.Column="1" HorizontalAlignment="Left" Margin="84,135,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

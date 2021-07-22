@@ -323,7 +323,7 @@ namespace WinnerWinnerChickenDinner
         {
             SettingsWindow openSettings = new SettingsWindow();
             //SettingsWindow w1 = new SettingsWindow();
-            openSettings.Owner = this;
+            openSettings.Owner = null;
             //openSettings.AppMainWindow = this;
             openSettings.Show();
         }
@@ -331,13 +331,18 @@ namespace WinnerWinnerChickenDinner
         private void OpenInitialSettings(object sender, RoutedEventArgs e)
         {
             SettingsWindow openSettings = new SettingsWindow();
-            openSettings.Owner = this;
+            openSettings.Owner = null;
             openSettings.Show();
         }
 
         public static void AddList(List<PrizeBoardItem> var_list)
         {
 
+        }
+
+        private void KillApp(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
         }
     }
 
