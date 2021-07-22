@@ -144,6 +144,7 @@ namespace WinnerWinnerChickenDinner
 
 
         }
+        //saves the prizes to a list and adds it to the scoreboard list
         private void savePrizes(object sender, RoutedEventArgs e)
         {
 
