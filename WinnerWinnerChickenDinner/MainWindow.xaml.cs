@@ -176,7 +176,7 @@ namespace WinnerWinnerChickenDinner
                         var delay = 250 * i / rollCount;
 
                         //TODO: change from absolute path to assets
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
                         player.Play();
 
                         //wait
@@ -251,7 +251,7 @@ namespace WinnerWinnerChickenDinner
         {
             PrizeBoardItem selectedItem = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
             //lst_PrizeBoard.SelectedItems[0].Col1.Text;
-            txt_CurrentPrize.Text = selectedItem.PrizeName;
+            //txt_CurrentPrize.Text = selectedItem.PrizeName;
         }
 
 

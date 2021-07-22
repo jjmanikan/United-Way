@@ -9,56 +9,57 @@
         Title="Winner Winner Chicken Dinner!" Height="450" Width="800"
         ResizeMode="NoResize" Loaded="OpenInitialSettings" Closing="KillApp">
 
-    <Grid>
+    <Grid RenderTransformOrigin="0.632,0.575">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <Grid.Background>
             <VisualBrush>
                 <VisualBrush.Visual>
-                    <Image gif:ImageBehavior.AnimatedSource="D:\MSILaptop\work\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
+                    <Image gif:ImageBehavior.AnimatedSource="C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
                            gif:ImageBehavior.AutoStart ="True"
                            gif:ImageBehavior.RepeatBehavior="1"/>
                 </VisualBrush.Visual>
             </VisualBrush>
         </Grid.Background>
 
-        <Button Style="{StaticResource RoundButtonTemplate}" Content="ROLL" Margin="0,315,390,-99" FontWeight="ExtraBold" FontFamily="Calibri" Click="Button_Click" HorizontalAlignment="Right" Width="122" />
+        <Rectangle Fill="DimGray" HorizontalAlignment="Left" Height="76" Margin="274,0,0,0" Stroke="DimGray" VerticalAlignment="Top" Width="520"/>
+
+        <Button Style="{StaticResource RoundButtonTemplate}" Background="LightSkyBlue" Content="ROLL" Margin="0,316,203,-86" FontWeight="ExtraBold" FontFamily="Arial" Click="Button_Click" HorizontalAlignment="Right" Width="119" />
         <!--<Button Style="{StaticResource RoundButtonTemplate}" Content="NEW PRIZE" Margin="0,316,263,-99" FontWeight="ExtraBold" FontFamily="Calibri" HorizontalAlignment="Right" Width="122" Click="Button_Click_1"/>-->
-        <ListView Background= "Transparent"  FontWeight="Bold" FontSize="15" Foreground="DarkGoldenrod" FontFamily="Calibri" BorderThickness="0" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Name="lst_PrizeBoard" SelectionChanged="lst_PrizeBoard_SelectionChanged" Margin="0,48,0,-1" HorizontalAlignment="Right" Width="300">
+        <ListView Background= "LightGray"  FontWeight="Bold" FontSize="15" Foreground="White" FontFamily="Arial" BorderThickness="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="lst_PrizeBoard" SelectionChanged="lst_PrizeBoard_SelectionChanged" Margin="0,100,538,-95" HorizontalAlignment="Right" Width="235">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource HeaderStyle}">
-                    <GridViewColumn  DisplayMemberBinding="{Binding PrizeName}" Header="PRIZE" Width="150"/>
-                    <GridViewColumn DisplayMemberBinding="{Binding Winner}" Header="WINNER" Width="150"/>
+                    <GridViewColumn  DisplayMemberBinding="{Binding PrizeName}" HeaderContainerStyle="{StaticResource HeaderFontStyle}" Header="PRIZE"  Width="110"/>
+                    <GridViewColumn DisplayMemberBinding="{Binding Winner}" HeaderContainerStyle="{StaticResource HeaderFontStyle}" Header="WINNER" Width="110"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBlock Foreground="DarkSlateGray" Name="txt_CurrentPrize" Margin="0,330,118,-96" TextWrapping="Wrap" Text="Select Prize" HorizontalAlignment="Right" Width="140"/>
-
-
-        <TextBlock Foreground="DarkSlateGray" FontSize="20" Margin="0,291,66,-64" TextWrapping="Wrap" FontFamily="Calibri" Text="Current Prize:" HorizontalAlignment="Right" Width="192"/>
-        <TextBlock FontWeight="ExtraBold" FontSize="35"  Foreground="DarkSlateGray" Name="txt_WheelName" Height="46" Margin="282,264,263,-48" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="249" TextAlignment="Center"/>
-        <TextBlock FontFamily="Brush Script MT" HorizontalAlignment="Left" Margin="10,81,0,0" TextWrapping="Wrap" Text="United Way Campaign" VerticalAlignment="Top" Height="172" Width="186" FontSize="40" Foreground="HotPink">
+        <TextBlock FontWeight="ExtraBold" FontSize="40"  Foreground="Red" x:Name="txt_WheelName" Margin="0,81,19,130" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="492" TextAlignment="Center"/>
+        <Button x:Name="settingsBtn"
+                HorizontalAlignment="Left"
+                Margin="733,10,0,0"
+                VerticalAlignment="Top"
+                Height="50" Width="41"
+                Background="Transparent"
+                BorderThickness="0"   
+                Click="BtnOpenSettings">
+            <Image Source="C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\settings.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
+        </Button>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="76" Stroke="Red" VerticalAlignment="Top" Width="256"/>
+        <TextBlock FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Left" Margin="292,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="458" FontSize="31" Foreground="White">
             <TextBlock.Effect>
                 <DropShadowEffect
                     ShadowDepth="1"
                     Direction="-25"
-                    Color="HotPink"
+                    Color="White"
                     Opacity="0.5"
                     BlurRadius="20"
                     
                 />
-            </TextBlock.Effect>
-        </TextBlock>
-        <Button x:Name="settingsBtn"
-                HorizontalAlignment="Left"
-                Margin="741,10,0,0"
-                VerticalAlignment="Top"
-                Height="33" Width="34"
-                BorderThickness="0"   
-                Click="BtnOpenSettings">
-            <Image Source="D:\MSILaptop\work\United-Way\WinnerWinnerChickenDinner/Assets/settings.png"  />
-        </Button>
+            </TextBlock.Effect><Run Text="United Way Campaign"/><Run Text=" Raffle"/></TextBlock>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="10,396,0,-132" Stroke="Red" VerticalAlignment="Top" Width="765"/>
+        <Image Source="C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="87" VerticalAlignment="Top" Width="345" Margin="10,-11,0,0"/>
 
     </Grid>
 </Window>
