@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows; 
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
@@ -22,32 +22,32 @@ using System.Windows.Shapes;
 
 namespace WinnerWinnerChickenDinner
 {
-    
- 
+
+
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : System.Windows.Window
     {
 
-        
+
         string output = "{0,-20}\t{1,-40}";
         int prizecount = 0;
         public static string filePath = "";
 
         public static List<PrizeBoardItem> prizeList = new List<PrizeBoardItem>();
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
-        public static  List<Contestant> ContestantList = new List<Contestant>();
+        public static List<Contestant> ContestantList = new List<Contestant>();
         //List<Contestant> UpdatedList = new List<Contestant>();
-       public static List<Ticket<string>> TicketsList = new List<Ticket<string>>();
+        public static List<Ticket<string>> TicketsList = new List<Ticket<string>>();
 
         public MainWindow()
         {
             InitializeComponent();
 
-           
-
             FillPrizeBoard();
+
+
             //testing purposes
             /*ContestantList.Add(new Contestant() { Tickets = 10, Prefix = "", FirstName = "Justine", MiddleName = "Kyle Soriano", LastName = "Manikan", FullName = "Justine Kyle Soriano Manikan", PhoneNumber = "2113442423", Email = "j@gmail.com" });
             ContestantList.Add(new Contestant() { Tickets = 5, Prefix = "", FirstName = "Js", MiddleName = "", LastName = "Man", FullName = "Js Man", PhoneNumber = "2113442423", Email = "j@gmail.com" });
@@ -69,7 +69,7 @@ namespace WinnerWinnerChickenDinner
 
 
 
-        
+
         /// <summary>
         /// import contestants from excel
         /// </summary>
@@ -112,7 +112,7 @@ namespace WinnerWinnerChickenDinner
             }
 
 
-            Console.WriteLine("Count is : " +ContestantList.Count);
+            Console.WriteLine("Count is : " + ContestantList.Count);
 
 
             //Closes workbook, excel will continue to run in the background if you don't
@@ -131,14 +131,16 @@ namespace WinnerWinnerChickenDinner
         }
 
 
+
         /// <summary>
         /// fill prize board with test prizes
         /// </summary>
         public void FillPrizeBoard()
         {
-            this.lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = "Cup", Winner = "" });
-            this.lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = "Cup2", Winner = "" });
-            this.lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = "Cup3", Winner = "" });
+            this.lst_PrizeBoard.ItemsSource = prizeList;
+            //this.lst_PrizeBoard.Items.Clear();
+
+
         }
 
         /// <summary>
@@ -149,7 +151,7 @@ namespace WinnerWinnerChickenDinner
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            Console.WriteLine("Total Count is :"+ContestantList.Count);
+            Console.WriteLine("Total Count is :" + ContestantList.Count);
             //error check that
             PrizeBoardItem selectedPrize = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
             if (selectedPrize.Winner == "")
@@ -176,7 +178,7 @@ namespace WinnerWinnerChickenDinner
                         var delay = 250 * i / rollCount;
 
                         //TODO: change from absolute path to assets
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
                         player.Play();
 
                         //wait
@@ -219,9 +221,9 @@ namespace WinnerWinnerChickenDinner
             {
                 System.Windows.MessageBox.Show($"{selectedPrize.Winner} already won {selectedPrize.PrizeName}! Select another prize!");
             }
-            
-           
-            
+
+
+
         }
 
 
@@ -301,7 +303,7 @@ namespace WinnerWinnerChickenDinner
         //        string t = textBox.Text;
         //        AddNewPrize(t);
         //        textBox.Text = "";
-                
+
         //    };
         //    prompt.Controls.Add(textBox);
         //    prompt.Controls.Add(button);
@@ -325,15 +327,12 @@ namespace WinnerWinnerChickenDinner
             //SettingsWindow w1 = new SettingsWindow();
             openSettings.Owner = null;
             //openSettings.AppMainWindow = this;
+
             openSettings.Show();
+            this.Close();
         }
 
-        private void OpenInitialSettings(object sender, RoutedEventArgs e)
-        {
-            SettingsWindow openSettings = new SettingsWindow();
-            openSettings.Owner = null;
-            openSettings.Show();
-        }
+
 
         public static void AddList(List<PrizeBoardItem> var_list)
         {
@@ -346,5 +345,5 @@ namespace WinnerWinnerChickenDinner
         }
     }
 
-   
+
 }

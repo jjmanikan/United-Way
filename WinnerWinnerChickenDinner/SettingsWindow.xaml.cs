@@ -22,6 +22,7 @@ namespace WinnerWinnerChickenDinner
     public partial class SettingsWindow : Window
     {
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        MainWindow mainWindow = new MainWindow();
 
 
         public SettingsWindow()
@@ -37,13 +38,20 @@ namespace WinnerWinnerChickenDinner
 
         public void AddNewPrize(string prize)
         {
+
             //MainWindow.prizeList.Add(new PrizeBoardItem { PrizeName = prize, Winner = "" });
             //SettingsWindow();
             if (prize != "")
             {
-                prizeBoard.Items.Add(new PrizeBoardItem { PrizeName = prize });
+                MainWindow.prizeList.Add(new PrizeBoardItem { PrizeName = prize, Winner = "" });
+
+                prizeBoard.Items.Clear();
+
+                foreach (var prizeItem in MainWindow.prizeList)
+                {
+                    prizeBoard.Items.Add(prizeItem);
+                }
             }
-            
         }
 
         public string ShowDialog(string text, string caption)
@@ -124,7 +132,6 @@ namespace WinnerWinnerChickenDinner
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
 
-                MainWindow mainWindow = new MainWindow();
 
                 string file = openFileDialog1.FileName;
                 MainWindow.filePath = file;
@@ -146,6 +153,13 @@ namespace WinnerWinnerChickenDinner
         }
         //saves the prizes to a list and adds it to the scoreboard list
         private void savePrizes(object sender, RoutedEventArgs e)
+        {
+            mainWindow.Show();
+            mainWindow.FillPrizeBoard();
+            this.Close();
+        }
+
+        private void prizeBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
