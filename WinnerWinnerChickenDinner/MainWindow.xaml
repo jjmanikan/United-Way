@@ -16,7 +16,7 @@
         <Grid.Background>
             <VisualBrush>
                 <VisualBrush.Visual>
-                    <Image gif:ImageBehavior.AnimatedSource="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
+                    <Image gif:ImageBehavior.AnimatedSource="D:\MSILaptop\work\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
                            gif:ImageBehavior.AutoStart ="True"
                            gif:ImageBehavior.RepeatBehavior="1"/>
                 </VisualBrush.Visual>
@@ -44,7 +44,7 @@
                 Background="Transparent"
                 BorderThickness="0"   
                 Click="BtnOpenSettings">
-            <Image Source="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\settings.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
+            <Image Source="D:\MSILaptop\work\United-Way\WinnerWinnerChickenDinner\Assets\settings.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
         </Button>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="76" Stroke="Red" VerticalAlignment="Top" Width="256"/>
         <TextBlock FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Left" Margin="292,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="458" FontSize="31" Foreground="White">
@@ -59,7 +59,7 @@
                 />
             </TextBlock.Effect><Run Text="United Way Campaign"/><Run Text=" Raffle"/></TextBlock>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="10,396,0,-132" Stroke="Red" VerticalAlignment="Top" Width="765"/>
-        <Image Source="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="87" VerticalAlignment="Top" Width="345" Margin="10,-11,0,0"/>
+        <Image Source="D:\MSILaptop\work\United-Way\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="87" VerticalAlignment="Top" Width="345" Margin="10,-11,0,0"/>
 
     </Grid>
 </Window>

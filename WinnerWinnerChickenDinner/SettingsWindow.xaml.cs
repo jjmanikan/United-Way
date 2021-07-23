@@ -13,6 +13,10 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
+using System.Collections.ObjectModel;
+using System.Windows.Input;
+//using ListViewScrollPosition.Commands;
+//using ListViewScrollPosition.Models;
 
 namespace WinnerWinnerChickenDinner
 {
@@ -53,6 +57,7 @@ namespace WinnerWinnerChickenDinner
                 }
             }
         }
+
 
         public string ShowDialog(string text, string caption)
         {
@@ -101,10 +106,10 @@ namespace WinnerWinnerChickenDinner
         }
 
         //save the state when window is closing for the next time it is opened sp all changes are still there
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-            System.Windows.Forms.Application.Exit();
-        }
+        //private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        //{
+        //    System.Windows.Forms.Application.Exit();
+        //}
 
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
@@ -141,7 +146,6 @@ namespace WinnerWinnerChickenDinner
                     string text = File.ReadAllText(file);
                     size = text.Length;
                     mainWindow.ImportContestants();
-                    mainWindow.FillPrizeBoard();
                 }
                 catch (IOException)
                 {
@@ -154,10 +158,35 @@ namespace WinnerWinnerChickenDinner
         //saves the prizes to a list and adds it to the scoreboard list
         private void savePrizes(object sender, RoutedEventArgs e)
         {
-            mainWindow.Show();
-            mainWindow.FillPrizeBoard();
-            this.Close();
+            if ((contestName.Text != "") & (MainWindow.prizeList.Count() > 0))
+            {
+                errorMessage.Foreground = Brushes.Green;
+                errorMessage.Content = "    Saved!";
+                contestTitle.Content = contestName.Text;
+                mainWindow.FillPrizeBoard();
+                //this.Close();
+            }
+            else if ((contestName.Text == "") & (MainWindow.prizeList.Count() == 0))
+            {
+                errorMessage.Foreground = Brushes.Red;
+                errorMessage.Content = "                     Could not Save.         " +
+                                       "\nMissing Contest Name and Prize Items";
+            }
+            else if (contestName.Text == "")
+            {
+                errorMessage.Foreground = Brushes.Red;
+                errorMessage.Content = "         Could not Save." +
+                                       "\n    Missing Contest Name"; 
+            }
+            else if(MainWindow.prizeList.Count() == 0)
+            {
+                errorMessage.Foreground = Brushes.Red;
+                errorMessage.Content = "        Could not Save." +
+                                       "\n    Missing Prize Items";
+            }
+
         }
+
 
         private void prizeBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
