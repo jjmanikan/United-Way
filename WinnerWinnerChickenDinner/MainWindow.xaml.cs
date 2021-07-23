@@ -202,7 +202,11 @@ namespace WinnerWinnerChickenDinner
                     System.Windows.MessageBox.Show($"and... The winner is... {winnername}");
 
                     //remove winner from list after they win
-                    ContestantList.RemoveAll(x => x.FullName == winnername);
+                    if(!SettingsWindow.allowMultipleWins)
+                    {
+                        ContestantList.RemoveAll(x => x.FullName == winnername);
+                        Console.WriteLine("Removing Content"+winnername);
+                    }
 
                     /*foreach (Contestant x in UpdatedList)
                     {
