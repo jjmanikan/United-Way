@@ -27,6 +27,8 @@ namespace WinnerWinnerChickenDinner
     {
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
         MainWindow mainWindow = new MainWindow();
+        public static bool allowMultipleWins = false;
+
 
 
         public SettingsWindow()
@@ -191,6 +193,22 @@ namespace WinnerWinnerChickenDinner
         private void prizeBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+
+        private void AllowMultipleWins_Checked(object sender, RoutedEventArgs e)
+        {
+
+                allowMultipleWins =true;
+          
+            Console.WriteLine("Allow Multiple Wins : "+allowMultipleWins);
+
+        }
+
+        private void AllowMultipleWins_Unchecked(object sender, RoutedEventArgs e)
+        {
+  
+                allowMultipleWins = false;
+                Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
         }
     }
 
