@@ -162,29 +162,30 @@ namespace WinnerWinnerChickenDinner
         {
             if ((contestName.Text != "") & (MainWindow.prizeList.Count() > 0))
             {
-                errorMessage.Foreground = Brushes.Green;
-                errorMessage.Content = "    Saved!";
+                errorMessage1.Foreground = Brushes.Green;
+                errorMessage1.Content = "Saved!";
+                errorMessage2.Content = "";
                 contestTitle.Content = contestName.Text;
                 mainWindow.FillPrizeBoard();
                 //this.Close();
             }
             else if ((contestName.Text == "") & (MainWindow.prizeList.Count() == 0))
             {
-                errorMessage.Foreground = Brushes.Red;
-                errorMessage.Content = "                     Could not Save.         " +
-                                       "\nMissing Contest Name and Prize Items";
+                errorMessage1.Foreground = Brushes.Red;
+                errorMessage1.Content = "Could not Save";
+                errorMessage2.Content = "Missing Contest Name and Prize Items";
             }
             else if (contestName.Text == "")
             {
-                errorMessage.Foreground = Brushes.Red;
-                errorMessage.Content = "         Could not Save." +
-                                       "\n    Missing Contest Name"; 
+                errorMessage1.Foreground = Brushes.Red;
+                errorMessage1.Content = "Could not Save";
+                errorMessage2.Content = "Missing Contest Name";
             }
             else if(MainWindow.prizeList.Count() == 0)
             {
-                errorMessage.Foreground = Brushes.Red;
-                errorMessage.Content = "        Could not Save." +
-                                       "\n    Missing Prize Items";
+                errorMessage1.Foreground = Brushes.Red;
+                errorMessage1.Content = "Could not Save";
+                errorMessage2.Content = "Missing Prize Items";
             }
 
         }
