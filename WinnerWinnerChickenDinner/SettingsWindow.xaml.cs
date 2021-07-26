@@ -1,25 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.Windows.Forms;
-using System.IO;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
+using System.Windows.Media;
 //using ListViewScrollPosition.Commands;
 //using ListViewScrollPosition.Models;
 
+
 namespace WinnerWinnerChickenDinner
 {
+
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>
@@ -77,6 +69,7 @@ namespace WinnerWinnerChickenDinner
             System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox() { Left = 50, Top = 50, Width = 200 };
             System.Windows.Forms.Button button = new System.Windows.Forms.Button() { Text = "Add and Go Back", Left = 50, Width = 110, Top = 70, DialogResult = System.Windows.Forms.DialogResult.OK };
             System.Windows.Forms.Button add = new System.Windows.Forms.Button()
+
             {
                 Text = "+",
                 Width = 50,
@@ -85,7 +78,8 @@ namespace WinnerWinnerChickenDinner
             };
 
             add.Font = new System.Drawing.Font(button.Font.FontFamily, 20);
-            button.Click += (sender, e) => {
+            button.Click += (sender, e) =>
+            {
                 string t = textBox.Text;
                 AddNewPrize(t);
                 prompt.Close();
@@ -157,9 +151,11 @@ namespace WinnerWinnerChickenDinner
 
 
         }
+
         //saves the prizes to a list and adds it to the scoreboard list
         private void savePrizes(object sender, RoutedEventArgs e)
         {
+
             if ((contestName.Text != "") & (MainWindow.prizeList.Count() > 0))
             {
                 errorMessage.Foreground = Brushes.Green;
@@ -178,9 +174,9 @@ namespace WinnerWinnerChickenDinner
             {
                 errorMessage.Foreground = Brushes.Red;
                 errorMessage.Content = "         Could not Save." +
-                                       "\n    Missing Contest Name"; 
+                                       "\n    Missing Contest Name";
             }
-            else if(MainWindow.prizeList.Count() == 0)
+            else if (MainWindow.prizeList.Count() == 0)
             {
                 errorMessage.Foreground = Brushes.Red;
                 errorMessage.Content = "        Could not Save." +
@@ -198,17 +194,17 @@ namespace WinnerWinnerChickenDinner
         private void AllowMultipleWins_Checked(object sender, RoutedEventArgs e)
         {
 
-                allowMultipleWins =true;
-          
-            Console.WriteLine("Allow Multiple Wins : "+allowMultipleWins);
+            allowMultipleWins = true;
+
+            Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
 
         }
 
         private void AllowMultipleWins_Unchecked(object sender, RoutedEventArgs e)
         {
-  
-                allowMultipleWins = false;
-                Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
+
+            allowMultipleWins = false;
+            Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
         }
     }
 
