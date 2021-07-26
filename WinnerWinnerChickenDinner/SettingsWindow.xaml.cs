@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 namespace WinnerWinnerChickenDinner
 {
@@ -103,6 +104,26 @@ namespace WinnerWinnerChickenDinner
         //save the state when window is closing for the next time it is opened sp all changes are still there
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
+
+            string settingsState = "Contestants";
+            using (StreamWriter outfile = new StreamWriter(@"C:\unitedway-State.txt"))
+            {
+                outfile.Write(settingsState);
+            }
+            string url = filePathBox.Text;
+            
+
+            savePrizesToSettings(MainWindow.prizeList);
+            Console.WriteLine("Prize List :" +Properties.Settings.Default.PrizeList);
+           
+            Properties.Settings.Default.ContestantListURL = url;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Upgrade();
+            Properties.Settings.Default.Save();
+
+            
+
+            Console.WriteLine("URL: " + Properties.Settings.Default.ContestantListURL);
             System.Windows.Forms.Application.Exit();
         }
 
@@ -134,7 +155,7 @@ namespace WinnerWinnerChickenDinner
 
 
                 string file = openFileDialog1.FileName;
-                MainWindow.filePath = file;
+                Properties.Settings.Default.ContestantListURL = file;
                 try
                 {
                     filePathBox.Text = file;
@@ -158,6 +179,21 @@ namespace WinnerWinnerChickenDinner
             mainWindow.FillPrizeBoard();
             this.Close();
         }
+
+        void savePrizesToSettings(List<PrizeBoardItem> prizeList)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(ms, prizeList);
+                ms.Position = 0;
+                byte[] buffer = new byte[(int)ms.Length];
+                ms.Read(buffer, 0, buffer.Length);
+                Properties.Settings.Default.PrizeList = Convert.ToBase64String(buffer);
+                Properties.Settings.Default.Save();
+            }
+        }
+
 
         private void prizeBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

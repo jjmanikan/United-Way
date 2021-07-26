@@ -2,8 +2,10 @@
 using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -34,6 +36,7 @@ namespace WinnerWinnerChickenDinner
         string output = "{0,-20}\t{1,-40}";
         int prizecount = 0;
         public static string filePath = "";
+        int initializecount = 0;
 
         public static List<PrizeBoardItem> prizeList = new List<PrizeBoardItem>();
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
@@ -45,9 +48,29 @@ namespace WinnerWinnerChickenDinner
         {
             InitializeComponent();
 
-            FillPrizeBoard();
+            
+            Properties.Settings.Default.Upgrade();
+            //Properties.Settings.Default.Save();
+            Console.WriteLine("Mainwindow2: " + Properties.Settings.Default.ContestantListURL);
+            prizeList = loadPrizes();
+            if (Properties.Settings.Default.ContestantListURL != "" || Properties.Settings.Default.ContestantListURL !="Choose a file..." && initializecount == 0)
+            {
+                FillPrizeBoard();
+                ImportContestants();
+                if(initializecount == 0)
+                {
+                    initializecount++;
+                }
+                Console.WriteLine("Ini Count: " + initializecount);
+            }
 
-
+            
+            foreach(PrizeBoardItem p in prizeList)
+            {
+                Console.WriteLine(p.PrizeName);
+            }
+            
+            
             //testing purposes
             /*ContestantList.Add(new Contestant() { Tickets = 10, Prefix = "", FirstName = "Justine", MiddleName = "Kyle Soriano", LastName = "Manikan", FullName = "Justine Kyle Soriano Manikan", PhoneNumber = "2113442423", Email = "j@gmail.com" });
             ContestantList.Add(new Contestant() { Tickets = 5, Prefix = "", FirstName = "Js", MiddleName = "", LastName = "Man", FullName = "Js Man", PhoneNumber = "2113442423", Email = "j@gmail.com" });
@@ -68,14 +91,22 @@ namespace WinnerWinnerChickenDinner
         }
 
 
-
+        List<PrizeBoardItem> loadPrizes()
+        {
+            using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.PrizeList)))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                return (List<PrizeBoardItem>)bf.Deserialize(ms);
+            }
+            
+        }
 
         /// <summary>
         /// import contestants from excel
         /// </summary>
         public void ImportContestants()
         {
-
+            
             Console.WriteLine("Calling this method");
             Microsoft.Office.Interop.Excel.Application xlApp;
             Workbook xlWorkBook;
@@ -89,7 +120,7 @@ namespace WinnerWinnerChickenDinner
             xlApp = new Microsoft.Office.Interop.Excel.Application();
             //absolute path, change when neccessary
             //TODO: Change to dynamic asset folder
-            xlWorkBook = xlApp.Workbooks.Open(filePath);
+            xlWorkBook = xlApp.Workbooks.Open(Properties.Settings.Default.ContestantListURL);
             xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             range = xlWorkSheet.UsedRange;
@@ -178,7 +209,7 @@ namespace WinnerWinnerChickenDinner
                         var delay = 250 * i / rollCount;
 
                         //TODO: change from absolute path to assets
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
                         player.Play();
 
                         //wait
