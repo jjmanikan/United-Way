@@ -26,12 +26,12 @@ namespace WinnerWinnerChickenDinner.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ContestantListURL {
+        public string ContestantList {
             get {
-                return ((string)(this["ContestantListURL"]));
+                return ((string)(this["ContestantList"]));
             }
             set {
-                this["ContestantListURL"] = value;
+                this["ContestantList"] = value;
             }
         }
         

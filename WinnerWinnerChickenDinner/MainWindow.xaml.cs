@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
-
-
 
 namespace WinnerWinnerChickenDinner
 {
@@ -51,26 +49,44 @@ namespace WinnerWinnerChickenDinner
             
             Properties.Settings.Default.Upgrade();
             //Properties.Settings.Default.Save();
-            Console.WriteLine("Mainwindow2: " + Properties.Settings.Default.ContestantListURL);
-            prizeList = loadPrizes();
-            if (Properties.Settings.Default.ContestantListURL != "" || Properties.Settings.Default.ContestantListURL !="Choose a file..." && initializecount == 0)
+            Console.WriteLine("Mainwindow2: " + Properties.Settings.Default.ContestantList);
+            try 
             {
-                FillPrizeBoard();
-                ImportContestants();
-                if(initializecount == 0)
-                {
-                    initializecount++;
-                }
-                Console.WriteLine("Ini Count: " + initializecount);
+                ContestantList = loadContestants();
+            }
+            catch (SerializationException e)
+            {
+                Console.WriteLine(" Contestant Exception: " + e.Message);
             }
 
-            
-            foreach(PrizeBoardItem p in prizeList)
+            try
             {
-                Console.WriteLine(p.PrizeName);
+                prizeList = loadPrizes();
+                FillPrizeBoard();
+
             }
-            
-            
+            catch (SerializationException e)
+            {
+                Console.WriteLine("Prize Exception: " + e.Message);
+            }
+
+            //skip first line since its the header
+            foreach (Contestant c in ContestantList.Skip(1))
+            {
+                Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
+                TicketsList.Add(contestant);
+            }
+
+            foreach (PrizeBoardItem p in prizeList)
+            {
+                Console.WriteLine(p.PrizeName + "Winner name:" + p.Winner);
+            }
+
+            /*foreach (Contestant contestant in ContestantList)
+            {
+                Console.WriteLine(contestant.Tickets + " "  + contestant.FullName + prizecount++);
+            } /*
+
             //testing purposes
             /*ContestantList.Add(new Contestant() { Tickets = 10, Prefix = "", FirstName = "Justine", MiddleName = "Kyle Soriano", LastName = "Manikan", FullName = "Justine Kyle Soriano Manikan", PhoneNumber = "2113442423", Email = "j@gmail.com" });
             ContestantList.Add(new Contestant() { Tickets = 5, Prefix = "", FirstName = "Js", MiddleName = "", LastName = "Man", FullName = "Js Man", PhoneNumber = "2113442423", Email = "j@gmail.com" });
@@ -78,16 +94,6 @@ namespace WinnerWinnerChickenDinner
             ContestantList.Add(new Contestant() { Tickets = 5, Prefix = "", FirstName = "2211", MiddleName = "", LastName = "Man", FullName = "2211 Man", PhoneNumber = "2113442423", Email = "j@gmail.com" });
             */
 
-
-
-            //UpdateList();
-
-            //testing
-            //Console.WriteLine("Hello");
-            /*foreach( Contestant contestant in ContestantList)
-            {
-                Console.WriteLine(contestant.Tickets + contestant.FullName);
-            }*/
         }
 
 
@@ -99,6 +105,43 @@ namespace WinnerWinnerChickenDinner
                 return (List<PrizeBoardItem>)bf.Deserialize(ms);
             }
             
+        }
+
+        List<Contestant> loadContestants()
+        {
+            using(MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.ContestantList)))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                return (List<Contestant>)bf.Deserialize(ms);
+            }
+        }
+
+        public void savePrizesToSettings(List<PrizeBoardItem> prizeList)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(ms, prizeList);
+                ms.Position = 0;
+                byte[] buffer = new byte[(int)ms.Length];
+                ms.Read(buffer, 0, buffer.Length);
+                Properties.Settings.Default.PrizeList = Convert.ToBase64String(buffer);
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        public void saveContestantsToSettings(List<Contestant> contestantList)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(ms, contestantList);
+                ms.Position = 0;
+                byte[] buffer = new byte[(int)ms.Length];
+                ms.Read(buffer, 0, buffer.Length);
+                Properties.Settings.Default.ContestantList = Convert.ToBase64String(buffer);
+                Properties.Settings.Default.Save();
+            }
         }
 
         /// <summary>
@@ -120,7 +163,7 @@ namespace WinnerWinnerChickenDinner
             xlApp = new Microsoft.Office.Interop.Excel.Application();
             //absolute path, change when neccessary
             //TODO: Change to dynamic asset folder
-            xlWorkBook = xlApp.Workbooks.Open(Properties.Settings.Default.ContestantListURL);
+            xlWorkBook = xlApp.Workbooks.Open(Properties.Settings.Default.ContestantList);
             xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             range = xlWorkSheet.UsedRange;
@@ -153,12 +196,7 @@ namespace WinnerWinnerChickenDinner
             Marshal.ReleaseComObject(xlWorkBook);
             Marshal.ReleaseComObject(xlApp);
 
-            //skip first line since its the header
-            foreach (Contestant c in ContestantList.Skip(1))
-            {
-                Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
-                TicketsList.Add(contestant);
-            }
+            
         }
 
 
@@ -236,8 +274,11 @@ namespace WinnerWinnerChickenDinner
                     if(!SettingsWindow.allowMultipleWins)
                     {
                         ContestantList.RemoveAll(x => x.FullName == winnername);
-                        Console.WriteLine("Removing Content"+winnername);
+                        Console.WriteLine("Removing Content " + winnername);
                     }
+
+                    savePrizesToSettings(prizeList);
+                    saveContestantsToSettings(ContestantList);
 
                     /*foreach (Contestant x in UpdatedList)
                     {

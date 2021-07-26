@@ -7,9 +7,9 @@ using System.Windows.Forms;
 using System.Windows.Media;
 //using ListViewScrollPosition.Commands;
 //using ListViewScrollPosition.Models;
-using System.IO;
-using System.Runtime.Serialization.Formatters.Binary;
 
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections.Generic;
 
 namespace WinnerWinnerChickenDinner
 {
@@ -107,26 +107,7 @@ namespace WinnerWinnerChickenDinner
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
 
-            string settingsState = "Contestants";
-            using (StreamWriter outfile = new StreamWriter(@"C:\unitedway-State.txt"))
-            {
-                outfile.Write(settingsState);
-            }
-            string url = filePathBox.Text;
             
-
-            savePrizesToSettings(MainWindow.prizeList);
-            Console.WriteLine("Prize List :" +Properties.Settings.Default.PrizeList);
-           
-            Properties.Settings.Default.ContestantListURL = url;
-            Properties.Settings.Default.Save();
-            Properties.Settings.Default.Upgrade();
-            Properties.Settings.Default.Save();
-
-            
-
-            Console.WriteLine("URL: " + Properties.Settings.Default.ContestantListURL);
-            System.Windows.Forms.Application.Exit();
         }
 
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
@@ -157,7 +138,7 @@ namespace WinnerWinnerChickenDinner
 
 
                 string file = openFileDialog1.FileName;
-                Properties.Settings.Default.ContestantListURL = file;
+                Properties.Settings.Default.ContestantList = file;
                 try
                 {
                     filePathBox.Text = file;
@@ -184,7 +165,27 @@ namespace WinnerWinnerChickenDinner
                 errorMessage.Content = "    Saved!";
                 contestTitle.Content = contestName.Text;
                 mainWindow.FillPrizeBoard();
-                //this.Close();
+                this.Close();
+
+                string settingsState = "Contestants";
+                using (StreamWriter outfile = new StreamWriter(@"C:\unitedway-State.txt"))
+                {
+                    outfile.Write(settingsState);
+                }
+
+
+                mainWindow.savePrizesToSettings(MainWindow.prizeList);
+                mainWindow.saveContestantsToSettings(MainWindow.ContestantList);
+                Console.WriteLine("Prize List :" + Properties.Settings.Default.PrizeList);
+                Console.WriteLine("ContestantList: " + Properties.Settings.Default.ContestantList);
+
+                Properties.Settings.Default.Save();
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.Save();
+
+                System.Windows.Forms.Application.Exit();
+
+                mainWindow.Show();
             }
             else if ((contestName.Text == "") & (MainWindow.prizeList.Count() == 0))
             {
@@ -207,19 +208,7 @@ namespace WinnerWinnerChickenDinner
 
         }
 
-        void savePrizesToSettings(List<PrizeBoardItem> prizeList)
-        {
-            using (MemoryStream ms = new MemoryStream())
-            {
-                BinaryFormatter bf = new BinaryFormatter();
-                bf.Serialize(ms, prizeList);
-                ms.Position = 0;
-                byte[] buffer = new byte[(int)ms.Length];
-                ms.Read(buffer, 0, buffer.Length);
-                Properties.Settings.Default.PrizeList = Convert.ToBase64String(buffer);
-                Properties.Settings.Default.Save();
-            }
-        }
+        
 
 
         private void prizeBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
