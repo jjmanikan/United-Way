@@ -168,13 +168,6 @@ namespace WinnerWinnerChickenDinner
                 mainWindow.FillPrizeBoard();
                 this.Close();
 
-                string settingsState = "Contestants";
-                using (StreamWriter outfile = new StreamWriter(@"C:\unitedway-State.txt"))
-                {
-                    outfile.Write(settingsState);
-                }
-
-
                 mainWindow.savePrizesToSettings(MainWindow.prizeList);
                 mainWindow.saveContestantsToSettings(MainWindow.ContestantList);
                 Console.WriteLine("Prize List :" + Properties.Settings.Default.PrizeList);
