@@ -28,6 +28,7 @@ namespace WinnerWinnerChickenDinner
             InitializeComponent();
             //prizeBoard.ItemsSource = MainWindow.prizeList;
             GetSettings();
+            LoadChanges();
         }
 
         private void AddPrize(object sender, RoutedEventArgs e)
@@ -144,6 +145,7 @@ namespace WinnerWinnerChickenDinner
                     string text = File.ReadAllText(file);
                     size = text.Length;
                     mainWindow.ImportContestants();
+                    DisplayContestants();
                 }
                 catch (IOException)
                 {
@@ -165,6 +167,7 @@ namespace WinnerWinnerChickenDinner
                 errorMessage2.Content = "";
                 contestTitle.Content = contestName.Text;
                 mainWindow.FillPrizeBoard();
+                contestantsListView.ItemsSource = null;
                 this.Close();
 
                 mainWindow.savePrizesToSettings(MainWindow.prizeList);
@@ -202,20 +205,29 @@ namespace WinnerWinnerChickenDinner
 
         }
 
-        
-
-
-        private void prizeBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public void LoadChanges()
         {
-
+            if (MainWindow.ContestantList != null)
+            {
+                DisplayContestants();
+                filePathBox.Text = "File currently loaded";
+            }
+            if (MainWindow.prizeList != null)
+            {
+                foreach (var prizeItem in MainWindow.prizeList)
+                {
+                    prizeBoard.Items.Add(prizeItem);
+                }
+            }
         }
 
-       
+
 
         public void GetSettings()
         {
             allowMultipleWins = Properties.Settings.Default.MultipleWins;
             contestName.Text = Properties.Settings.Default.ContestName;
+            contestTitle.Content = Properties.Settings.Default.ContestName;
             if (allowMultipleWins)
             {
                 AllowMultipleWins.IsChecked = true;
@@ -248,6 +260,27 @@ namespace WinnerWinnerChickenDinner
             Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
             Properties.Settings.Default.Save();
 
+        }
+
+        public void DisplayContestants()
+        {
+            foreach (Contestant contestant in MainWindow.ContestantList)
+            {
+                this.contestantsListView.Items.Add(new Contestant
+                {
+                    Tickets = contestant.Tickets,
+                    Prefix = contestant.Prefix,
+                    FirstName = contestant.FirstName,
+                    MiddleName = contestant.MiddleName,
+                    LastName = contestant.LastName,
+                    FullName = contestant.FullName,
+                    PhoneNumber = contestant.PhoneNumber,
+                    Email = contestant.Email
+                });
+                //int tickets = Int32.Parse(contestant.Tickets);
+                //MainWindow.totalTickets = MainWindow.totalTickets + contestant.Tickets;
+                //tickets = 0;
+            }
         }
     }
 

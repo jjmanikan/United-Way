@@ -255,7 +255,7 @@ namespace WinnerWinnerChickenDinner
                         var delay = 250 * i / rollCount;
 
                         //TODO: change from absolute path to assets
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"D:\MSILaptop\work\UnitedWay - gitHub\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
                         player.Play();
 
                         //wait
@@ -414,13 +414,6 @@ namespace WinnerWinnerChickenDinner
 
             openSettings.Show();
             this.Hide();
-        }
-
-
-
-        public static void AddList(List<PrizeBoardItem> var_list)
-        {
-
         }
 
         private void KillApp(object sender, System.ComponentModel.CancelEventArgs e)
