@@ -71,7 +71,7 @@ namespace WinnerWinnerChickenDinner
             }
 
             //skip first line since its the header
-            foreach (Contestant c in ContestantList.Skip(1))
+            foreach (Contestant c in ContestantList)
             {
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
                 TicketsList.Add(contestant);
@@ -82,10 +82,11 @@ namespace WinnerWinnerChickenDinner
                 Console.WriteLine(p.PrizeName + "Winner name:" + p.Winner);
             }
 
-            /*foreach (Contestant contestant in ContestantList)
+            foreach (Contestant contestant in ContestantList)
             {
                 Console.WriteLine(contestant.Tickets + " "  + contestant.FullName + prizecount++);
-            } /*
+            } 
+            /*
 
             //testing purposes
             /*ContestantList.Add(new Contestant() { Tickets = 10, Prefix = "", FirstName = "Justine", MiddleName = "Kyle Soriano", LastName = "Manikan", FullName = "Justine Kyle Soriano Manikan", PhoneNumber = "2113442423", Email = "j@gmail.com" });
@@ -170,7 +171,7 @@ namespace WinnerWinnerChickenDinner
             rw = range.Rows.Count;
             cl = range.Columns.Count;
 
-            for (rCnt = 1; rCnt <= rw; rCnt++)
+            for (rCnt = 2; rCnt <= rw; rCnt++)
             {
 
                 Contestant contestant = new Contestant();
@@ -196,7 +197,14 @@ namespace WinnerWinnerChickenDinner
             Marshal.ReleaseComObject(xlWorkBook);
             Marshal.ReleaseComObject(xlApp);
 
-            
+
+            //skip first line since its the header
+            foreach (Contestant c in ContestantList)
+            {
+                Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
+                TicketsList.Add(contestant);
+            }
+
         }
 
 
@@ -309,7 +317,7 @@ namespace WinnerWinnerChickenDinner
         /// </summary>
         public void UpdateList()
         {
-            foreach (Contestant contestant in ContestantList.Skip(1))
+            foreach (Contestant contestant in ContestantList)
             {
                 int ts = Int32.Parse(contestant.Tickets);
                 for (int i = 0; i < ts; i++)
@@ -405,7 +413,7 @@ namespace WinnerWinnerChickenDinner
             //openSettings.AppMainWindow = this;
 
             openSettings.Show();
-            this.Close();
+            this.Hide();
         }
 
 

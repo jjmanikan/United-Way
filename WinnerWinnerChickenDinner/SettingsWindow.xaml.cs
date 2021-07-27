@@ -23,8 +23,6 @@ namespace WinnerWinnerChickenDinner
         MainWindow mainWindow = new MainWindow();
         public static bool allowMultipleWins = false;
 
-
-
         public SettingsWindow()
         {
             InitializeComponent();
