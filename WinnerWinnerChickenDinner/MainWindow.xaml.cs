@@ -164,7 +164,7 @@ namespace WinnerWinnerChickenDinner
             xlApp = new Microsoft.Office.Interop.Excel.Application();
             //absolute path, change when neccessary
             //TODO: Change to dynamic asset folder
-            xlWorkBook = xlApp.Workbooks.Open(Properties.Settings.Default.ContestantList);
+            xlWorkBook = xlApp.Workbooks.Open(filePath);
             xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
 
             range = xlWorkSheet.UsedRange;

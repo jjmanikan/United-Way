@@ -136,7 +136,7 @@ namespace WinnerWinnerChickenDinner
 
 
                 string file = openFileDialog1.FileName;
-                Properties.Settings.Default.ContestantList = file;
+                MainWindow.filePath = file;
                 try
                 {
                     filePathBox.Text = file;
