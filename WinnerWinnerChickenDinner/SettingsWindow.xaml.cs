@@ -282,6 +282,18 @@ namespace WinnerWinnerChickenDinner
                 //tickets = 0;
             }
         }
+
+        private void prizeBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+
+            MainWindow.prizeList.RemoveAt(prizeBoard.SelectedIndex);
+            prizeBoard.Items.RemoveAt(prizeBoard.SelectedIndex);
+        }
     }
 
 }
