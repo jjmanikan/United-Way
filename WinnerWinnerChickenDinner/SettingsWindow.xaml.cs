@@ -27,6 +27,7 @@ namespace WinnerWinnerChickenDinner
         {
             InitializeComponent();
             //prizeBoard.ItemsSource = MainWindow.prizeList;
+            GetSettings();
         }
 
         private void AddPrize(object sender, RoutedEventArgs e)
@@ -171,6 +172,7 @@ namespace WinnerWinnerChickenDinner
                 Console.WriteLine("Prize List :" + Properties.Settings.Default.PrizeList);
                 Console.WriteLine("ContestantList: " + Properties.Settings.Default.ContestantList);
 
+                Properties.Settings.Default.ContestName = contestName.Text;
                 Properties.Settings.Default.Save();
                 Properties.Settings.Default.Upgrade();
                 Properties.Settings.Default.Save();
@@ -208,20 +210,44 @@ namespace WinnerWinnerChickenDinner
 
         }
 
-        private void AllowMultipleWins_Checked(object sender, RoutedEventArgs e)
+       
+
+        public void GetSettings()
         {
+            allowMultipleWins = Properties.Settings.Default.MultipleWins;
+            contestName.Text = Properties.Settings.Default.ContestName;
+            if (allowMultipleWins)
+            {
+                AllowMultipleWins.IsChecked = true;
 
-            allowMultipleWins = true;
+            }
+            else
+            {
+                AllowMultipleWins.IsChecked = false;
 
-            Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
-
+            }
+            Console.WriteLine("Hey I am Settings : " + allowMultipleWins);
         }
 
-        private void AllowMultipleWins_Unchecked(object sender, RoutedEventArgs e)
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
+                allowMultipleWins = true;
+                Properties.Settings.Default.MultipleWins = true;
+                Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
+            Properties.Settings.Default.Save();
+        }
 
+
+
+
+
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
             allowMultipleWins = false;
+            Properties.Settings.Default.MultipleWins = allowMultipleWins;
             Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
+            Properties.Settings.Default.Save();
+
         }
     }
 

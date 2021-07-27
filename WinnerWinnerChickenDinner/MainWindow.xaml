@@ -16,7 +16,7 @@
         <Grid.Background>
             <VisualBrush>
                 <VisualBrush.Visual>
-                    <Image gif:ImageBehavior.AnimatedSource="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
+                    <Image gif:ImageBehavior.AnimatedSource="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
                            gif:ImageBehavior.AutoStart ="True"
                            gif:ImageBehavior.RepeatBehavior="1"/>
                 </VisualBrush.Visual>
@@ -45,7 +45,7 @@
                 Background="Transparent"
                 BorderThickness="0"   
                 Click="BtnOpenSettings">
-            <Image Source="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\settings.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
+            <Image Source="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\settings.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
         </Button>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="76" Stroke="Red" VerticalAlignment="Top" Width="256"/>
         <TextBlock FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Left" Margin="292,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="458" FontSize="31" Foreground="White">
@@ -60,9 +60,9 @@
                 />
             </TextBlock.Effect><Run Text="United Way Campaign"/><Run Text=" Raffle"/></TextBlock>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="9,398,0,-102" Stroke="Red" VerticalAlignment="Top" Width="765"/>
-        <Image Source="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="384"/>
+        <Image Source="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="384"/>
         <Image HorizontalAlignment="Left" Height="164" Margin="446,144,0,-20" VerticalAlignment="Top" Width="155"
-               gif:ImageBehavior.AnimatedSource="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\slotmachine2.gif"
+               gif:ImageBehavior.AnimatedSource="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine2.gif"
                gif:ImageBehavior.AutoStart ="True"
                gif:ImageBehavior.RepeatBehavior="1" />
         <Rectangle Fill="White" HorizontalAlignment="Left" Height="30" Margin="424,138,0,0" Stroke="White" VerticalAlignment="Top" Width="78"/>
@@ -101,7 +101,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Image Source="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\logo3.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="63" Margin="229,0,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Image Source="C:\Users\choud\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\logo3.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="63" Margin="229,0,0,0" RenderTransformOrigin="0.5,0.5"/>
         <TextBlock FontWeight="ExtraBold" FontSize="40"  Foreground="Red" x:Name="txt_WheelName" Margin="0,81,19,151" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="492" TextAlignment="Center"/>
         <Rectangle Fill="White" HorizontalAlignment="Left" Height="22" Margin="594,211,0,0" Stroke="White" VerticalAlignment="Top" Width="9" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>

@@ -28,7 +28,7 @@
         <TextBox x:Name="contestName" HorizontalAlignment="Left" Height="23"  Margin="56,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="159" Grid.Column="1" Foreground="#FF898989"/>
         <Label Content="Contest Name" Grid.Column="1" HorizontalAlignment="Left" Margin="56,72,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" Width="159" Height="28"/>
         <Label x:Name="contestTitle"  Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="215,35,0,0" VerticalAlignment="Top" Width="390" Grid.ColumnSpan="2" FontSize="20"/>
-        <CheckBox Content="Allow Multiple Wins" Grid.Column="1" HorizontalAlignment="Left" Margin="69,135,0,0" VerticalAlignment="Top" Width="141"/>
+        <CheckBox x:Name="AllowMultipleWins" Content="Allow Multiple Wins" Grid.Column="1" HorizontalAlignment="Left" Margin="69,135,0,0" VerticalAlignment="Top" Width="141" Checked="CheckBox_Checked"/>
         <Label x:Name="errorMessage2" Content=""  HorizontalContentAlignment="Center"  Foreground="Red" Grid.Column="1" HorizontalAlignment="Left" Margin="20,400,0,0" VerticalAlignment="Top" Height="27" Width="240" FontWeight="Bold"/>
         <Label x:Name="errorMessage1" Content=""  HorizontalContentAlignment="Center" Grid.Column="1" HorizontalAlignment="Left" Margin="20,377,0,0" VerticalAlignment="Top" Height="23" Width="240"  FontWeight="Bold"/>
 
