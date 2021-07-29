@@ -55,6 +55,7 @@ namespace WinnerWinnerChickenDinner
 
             //number of contestants
             int count = tickets.Count();
+            //MainWindow.totalTickets = count.ToString();
             Console.WriteLine("Ticket Count : " + count);
 
             //totals number of tickets
@@ -64,6 +65,7 @@ namespace WinnerWinnerChickenDinner
                 //each contestant will have a set segment in the total number of tickets
                 int ticketSum2;
                 tSum += tickets[i].weight;
+                
                 tickets[i].ticketSum = tSum;
 
                 //verification
@@ -77,11 +79,14 @@ namespace WinnerWinnerChickenDinner
                 }
 
                 Console.WriteLine("Name: " + tickets[i].key + " Tickets: " + tickets[i].weight + " Number Range Section: Between " + ticketSum2 + " and " + tickets[i].ticketSum);
-            }
 
+            }
+            MainWindow.totalTickets = tSum;
             //random number in total number of tickets
             double winningodd = random.NextDouble() * tSum;
             Console.WriteLine("Winning Number: " + winningodd);
+            MainWindow.winningTicket = winningodd;
+            
 
             //picks closest ticket( by greater than i.e. if WinningOdd is 10 a contestant with a ticketSum of 10 or greater will win and is the closest))
             Ticket<T> winner = tickets.FirstOrDefault(n => n.ticketSum >= winningodd);

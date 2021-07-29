@@ -35,12 +35,16 @@ namespace WinnerWinnerChickenDinner
         int prizecount = 0;
         public static string filePath = "";
         int initializecount = 0;
+        public static int totalTickets;
+        public static string currentPrize = "";
+        public static double winningTicket;
 
         public static List<PrizeBoardItem> prizeList = new List<PrizeBoardItem>();
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
         public static List<Contestant> ContestantList = new List<Contestant>();
         //List<Contestant> UpdatedList = new List<Contestant>();
         public static List<Ticket<string>> TicketsList = new List<Ticket<string>>();
+        public static string contestTitle = "";
 
         public MainWindow()
         {
@@ -229,84 +233,95 @@ namespace WinnerWinnerChickenDinner
         {
 
             Console.WriteLine("Total Count is :" + ContestantList.Count);
+            
             //error check that
-            PrizeBoardItem selectedPrize = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
-            if (selectedPrize.Winner == "")
+            if (lst_PrizeBoard.SelectedItem == null)
             {
-                try
-                {
-                    // determines how many rolls there will be
-                    int rollCount = 50 + _rnd.Next(ContestantList.Count);
-
-                    int index = 0;
-                    Random randomname = new Random();
-
-                    //rolling effect
-                    for (int i = 0; i < rollCount; i++)
-                    {
-                        // get random index in list of contestant
-                        //index = i % UpdatedList.Count;
-                        index = randomname.Next(0, ContestantList.Count);
-
-                        txt_WheelName.Text = ContestantList[index].FullName;
-
-                        //TODO: Change to make more bearable  with larger contestant lists
-                        //delay that gets longer and longer on each roll
-                        var delay = 250 * i / rollCount;
-
-                        //TODO: change from absolute path to assets
-                        System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
-                        player.Play();
-
-                        //wait
-                        await Task.Delay(delay);
-                    }
-
-                    //display each contestants probability of winning
-                    //Ticket<string>.GetProbabilities(TicketsList);
-
-                    //final roll for winner, only roll that matters
-                    string winnername = Ticket<string>.Pick(TicketsList);
-                    txt_WheelName.Text = winnername;
-
-                    Console.WriteLine("Winner: " + winnername);
-
-                    //string winnername = UpdatedList[index].FullName;
-
-
-                    selectedPrize.Winner = winnername;
-                    lst_PrizeBoard.Items.Refresh();
-                    System.Windows.MessageBox.Show($"and... The winner is... {winnername}");
-
-                    //remove winner from list after they win
-                    if(!SettingsWindow.allowMultipleWins)
-                    {
-                        ContestantList.RemoveAll(x => x.FullName == winnername);
-                        Console.WriteLine("Removing Content " + winnername);
-                    }
-
-                    savePrizesToSettings(prizeList);
-                    saveContestantsToSettings(ContestantList);
-
-                    /*foreach (Contestant x in UpdatedList)
-                    {
-                        Console.WriteLine(x.FullName);
-                    } */
-
-
-                }
-                catch (ArgumentOutOfRangeException r)
-                {
-                    Console.WriteLine("Exception: " + r.Message);
-                    //throw new ArgumentOutOfRangeException("", r);
-                }
+                errorMain.Content = "Please select a Prize";
             }
             else
             {
-                System.Windows.MessageBox.Show($"{selectedPrize.Winner} already won {selectedPrize.PrizeName}! Select another prize!");
+                PrizeBoardItem selectedPrize = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
+                if (selectedPrize.Winner == "")
+                {
+                    errorMain.Content = "";
+                    try
+                    {
+                        // determines how many rolls there will be
+                        int rollCount = 50 + _rnd.Next(ContestantList.Count);
+
+                        int index = 0;
+                        Random randomname = new Random();
+
+                        //rolling effect
+                        for (int i = 0; i < rollCount; i++)
+                        {
+                            // get random index in list of contestant
+                            //index = i % UpdatedList.Count;
+                            index = randomname.Next(0, ContestantList.Count);
+
+                            txt_WheelName.Text = ContestantList[index].FullName;
+
+                            //TODO: Change to make more bearable  with larger contestant lists
+                            //delay that gets longer and longer on each roll
+                            var delay = 250 * i / rollCount;
+
+                            //TODO: change from absolute path to assets
+                            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"D:\MSILaptop\work\United-Way - Copy\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                            player.Play();
+
+                            //wait
+                            await Task.Delay(delay);
+                        }
+
+                        //display each contestants probability of winning
+                        //Ticket<string>.GetProbabilities(TicketsList);
+                        currentPrize = selectedPrize.PrizeName;
+                        //final roll for winner, only roll that matters
+                        string winnername = Ticket<string>.Pick(TicketsList);
+                        txt_WheelName.Text = winnername;
+
+
+                        Console.WriteLine("Winner: " + winnername);
+
+                        //string winnername = UpdatedList[index].FullName;
+
+
+                        selectedPrize.Winner = winnername;
+
+                        SaveFile.SaveToFile(contestTitle, ContestantList, prizeList, currentPrize, TicketsList, totalTickets, winningTicket, winnername);
+                        lst_PrizeBoard.Items.Refresh();
+                        System.Windows.MessageBox.Show($"and... The winner is... {winnername}");
+
+                        //remove winner from list after they win
+                        if (!SettingsWindow.allowMultipleWins)
+                        {
+                            ContestantList.RemoveAll(x => x.FullName == winnername);
+                            Console.WriteLine("Removing Content " + winnername);
+                        }
+
+                        savePrizesToSettings(prizeList);
+                        saveContestantsToSettings(ContestantList);
+
+                        /*foreach (Contestant x in UpdatedList)
+                        {
+                            Console.WriteLine(x.FullName);
+                        } */
+
+
+                    }
+                    catch (ArgumentOutOfRangeException r)
+                    {
+                        Console.WriteLine("Exception: " + r.Message);
+                        //throw new ArgumentOutOfRangeException("", r);
+                    }
+                }
+                else
+                {
+                    //System.Windows.MessageBox.Show($"{selectedPrize.Winner} already won {selectedPrize.PrizeName}! Select another prize!");
+                    errorMain.Content = $"{selectedPrize.Winner} already won {selectedPrize.PrizeName}! Select another prize!";
+                }
             }
-
-
 
         }
 

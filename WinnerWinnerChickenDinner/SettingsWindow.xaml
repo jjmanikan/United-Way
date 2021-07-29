@@ -5,38 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinnerWinnerChickenDinner"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="767.333" ResizeMode="NoResize">
+        Title="Settings" Height="450" Width="767" ResizeMode="NoResize">
     <Grid Margin="0,0,0,6">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="61*"/>
-            <ColumnDefinition Width="201*"/>
-            <ColumnDefinition Width="135*"/>
+            <ColumnDefinition Width="217*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="542*"/>
         </Grid.ColumnDefinitions>
 
-        <ListView Background= "LightGray"  FontWeight="Bold" FontSize="15" Foreground="White" FontFamily="Arial" BorderThickness="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="prizeBoard" Margin="0,155,20,112" HorizontalAlignment="Right" Width="171" Grid.Column="2">
+        <ListView  FontWeight="Bold" FontSize="15" Foreground="LightSkyBlue"  FontFamily="Arial" BorderThickness="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="prizeBoard" Margin="31,165,24,102">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource HeaderStyle}">
                     <GridViewColumn DisplayMemberBinding="{Binding PrizeName}" Header="PRIZES" Width="150"/>
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="AddPrizeBtn" Content="Add Prize" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" HorizontalAlignment="Left" Margin="107,312,0,0" VerticalAlignment="Top" Width="99" Click="AddPrize" Grid.Column="2" Height="20"/>
-        <Button x:Name="savePrizesBtn" Content="Save" Foreground="White" Background="Red" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left" Margin="107,337,0,0" VerticalAlignment="Top" Width="99" Click="savePrizes" Grid.Column="2" Height="28"/>
-        <Button x:Name="btnUploadFile" Content="Upload File" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" HorizontalAlignment="Left" Margin="350,101,0,0" VerticalAlignment="Top" Width="80" Click="btnUploadFile_Click" Grid.ColumnSpan="2" Grid.Column="1" Height="23"/>
-        <TextBox x:Name="filePathBox" HorizontalAlignment="Left" Height="23" Margin="28,101,0,0" TextWrapping="Wrap" Text="Choose a file..." VerticalAlignment="Top" Width="426" IsEnabled="false" Grid.ColumnSpan="2"/>
-        <Label x:Name="contestantsListLabel" Content="Current Contestants in the Raffle" HorizontalContentAlignment="Center" Foreground="Black" FontSize="18" FontWeight="Bold" FontFamily="Arial" HorizontalAlignment="Left" Height="36" Margin="49,135,0,0" VerticalAlignment="Top" Width="426" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="contestName" HorizontalAlignment="Left" Height="23" Margin="69,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="170" Grid.Column="2" FontWeight="Bold" Foreground="Red"/>
-        <Label Content="Contest Name" Grid.Column="2"  HorizontalAlignment="Left" Margin="69,77,0,0" VerticalAlignment="Top" Foreground="DimGray"  FontWeight="Bold" HorizontalContentAlignment="Center" Width="170" Height="24"/>
-        <CheckBox x:Name="AllowMultipleWins" Content="Allow Multiple Wins" Grid.Column="2" Foreground="DimGray"  FontWeight="Bold" HorizontalAlignment="Left" Margin="69,135,0,0" VerticalAlignment="Top" Width="141" Checked="CheckBox_Checked"/>
-        <Label x:Name="errorMessage2" Content=""  HorizontalContentAlignment="Center"  Foreground="Red" Grid.Column="1" HorizontalAlignment="Left" Margin="20,400,0,0" VerticalAlignment="Top" Height="27" Width="240" FontWeight="Bold"/>
-        <Label x:Name="errorMessage1"  HorizontalContentAlignment="Center" Grid.Column="2" HorizontalAlignment="Left" Margin="38,365,-19,0" VerticalAlignment="Top" Height="38" Width="240"  FontWeight="Bold">
-            <Button x:Name="deleteBtn" Content="Delete" Width="74" Height="24" Click="deleteBtn_Click"/>
-        </Label>
-        <Rectangle Fill="DimGray" HorizontalAlignment="Left" Height="76" Margin="108,0,-1,0" Stroke="DimGray" VerticalAlignment="Top" Width="565" Grid.ColumnSpan="2" Grid.Column="1"/>
-        <Label x:Name="contestTitle"  Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="231,14,0,0" VerticalAlignment="Top" Width="282" FontFamily="Arial" FontWeight="Bold" Foreground="White" FontSize="31" Height="46" Grid.Column="1" Grid.ColumnSpan="2"/>
-        <Image Source="C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="272" Grid.ColumnSpan="2"/>
-        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="9,398,0,0" Stroke="Red" VerticalAlignment="Top" Width="732" Grid.ColumnSpan="3"/>
-        <ListView x:Name="contestantsListView" HorizontalAlignment="Left" Height="207" Margin="28,165,0,0" VerticalAlignment="Top" Width="474" Grid.ColumnSpan="2">
+        <Button x:Name="AddPrizeBtn" Content="ADD" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" Margin="31,313,110,0" VerticalAlignment="Top" Click="AddPrize" Height="20"/>
+        <Button x:Name="deleteBtn" Content="REMOVE" Click="deleteBtn_Click" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" Margin="118,313,25,0" VerticalAlignment="Top"  Height="20"/>
+
+        <Button x:Name="savePrizesBtn" Content="SAVE AND GO BACK" Foreground="White" Background="Red" FontSize="15" FontWeight="Bold" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="32,339,0,0" VerticalAlignment="Top" Width="160" Click="savePrizes" Height="28"/>
+        <Button x:Name="btnUploadFile" Content="UPLOAD" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" HorizontalAlignment="Left" Margin="441,105,0,0" VerticalAlignment="Top" Width="67" Click="btnUploadFile_Click"  Height="23" Grid.Column="2"/>
+        <TextBox x:Name="filePathBox" HorizontalAlignment="Left" Height="23" Margin="4,105,0,0" TextWrapping="Wrap" Text="Choose a file..." VerticalAlignment="Top" Width="437" IsEnabled="false" Grid.Column="2"/>
+        <Label x:Name="contestantsListLabel" Content="Current Contestants in the Raffle" HorizontalContentAlignment="Center" Foreground="DimGray" FontSize="18" FontWeight="Bold" FontFamily="Arial" HorizontalAlignment="Left" Height="36" Margin="4,131,0,0" VerticalAlignment="Top" Width="534" Grid.Column="2"/>
+        <TextBox x:Name="contestName" HorizontalAlignment="Left" Height="23" Margin="31,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontWeight="Bold" Foreground="Red"/>
+        <Label Content="Contest Name"  HorizontalAlignment="Left" Margin="31,80,0,0" VerticalAlignment="Top" Foreground="DimGray"  FontWeight="Bold" HorizontalContentAlignment="Center" Width="161" Height="24"/>
+        <CheckBox x:Name="AllowMultipleWins" Content="Allow Multiple Wins" Foreground="DimGray"  FontWeight="Bold" HorizontalAlignment="Left" Margin="31,138,0,0" VerticalAlignment="Top" Width="161" Checked="CheckBox_Checked" Height="15"/>
+        <Label x:Name="errorMessage2" Foreground="Red" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="159,367,0,0" VerticalAlignment="Top" Height="28" Width="369"  FontWeight="Bold" Grid.Column="2"/>
+        <Label x:Name="errorMessage1"  HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Height="28" Width="382"  FontWeight="Bold" Grid.ColumnSpan="3"/>
+        <Rectangle Fill="DimGray" HorizontalAlignment="Left" Height="69" Margin="212,0,0,0" Stroke="DimGray" VerticalAlignment="Top" Width="549" Grid.ColumnSpan="3"/>
+        <Label x:Name="contestTitle"  Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="212,14,0,0" VerticalAlignment="Top" Width="549" FontFamily="Arial" FontWeight="Bold" Foreground="White" FontSize="31" Height="46" Grid.ColumnSpan="3"/>
+        <Image Source="D:\MSILaptop\work\United-Way - Copy\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="212"/>
+        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="31,400,0,0" Stroke="Red" VerticalAlignment="Top" Width="700" Grid.ColumnSpan="3"/>
+        <ListView x:Name="contestantsListView" HorizontalAlignment="Left" Height="202" Margin="4,165,0,0" VerticalAlignment="Top" Width="504" Grid.Column="2">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Tickets" DisplayMemberBinding="{Binding Tickets}"/>
