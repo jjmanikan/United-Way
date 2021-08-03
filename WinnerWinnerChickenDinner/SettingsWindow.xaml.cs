@@ -168,6 +168,7 @@ namespace WinnerWinnerChickenDinner
                 contestTitle.Content = contestName.Text;
                 mainWindow.FillPrizeBoard();
                 contestantsListView.ItemsSource = null;
+                MainWindow.contestTitle = contestName.Text;
                 this.Close();
 
                 mainWindow.savePrizesToSettings(MainWindow.prizeList);
@@ -188,19 +189,19 @@ namespace WinnerWinnerChickenDinner
             {
                 errorMessage1.Foreground = Brushes.Red;
                 errorMessage1.Content = "Could not Save";
-                errorMessage2.Content = "Missing Contest Name and Prize Items";
+                errorMessage2.Content = " -    Missing Contest Name and Prize Items";
             }
             else if (contestName.Text == "")
             {
                 errorMessage1.Foreground = Brushes.Red;
                 errorMessage1.Content = "Could not Save";
-                errorMessage2.Content = "Missing Contest Name";
+                errorMessage2.Content = " -    Missing Contest Name";
             }
             else if (MainWindow.prizeList.Count() == 0)
             {
                 errorMessage1.Foreground = Brushes.Red;
                 errorMessage1.Content = "Could not Save";
-                errorMessage2.Content = "Missing Prize Items";
+                errorMessage2.Content = " -    Missing Prize Items";
             }
 
         }
@@ -277,9 +278,6 @@ namespace WinnerWinnerChickenDinner
                     PhoneNumber = contestant.PhoneNumber,
                     Email = contestant.Email
                 });
-                //int tickets = Int32.Parse(contestant.Tickets);
-                //MainWindow.totalTickets = MainWindow.totalTickets + contestant.Tickets;
-                //tickets = 0;
             }
         }
 
@@ -290,7 +288,6 @@ namespace WinnerWinnerChickenDinner
 
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
         {
-
             MainWindow.prizeList.RemoveAt(prizeBoard.SelectedIndex);
             prizeBoard.Items.RemoveAt(prizeBoard.SelectedIndex);
         }
