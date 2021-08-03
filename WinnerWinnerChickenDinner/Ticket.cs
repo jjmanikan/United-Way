@@ -37,12 +37,12 @@ namespace WinnerWinnerChickenDinner
    
             }
 
-            Console.WriteLine("\nTotal Number of Tickets: " + tSum);
+            //Console.WriteLine("\nTotal Number of Tickets: " + tSum);
             foreach(Ticket<T> c in tickets)
             {
                 double probability = Convert.ToDouble(c.weight) / Convert.ToDouble(tSum);
                 
-                Console.WriteLine("Name: " + c.key + " | Chances of winning: " + probability * 100 + "% | Tickets: " + c.weight);
+                //Console.WriteLine("Name: " + c.key + " | Chances of winning: " + probability * 100 + "% | Tickets: " + c.weight);
             }
  
             return tickets;
@@ -55,7 +55,7 @@ namespace WinnerWinnerChickenDinner
 
             //number of contestants
             int count = tickets.Count();
-            Console.WriteLine("Ticket Count : " + count);
+            //Console.WriteLine("Ticket Count : " + count);
 
             //totals number of tickets
             for (int i = 0; i < count; i++)
@@ -76,12 +76,12 @@ namespace WinnerWinnerChickenDinner
                     ticketSum2 = 0;
                 }
 
-                Console.WriteLine("Name: " + tickets[i].key + " Tickets: " + tickets[i].weight + " Number Range Section: Between " + ticketSum2 + " and " + tickets[i].ticketSum);
+                //Console.WriteLine("Name: " + tickets[i].key + " Tickets: " + tickets[i].weight + " Number Range Section: Between " + ticketSum2 + " and " + tickets[i].ticketSum);
             }
 
             //random number in total number of tickets
             double winningodd = random.NextDouble() * tSum;
-            Console.WriteLine("Winning Number: " + winningodd);
+            //Console.WriteLine("Winning Number: " + winningodd);
 
             //picks closest ticket( by greater than i.e. if WinningOdd is 10 a contestant with a ticketSum of 10 or greater will win and is the closest))
             Ticket<T> winner = tickets.FirstOrDefault(n => n.ticketSum >= winningodd);
