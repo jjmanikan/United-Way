@@ -89,16 +89,6 @@ namespace WinnerWinnerChickenDinner
             }
             count = 1;
             sw.WriteLine("--------------------------------------------------------------------------------------------------------------");
-            //foreach (Ticket<string> contestant in tickets)
-            //{
-            //    var eachCont = String.Format("{0,10}{1,30}",
-            //        count,
-            //        contestant);
-            //    count++;
-            //    sw.WriteLine(eachCont);
-            //    eachCont = "";
-
-            //}
         }
     }
 }
