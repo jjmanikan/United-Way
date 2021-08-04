@@ -112,7 +112,10 @@ namespace WinnerWinnerChickenDinner
 
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
-
+            //if (MainWindow.ContestantList != null)
+            //{
+               // adding the message box that allows the user to choose if they want to overwrite current file uploaded or add to it
+            //}
             int size = -1;
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
