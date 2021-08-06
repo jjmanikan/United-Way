@@ -34,7 +34,7 @@
         <Label x:Name="errorMessage1"  HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Height="28" Width="382"  FontWeight="Bold" Grid.ColumnSpan="3"/>
         <Rectangle Fill="DimGray" HorizontalAlignment="Left" Height="69" Margin="212,0,0,0" Stroke="DimGray" VerticalAlignment="Top" Width="549" Grid.ColumnSpan="3"/>
         <Label x:Name="contestTitle"  Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="212,14,0,0" VerticalAlignment="Top" Width="549" FontFamily="Arial" FontWeight="Bold" Foreground="White" FontSize="31" Height="46" Grid.ColumnSpan="3"/>
-        <Image Source="D:\MSILaptop\work\United-Way - Copy\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="212"/>
+        <Image Source="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="212"/>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="31,400,0,0" Stroke="Red" VerticalAlignment="Top" Width="700" Grid.ColumnSpan="3"/>
         <ListView x:Name="contestantsListView" HorizontalAlignment="Left" Height="202" Margin="4,165,0,0" VerticalAlignment="Top" Width="504" Grid.Column="2">
             <ListView.View>

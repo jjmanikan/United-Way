@@ -1,4 +1,5 @@
 ﻿using Ganss.Excel;
+using Microsoft.CSharp.RuntimeBinder;
 using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace WinnerWinnerChickenDinner
             
             Properties.Settings.Default.Upgrade();
             //Properties.Settings.Default.Save();
-            Console.WriteLine("Mainwindow2: " + Properties.Settings.Default.ContestantList);
+            //Console.WriteLine("Mainwindow2: " + Properties.Settings.Default.ContestantList);
             try 
             {
                 ContestantList = loadContestants();
@@ -81,15 +82,15 @@ namespace WinnerWinnerChickenDinner
                 TicketsList.Add(contestant);
             }
 
-            foreach (PrizeBoardItem p in prizeList)
-            {
-                Console.WriteLine(p.PrizeName + "Winner name:" + p.Winner);
-            }
+            //foreach (PrizeBoardItem p in prizeList)
+            //{
+            //    Console.WriteLine(p.PrizeName + "Winner name:" + p.Winner);
+            //}
 
-            foreach (Contestant contestant in ContestantList)
-            {
-                Console.WriteLine(contestant.Tickets + " "  + contestant.FullName + prizecount++);
-            } 
+            //foreach (Contestant contestant in ContestantList)
+            //{
+            //    Console.WriteLine(contestant.Tickets + " "  + contestant.FullName + prizecount++);
+            //} 
             /*
 
             //testing purposes
@@ -162,8 +163,11 @@ namespace WinnerWinnerChickenDinner
             Range range;
 
             int rCnt;
+            int clCnt;
             int rw = 0;
             int cl = 0;
+
+            string fullname;
 
             xlApp = new Microsoft.Office.Interop.Excel.Application();
             //absolute path, change when neccessary
@@ -175,19 +179,67 @@ namespace WinnerWinnerChickenDinner
             rw = range.Rows.Count;
             cl = range.Columns.Count;
 
-            for (rCnt = 2; rCnt <= rw; rCnt++)
+            for (rCnt = 3; rCnt <= rw; rCnt++)
             {
 
                 Contestant contestant = new Contestant();
+                
+              
+
                 contestant.Tickets = (string)(range.Cells[rCnt, 1] as Range).Value2.ToString();
                 contestant.Prefix = (string)(range.Cells[rCnt, 2] as Range).Value2.ToString();
                 contestant.FirstName = (string)(range.Cells[rCnt, 3] as Range).Value2.ToString();
-                contestant.MiddleName = (string)(range.Cells[rCnt, 4] as Range).Value2.ToString();
+                try
+                {
+                    Console.WriteLine("hello2");
+                    contestant.MiddleName = (string)(range.Cells[rCnt, 4] as Range).Value2.ToString();
+                }
+                catch (RuntimeBinderException e)
+                {
+                    contestant.MiddleName = " ";
+                }
+
+                //
                 contestant.LastName = (string)(range.Cells[rCnt, 5] as Range).Value2.ToString();
-                contestant.FullName = (string)(range.Cells[rCnt, 6] as Range).Value2.ToString();
-                contestant.PhoneNumber = (string)(range.Cells[rCnt, 7] as Range).Value2.ToString();
-                contestant.Email = (string)(range.Cells[rCnt, 8] as Range).Value2.ToString();
+                
+                try
+                {
+                    Console.WriteLine("hello2");
+                    contestant.FullName = (string)(range.Cells[rCnt, 6] as Range).Value2.ToString();
+                }
+                catch (RuntimeBinderException e)
+                {
+                    contestant.FullName = " ";
+                }
+
+                try
+                {
+                    Console.WriteLine("hello2");
+                    contestant.PhoneNumber = (string)(range.Cells[rCnt, 7] as Range).Value2.ToString();
+                }
+                catch (RuntimeBinderException e)
+                {
+                    contestant.PhoneNumber = " ";
+                }
+                try
+                {
+                    Console.WriteLine("hello2");
+                    contestant.Email = (string)(range.Cells[rCnt, 8] as Range).Value2.ToString();
+                }
+                catch (RuntimeBinderException e)
+                {
+                    contestant.Email = " ";
+                }
+                
                 ContestantList.Add(contestant);
+
+                //for(clCnt = 0; clCnt <= cl; clCnt++)
+                //{
+                //    if(!string.IsNullOrEmpty((string)(range.Cells[rCnt, clCnt] as Range).Value2.ToString()))
+                //    {
+                //        switch
+                //    }
+                //}
             }
 
 
@@ -207,6 +259,7 @@ namespace WinnerWinnerChickenDinner
             {
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
                 TicketsList.Add(contestant);
+                Console.WriteLine(c.FullName);
             }
 
         }
@@ -232,7 +285,7 @@ namespace WinnerWinnerChickenDinner
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
 
-            Console.WriteLine("Total Count is :" + ContestantList.Count);
+            //Console.WriteLine("Total Count is :" + ContestantList.Count);
             
             //error check that
             if (lst_PrizeBoard.SelectedItem == null)
@@ -267,7 +320,7 @@ namespace WinnerWinnerChickenDinner
                             var delay = 250 * i / rollCount;
 
                             //TODO: change from absolute path to assets
-                            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"D:\MSILaptop\work\United-Way - Copy\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
                             player.Play();
 
                             //wait
@@ -279,7 +332,7 @@ namespace WinnerWinnerChickenDinner
                         currentPrize = selectedPrize.PrizeName;
                         //final roll for winner, only roll that matters
                         string winnername = Ticket<string>.Pick(TicketsList);
-                        txt_WheelName.Text = winnername;
+                        txt_WheelName.Text = "Congratulations " + winnername + "! You Won " + currentPrize;
 
 
                         Console.WriteLine("Winner: " + winnername);
@@ -291,7 +344,9 @@ namespace WinnerWinnerChickenDinner
 
                         SaveFile.SaveToFile(contestTitle, ContestantList, prizeList, currentPrize, TicketsList, totalTickets, winningTicket, winnername);
                         lst_PrizeBoard.Items.Refresh();
-                        System.Windows.MessageBox.Show($"and... The winner is... {winnername}");
+                        System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\dingding.wav");
+                        player2.Play();
+                        System.Windows.MessageBox.Show($"Congratulations {winnername} you have won {currentPrize}!");
 
                         //remove winner from list after they win
                         if (!SettingsWindow.allowMultipleWins)
@@ -299,6 +354,7 @@ namespace WinnerWinnerChickenDinner
                             ContestantList.RemoveAll(x => x.FullName == winnername);
                             Console.WriteLine("Removing Content " + winnername);
                         }
+
 
                         savePrizesToSettings(prizeList);
                         saveContestantsToSettings(ContestantList);

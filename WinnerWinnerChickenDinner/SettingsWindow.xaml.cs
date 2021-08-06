@@ -176,8 +176,8 @@ namespace WinnerWinnerChickenDinner
 
                 mainWindow.savePrizesToSettings(MainWindow.prizeList);
                 mainWindow.saveContestantsToSettings(MainWindow.ContestantList);
-                Console.WriteLine("Prize List :" + Properties.Settings.Default.PrizeList);
-                Console.WriteLine("ContestantList: " + Properties.Settings.Default.ContestantList);
+                //Console.WriteLine("Prize List :" + Properties.Settings.Default.PrizeList);
+                //Console.WriteLine("ContestantList: " + Properties.Settings.Default.ContestantList);
 
                 Properties.Settings.Default.ContestName = contestName.Text;
                 Properties.Settings.Default.Save();
@@ -242,7 +242,7 @@ namespace WinnerWinnerChickenDinner
                 AllowMultipleWins.IsChecked = false;
 
             }
-            Console.WriteLine("Hey I am Settings : " + allowMultipleWins);
+            //Console.WriteLine("Hey I am Settings : " + allowMultipleWins);
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)

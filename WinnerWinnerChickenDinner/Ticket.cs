@@ -90,6 +90,21 @@ namespace WinnerWinnerChickenDinner
             //picks closest ticket( by greater than i.e. if WinningOdd is 10 a contestant with a ticketSum of 10 or greater will win and is the closest))
             Ticket<T> winner = tickets.FirstOrDefault(n => n.ticketSum >= winningodd);
             if (winner == null) throw new Exception("No winner, check algorithm");
+
+            if (!SettingsWindow.allowMultipleWins)
+            {
+                tickets.Remove(winner);
+            }
+            else
+            {
+                winner.weight -= 1;
+            }
+
+            foreach (Ticket<T> t in tickets)
+            {
+                Console.WriteLine("Contestant Name: " + t.key + " Tickets: " + t.weight);
+            }
+
             return winner.key;
         }
     }
