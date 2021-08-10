@@ -320,7 +320,7 @@ namespace WinnerWinnerChickenDinner
                             var delay = 250 * i / rollCount;
 
                             //TODO: change from absolute path to assets
-                            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Marya\Source\Repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
                             player.Play();
 
                             //wait
@@ -332,7 +332,7 @@ namespace WinnerWinnerChickenDinner
                         currentPrize = selectedPrize.PrizeName;
                         //final roll for winner, only roll that matters
                         string winnername = Ticket<string>.Pick(TicketsList);
-                        txt_WheelName.Text = "Congratulations " + winnername + "! You Won " + currentPrize;
+                        txt_WheelName.Text = "Congratulations " + winnername + "!\nYou Won " + currentPrize;
 
 
                         Console.WriteLine("Winner: " + winnername);
@@ -344,7 +344,7 @@ namespace WinnerWinnerChickenDinner
 
                         SaveFile.SaveToFile(contestTitle, ContestantList, prizeList, currentPrize, TicketsList, totalTickets, winningTicket, winnername);
                         lst_PrizeBoard.Items.Refresh();
-                        System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\dingding.wav");
+                        System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(@"C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\dingding.wav");
                         player2.Play();
                         System.Windows.MessageBox.Show($"Congratulations {winnername} you have won {currentPrize}!");
 

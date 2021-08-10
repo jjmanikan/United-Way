@@ -16,7 +16,7 @@
         <Grid.Background>
             <VisualBrush>
                 <VisualBrush.Visual>
-                    <Image gif:ImageBehavior.AnimatedSource="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
+                    <Image gif:ImageBehavior.AnimatedSource="C:\Users\Marya\Source\Repos\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine.gif"
                            gif:ImageBehavior.AutoStart ="True"
                            gif:ImageBehavior.RepeatBehavior="1"/>
                 </VisualBrush.Visual>
@@ -27,7 +27,7 @@
 
         <Rectangle Fill="DimGray" HorizontalAlignment="Left" Height="76" Margin="271,0,0,0" Stroke="DimGray" VerticalAlignment="Top" Width="523"/>
 
-        <Button Style="{StaticResource RoundButtonTemplate}" Background="LightSkyBlue" Content="ROLL" FontSize="15" Margin="0,319,219,-29" FontWeight="ExtraBold" FontFamily="Arial" Click="Button_Click" HorizontalAlignment="Right" Width="114" />
+        <Button Style="{StaticResource RoundButtonTemplate}" Background="LightSkyBlue" Content="ROLL" FontSize="15" Margin="0,323,217.667,-29.333" FontWeight="ExtraBold" FontFamily="Arial" Click="Button_Click" HorizontalAlignment="Right" Width="114" />
         <!--<Button Style="{StaticResource RoundButtonTemplate}" Content="NEW PRIZE" Margin="0,316,263,-99" FontWeight="ExtraBold" FontFamily="Calibri" HorizontalAlignment="Right" Width="122" Click="Button_Click_1"/>-->
         <ListView Background= "LightGray"  FontWeight="Bold" FontSize="15" Foreground="White" FontFamily="Arial" BorderThickness="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="lst_PrizeBoard" SelectionChanged="lst_PrizeBoard_SelectionChanged" Margin="0,91,538,-29" HorizontalAlignment="Right" Width="235">
             <ListView.View>
@@ -37,7 +37,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Label x:Name="errorMain" Content="" Foreground="Red" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="21,363,0,-56" VerticalAlignment="Top" Width="753"/>
+        <Label x:Name="errorMain" Content="" Foreground="Red" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="257,363,0,-68" VerticalAlignment="Top" Width="517" Height="41"/>
 
         <Button x:Name="settingsBtn"
                 HorizontalAlignment="Left"
@@ -47,7 +47,7 @@
                 Background="Transparent"
                 BorderThickness="0"   
                 Click="BtnOpenSettings">
-            <Image Source="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\settings.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
+            <Image Source="C:\Users\Marya\Source\Repos\United-Way\WinnerWinnerChickenDinner\Assets\settings.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
         </Button>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="76" Stroke="Red" VerticalAlignment="Top" Width="256"/>
         <TextBlock FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Left" Margin="292,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="458" FontSize="31" Foreground="White">
@@ -62,18 +62,18 @@
                 />
             </TextBlock.Effect><Run Text="United Way Campaign"/><Run Text=" Raffle"/></TextBlock>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="9,398,0,-102" Stroke="Red" VerticalAlignment="Top" Width="765"/>
-        <Image Source="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="384"/>
-        <Image HorizontalAlignment="Left" Height="164" Margin="446,144,0,-20" VerticalAlignment="Top" Width="155"
-               gif:ImageBehavior.AnimatedSource="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\slotmachine2.gif"
+        <Image Source="C:\Users\Marya\Source\Repos\United-Way\WinnerWinnerChickenDinner\Assets\logo1.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="384"/>
+        <Image HorizontalAlignment="Left" Height="161" Margin="446,153,0,0" VerticalAlignment="Top" Width="155"
+               gif:ImageBehavior.AnimatedSource="C:\Users\Marya\Source\Repos\United-Way\WinnerWinnerChickenDinner\Assets\slotmachine2.gif"
                gif:ImageBehavior.AutoStart ="True"
                gif:ImageBehavior.RepeatBehavior="1" />
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="30" Margin="424,138,0,0" Stroke="White" VerticalAlignment="Top" Width="78"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="30" Margin="525,138,0,0" Stroke="White" VerticalAlignment="Top" Width="51"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="18" Margin="461,296,0,-23" Stroke="White" VerticalAlignment="Top" Width="101"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="77" Margin="577,237,0,-22" Stroke="White" VerticalAlignment="Top" Width="55"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="152" Margin="371,156,0,-15" Stroke="White" VerticalAlignment="Top" Width="78"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="30" Margin="564,132,0,0" Stroke="White" VerticalAlignment="Top" Width="42"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="24" Margin="482,125,0,0" Stroke="White" VerticalAlignment="Top" Width="34" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="30" Margin="423,147,0,0" Stroke="White" VerticalAlignment="Top" Width="78"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="30" Margin="524,147,0,0" Stroke="White" VerticalAlignment="Top" Width="51"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="14" Margin="462,303,0,0" Stroke="White" VerticalAlignment="Top" Width="101"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="71" Margin="575,244,0,0" Stroke="White" VerticalAlignment="Top" Width="55"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="152" Margin="371,163,0,0" Stroke="White" VerticalAlignment="Top" Width="78"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="30" Margin="564,140,0,0" Stroke="White" VerticalAlignment="Top" Width="42"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="24" Margin="481,133,0,0" Stroke="White" VerticalAlignment="Top" Width="34" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -83,7 +83,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="24" Margin="518,125,0,0" Stroke="White" VerticalAlignment="Top" Width="34" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="24" Margin="517,133,0,0" Stroke="White" VerticalAlignment="Top" Width="34" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -93,7 +93,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="8" Margin="586,233,0,0" Stroke="White" VerticalAlignment="Top" Width="14" RenderTransformOrigin="0.5,0.5">
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="8" Margin="584,240,0,0" Stroke="White" VerticalAlignment="Top" Width="14" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -103,9 +103,9 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Image Source="C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\logo3.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="63" Margin="229,0,0,0" RenderTransformOrigin="0.5,0.5"/>
-        <TextBlock FontWeight="ExtraBold" FontSize="25"  Foreground="Red" x:Name="txt_WheelName" Margin="0,81,4,166" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="530" TextAlignment="Center"/>
-        <Rectangle Fill="White" HorizontalAlignment="Left" Height="22" Margin="594,211,0,0" Stroke="White" VerticalAlignment="Top" Width="9" RenderTransformOrigin="0.5,0.5">
+        <Image Source="C:\Users\Marya\Source\Repos\United-Way\WinnerWinnerChickenDinner\Assets\logo3.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="63" Margin="229,0,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <TextBlock FontWeight="ExtraBold" FontSize="25"  Foreground="Red" x:Name="txt_WheelName" Margin="0,81,3.667,165.333" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="530" TextAlignment="Center"/>
+        <Rectangle Fill="White" HorizontalAlignment="Left" Height="22" Margin="591,218,0,0" Stroke="White" VerticalAlignment="Top" Width="9" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
