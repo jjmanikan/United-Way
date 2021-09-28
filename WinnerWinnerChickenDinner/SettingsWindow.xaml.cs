@@ -305,6 +305,12 @@ namespace WinnerWinnerChickenDinner
             prizeBoard.Items.RemoveAt(prizeBoard.SelectedIndex);
         }
 
+        private void SettingsWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+            this.mainWindow.Close();
+        }
+
         public string loadPath()
         {
             using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.FilePath)))
@@ -312,6 +318,7 @@ namespace WinnerWinnerChickenDinner
                 BinaryFormatter bf = new BinaryFormatter();
                 return (string)bf.Deserialize(ms);
             }
+
         }
     }
 

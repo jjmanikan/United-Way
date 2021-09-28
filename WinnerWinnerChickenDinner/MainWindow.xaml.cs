@@ -82,6 +82,7 @@ namespace WinnerWinnerChickenDinner
                 Console.WriteLine("Prize Exception: " + e.Message);
             }
 
+            
             //skip first line since its the header
             //for every contestant, retrieve full name and the number of tickets and add to a list that is used for determining the winner
             foreach (Contestant c in ContestantList)
@@ -89,6 +90,7 @@ namespace WinnerWinnerChickenDinner
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
                 TicketsList.Add(contestant);
             }
+
         }
 
         //retrieve the prizes from saved property settings
@@ -331,7 +333,8 @@ namespace WinnerWinnerChickenDinner
                         currentPrize = selectedPrize.PrizeName;
                         //final roll for winner, only roll that matters
                         string winnername = Ticket<string>.Pick(TicketsList);
-                        txt_WheelName.Text = "Congratulations " + winnername + "!\nYou Won " + currentPrize;
+
+                        txt_WheelName.Text = "Congratulations " + winnername + "!\n You Won " + currentPrize;
 
 
                         Console.WriteLine("Winner: " + winnername);
@@ -346,7 +349,6 @@ namespace WinnerWinnerChickenDinner
                         System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(congratsSoundFile);
 
                         player2.Play();
-                       
 
                         //remove winner from list after they win
                         if (!SettingsWindow.allowMultipleWins)
