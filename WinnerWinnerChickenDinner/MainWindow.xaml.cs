@@ -1,4 +1,12 @@
-﻿using Ganss.Excel;
+﻿/*
+ * FILE:            MainWindow.xaml.cs
+ * DESCRIPTION:     This file contains the functionality for the Main Contest Window which is invoked once the user clicks on "Save and Continue"
+ *                      in the Settings Window.
+ */
+
+
+
+using Ganss.Excel;
 using Microsoft.CSharp.RuntimeBinder;
 using Microsoft.Office.Interop.Excel;
 using System;
@@ -25,17 +33,15 @@ namespace WinnerWinnerChickenDinner
 {
 
 
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : System.Windows.Window
     {
 
 
-        string output = "{0,-20}\t{1,-40}";
-        int prizecount = 0;
+        //string output = "{0,-20}\t{1,-40}";
+       // int prizecount = 0;
         public static string filePath = "";
-        int initializecount = 0;
+        //int initializecount = 0;
         public static int totalTickets;
         public static string currentPrize = "";
         public static double winningTicket;
@@ -43,9 +49,9 @@ namespace WinnerWinnerChickenDinner
         public static List<PrizeBoardItem> prizeList = new List<PrizeBoardItem>();
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
         public static List<Contestant> ContestantList = new List<Contestant>();
-        //List<Contestant> UpdatedList = new List<Contestant>();
         public static List<Ticket<string>> TicketsList = new List<Ticket<string>>();
         public static string contestTitle = "";
+        
 
         public MainWindow()
         {
@@ -53,10 +59,10 @@ namespace WinnerWinnerChickenDinner
 
             
             Properties.Settings.Default.Upgrade();
-            //Properties.Settings.Default.Save();
-            //Console.WriteLine("Mainwindow2: " + Properties.Settings.Default.ContestantList);
+            //Properties.Settings.Default.Save(); - keeping for testing
             try 
             {
+                //populate contestant list from the saved settings
                 ContestantList = loadContestants();
             }
             catch (SerializationException e)
@@ -66,6 +72,7 @@ namespace WinnerWinnerChickenDinner
 
             try
             {
+                //populate prize list from saved settings
                 prizeList = loadPrizes();
                 FillPrizeBoard();
 
@@ -76,33 +83,15 @@ namespace WinnerWinnerChickenDinner
             }
 
             //skip first line since its the header
+            //for every contestant, retrieve full name and the number of tickets and add to a list that is used for determining the winner
             foreach (Contestant c in ContestantList)
             {
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
                 TicketsList.Add(contestant);
             }
-
-            //foreach (PrizeBoardItem p in prizeList)
-            //{
-            //    Console.WriteLine(p.PrizeName + "Winner name:" + p.Winner);
-            //}
-
-            //foreach (Contestant contestant in ContestantList)
-            //{
-            //    Console.WriteLine(contestant.Tickets + " "  + contestant.FullName + prizecount++);
-            //} 
-            /*
-
-            //testing purposes
-            /*ContestantList.Add(new Contestant() { Tickets = 10, Prefix = "", FirstName = "Justine", MiddleName = "Kyle Soriano", LastName = "Manikan", FullName = "Justine Kyle Soriano Manikan", PhoneNumber = "2113442423", Email = "j@gmail.com" });
-            ContestantList.Add(new Contestant() { Tickets = 5, Prefix = "", FirstName = "Js", MiddleName = "", LastName = "Man", FullName = "Js Man", PhoneNumber = "2113442423", Email = "j@gmail.com" });
-            ContestantList.Add(new Contestant() { Tickets = 5, Prefix = "", FirstName = "AAAA", MiddleName = "", LastName = "Man", FullName = "AAAA Man", PhoneNumber = "2113442423", Email = "j@gmail.com" });
-            ContestantList.Add(new Contestant() { Tickets = 5, Prefix = "", FirstName = "2211", MiddleName = "", LastName = "Man", FullName = "2211 Man", PhoneNumber = "2113442423", Email = "j@gmail.com" });
-            */
-
         }
 
-
+        //retrieve the prizes from saved property settings
         List<PrizeBoardItem> loadPrizes()
         {
             using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.PrizeList)))
@@ -113,6 +102,9 @@ namespace WinnerWinnerChickenDinner
             
         }
 
+
+
+        //retrieve the list of current contestants from saved property settings
         List<Contestant> loadContestants()
         {
             using(MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.ContestantList)))
@@ -122,6 +114,7 @@ namespace WinnerWinnerChickenDinner
             }
         }
 
+        //saves current prizes (with winner if it has been chosen) to property settings so that it can be retreived next time this window is opened
         public void savePrizesToSettings(List<PrizeBoardItem> prizeList)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -136,6 +129,7 @@ namespace WinnerWinnerChickenDinner
             }
         }
 
+        //saves current contestant list to property settings so that it can be retreived next time this window is opened
         public void saveContestantsToSettings(List<Contestant> contestantList)
         {
             using (MemoryStream ms = new MemoryStream())
@@ -151,26 +145,23 @@ namespace WinnerWinnerChickenDinner
         }
 
         /// <summary>
-        /// import contestants from excel
+        /// Accesses the excel file chosen by the user and walks through each cell populating each contestant information
         /// </summary>
         public void ImportContestants()
         {
-            
-            Console.WriteLine("Calling this method");
+            Console.WriteLine("Importing Contestants");
             Microsoft.Office.Interop.Excel.Application xlApp;
             Workbook xlWorkBook;
             Worksheet xlWorkSheet;
             Range range;
 
-            int rCnt;
-            int clCnt;
+            int rCnt;   //row at which the first contestant is
             int rw = 0;
             int cl = 0;
 
-            string fullname;
+            //string fullname;
 
             xlApp = new Microsoft.Office.Interop.Excel.Application();
-            //absolute path, change when neccessary
             //TODO: Change to dynamic asset folder
             xlWorkBook = xlApp.Workbooks.Open(filePath);
             xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
@@ -179,19 +170,42 @@ namespace WinnerWinnerChickenDinner
             rw = range.Rows.Count;
             cl = range.Columns.Count;
 
+            // until final row is reached, walk through each column of each row, populating contestants' info
             for (rCnt = 3; rCnt <= rw; rCnt++)
             {
 
                 Contestant contestant = new Contestant();
-                
-              
 
-                contestant.Tickets = (string)(range.Cells[rCnt, 1] as Range).Value2.ToString();
-                contestant.Prefix = (string)(range.Cells[rCnt, 2] as Range).Value2.ToString();
-                contestant.FirstName = (string)(range.Cells[rCnt, 3] as Range).Value2.ToString();
+                // try/catch block for each value in case the cell is empty. Otherwise, add value to the contestant info
                 try
                 {
-                    Console.WriteLine("hello2");
+                    contestant.Tickets = (string)(range.Cells[rCnt, 1] as Range).Value2.ToString();
+                }
+                catch (RuntimeBinderException e)
+                {
+                    contestant.Tickets = " ";
+                }
+
+                try
+                {
+                    contestant.Prefix = (string)(range.Cells[rCnt, 2] as Range).Value2.ToString();
+                }
+                catch (RuntimeBinderException e)
+                {
+                    contestant.Prefix = " ";
+                }
+
+                try
+                {
+                    contestant.FirstName = (string)(range.Cells[rCnt, 3] as Range).Value2.ToString();
+                }
+                catch (RuntimeBinderException e)
+                {
+                    contestant.FirstName = " ";
+                }
+
+                try
+                {
                     contestant.MiddleName = (string)(range.Cells[rCnt, 4] as Range).Value2.ToString();
                 }
                 catch (RuntimeBinderException e)
@@ -199,12 +213,10 @@ namespace WinnerWinnerChickenDinner
                     contestant.MiddleName = " ";
                 }
 
-                //
                 contestant.LastName = (string)(range.Cells[rCnt, 5] as Range).Value2.ToString();
                 
                 try
                 {
-                    Console.WriteLine("hello2");
                     contestant.FullName = (string)(range.Cells[rCnt, 6] as Range).Value2.ToString();
                 }
                 catch (RuntimeBinderException e)
@@ -214,7 +226,6 @@ namespace WinnerWinnerChickenDinner
 
                 try
                 {
-                    Console.WriteLine("hello2");
                     contestant.PhoneNumber = (string)(range.Cells[rCnt, 7] as Range).Value2.ToString();
                 }
                 catch (RuntimeBinderException e)
@@ -223,7 +234,6 @@ namespace WinnerWinnerChickenDinner
                 }
                 try
                 {
-                    Console.WriteLine("hello2");
                     contestant.Email = (string)(range.Cells[rCnt, 8] as Range).Value2.ToString();
                 }
                 catch (RuntimeBinderException e)
@@ -231,15 +241,9 @@ namespace WinnerWinnerChickenDinner
                     contestant.Email = " ";
                 }
                 
+                // add contestant to the list
                 ContestantList.Add(contestant);
 
-                //for(clCnt = 0; clCnt <= cl; clCnt++)
-                //{
-                //    if(!string.IsNullOrEmpty((string)(range.Cells[rCnt, clCnt] as Range).Value2.ToString()))
-                //    {
-                //        switch
-                //    }
-                //}
             }
 
 
@@ -254,7 +258,7 @@ namespace WinnerWinnerChickenDinner
             Marshal.ReleaseComObject(xlApp);
 
 
-            //skip first line since its the header
+            //grab each contestant's full name and tickets purcharsed from the original complete list and add it to list used for determining the winner
             foreach (Contestant c in ContestantList)
             {
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
@@ -267,26 +271,20 @@ namespace WinnerWinnerChickenDinner
 
 
         /// <summary>
-        /// fill prize board with test prizes
+        /// fill prize board (UI component) with prizes added by user in Settings
         /// </summary>
         public void FillPrizeBoard()
         {
             this.lst_PrizeBoard.ItemsSource = prizeList;
-            //this.lst_PrizeBoard.Items.Clear();
-
-
         }
 
         /// <summary>
-        /// Rolls button  click function, roll for winner
+        /// When the user clicks on "Roll" button, the functions checks for whether the prize has been selected and invokes the algorithm that 
+        /// determines who from the TicketList will be the winner. Once the winner has been chosen, the result is logged into text file. 
+        /// Additiionally, if the user has selected to not allow for multiple wins, the winner is removed from the current contestant list.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private async void Button_Click(object sender, RoutedEventArgs e)
-        {
-
-            //Console.WriteLine("Total Count is :" + ContestantList.Count);
-            
+        {  
             //error check that
             if (lst_PrizeBoard.SelectedItem == null)
             {
@@ -320,7 +318,7 @@ namespace WinnerWinnerChickenDinner
                             var delay = 250 * i / rollCount;
 
                             //TODO: change from absolute path to assets
-                            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Marya\Source\Repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"D:\MSILaptop\work\newUW\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
                             player.Play();
 
                             //wait
@@ -328,7 +326,6 @@ namespace WinnerWinnerChickenDinner
                         }
 
                         //display each contestants probability of winning
-                        //Ticket<string>.GetProbabilities(TicketsList);
                         currentPrize = selectedPrize.PrizeName;
                         //final roll for winner, only roll that matters
                         string winnername = Ticket<string>.Pick(TicketsList);
@@ -337,16 +334,14 @@ namespace WinnerWinnerChickenDinner
 
                         Console.WriteLine("Winner: " + winnername);
 
-                        //string winnername = UpdatedList[index].FullName;
-
 
                         selectedPrize.Winner = winnername;
 
                         SaveFile.SaveToFile(contestTitle, ContestantList, prizeList, currentPrize, TicketsList, totalTickets, winningTicket, winnername);
                         lst_PrizeBoard.Items.Refresh();
-                        System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(@"C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\dingding.wav");
+                        System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(@"D:\MSILaptop\work\newUW\WinnerWinnerChickenDinner\Assets\dingding.wav");
                         player2.Play();
-                        System.Windows.MessageBox.Show($"Congratulations {winnername} you have won {currentPrize}!");
+                       
 
                         //remove winner from list after they win
                         if (!SettingsWindow.allowMultipleWins)
@@ -355,138 +350,44 @@ namespace WinnerWinnerChickenDinner
                             Console.WriteLine("Removing Content " + winnername);
                         }
 
-
+                        // update the lists to saved settings for future rounds
                         savePrizesToSettings(prizeList);
                         saveContestantsToSettings(ContestantList);
-
-                        /*foreach (Contestant x in UpdatedList)
-                        {
-                            Console.WriteLine(x.FullName);
-                        } */
-
 
                     }
                     catch (ArgumentOutOfRangeException r)
                     {
                         Console.WriteLine("Exception: " + r.Message);
-                        //throw new ArgumentOutOfRangeException("", r);
                     }
                 }
+                //display an error message if the prize selected to be rolled for already has a winner associated with it
                 else
                 {
-                    //System.Windows.MessageBox.Show($"{selectedPrize.Winner} already won {selectedPrize.PrizeName}! Select another prize!");
                     errorMain.Content = $"{selectedPrize.Winner} already won {selectedPrize.PrizeName}! Select another prize!";
                 }
             }
 
         }
 
-
         /// <summary>
-        /// old way of finding winner
-        /// function to update list iterating through each contestants number of tickets
+        /// captures which prize the user has selected to be rolled for
         /// </summary>
-        public void UpdateList()
-        {
-            foreach (Contestant contestant in ContestantList)
-            {
-                int ts = Int32.Parse(contestant.Tickets);
-                for (int i = 0; i < ts; i++)
-                {
-                    Console.WriteLine(contestant.FullName);
-                    //UpdatedList.Add(new Contestant() { Tickets = "1", Prefix = contestant.Prefix, FirstName = contestant.FirstName, MiddleName = contestant.MiddleName, LastName = contestant.LastName, FullName = contestant.FullName, PhoneNumber = contestant.PhoneNumber, Email = contestant.Email });
-                }
-            }
-        }
-
-        /// <summary>
-        /// selection change function
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void lst_PrizeBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             PrizeBoardItem selectedItem = (PrizeBoardItem)lst_PrizeBoard.SelectedItems[0];
-            //lst_PrizeBoard.SelectedItems[0].Col1.Text;
-            //txt_CurrentPrize.Text = selectedItem.PrizeName;
         }
 
-
-        /// <summary>
-        /// add new prize
-        /// </summary>
-        /// <param name="prize"></param>
-        /// 
-
-        //public void AddNewPrize(string prize)
-        //{
-        //    lst_PrizeBoard.Items.Add(new PrizeBoardItem { PrizeName = prize, Winner = "" });
-        //}
-        //static
-
-
-        //public string ShowDialog(string text, string caption)
-        //{
-        //    Form prompt = new Form()
-        //    {
-        //        Width = 300,
-        //        Height = 150,
-        //        BackColor = System.Drawing.Color.MistyRose,
-        //        FormBorderStyle = FormBorderStyle.FixedDialog,
-        //        Text = caption,
-        //        StartPosition = FormStartPosition.CenterParent
-        //    };
-
-        //    System.Windows.Forms.Label txtLabel = new System.Windows.Forms.Label() { Left = 50, Top = 20, Text = text};
-        //    System.Windows.Forms.TextBox textBox = new System.Windows.Forms.TextBox() { Left = 50, Top = 50, Width = 200 };
-        //    System.Windows.Forms.Button button = new System.Windows.Forms.Button() { Text = "Add and Go Back", Left = 50, Width = 110, Top = 70, DialogResult = System.Windows.Forms.DialogResult.OK};
-        //    System.Windows.Forms.Button add = new System.Windows.Forms.Button()
-        //    {
-        //        Text="+",
-        //        Width = 50,
-        //        Top = 70,
-        //        Left = 160
-        //    };
-
-        //    add.Font = new System.Drawing.Font(button.Font.FontFamily, 20);
-        //    button.Click += (sender, e) => {
-        //        string t = textBox.Text;
-        //        AddNewPrize(t);
-        //        prompt.Close(); };
-        //    add.Click += (sender, e) =>
-        //    {
-        //        string t = textBox.Text;
-        //        AddNewPrize(t);
-        //        textBox.Text = "";
-
-        //    };
-        //    prompt.Controls.Add(textBox);
-        //    prompt.Controls.Add(button);
-        //    prompt.Controls.Add(add);
-        //    prompt.Controls.Add(txtLabel);
-        //    prompt.AcceptButton = button;
-
-        //    return prompt.ShowDialog() == System.Windows.Forms.DialogResult.OK ? textBox.Text : "";
-
-        //}
-
-        //private void Button_Click_1(object sender, RoutedEventArgs e)
-        //{
-        //    ShowDialog("Name new Prize:", "NEW PRIZE");
-        //}
-
-
+        //Button to invoke the Settings window. Upon clicking, the current Main window is closed.
         private void BtnOpenSettings(object sender, RoutedEventArgs e)
         {
             SettingsWindow openSettings = new SettingsWindow();
-            //SettingsWindow w1 = new SettingsWindow();
             openSettings.Owner = null;
-            //openSettings.AppMainWindow = this;
 
             openSettings.Show();
             this.Hide();
         }
 
+        //Does not seem to currently get the job done - needs to be fixed
         private void KillApp(object sender, System.ComponentModel.CancelEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
