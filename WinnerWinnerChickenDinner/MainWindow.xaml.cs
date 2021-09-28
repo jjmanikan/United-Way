@@ -75,12 +75,17 @@ namespace WinnerWinnerChickenDinner
                 Console.WriteLine("Prize Exception: " + e.Message);
             }
 
+            
             //skip first line since its the header
             foreach (Contestant c in ContestantList)
             {
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
                 TicketsList.Add(contestant);
             }
+            Console.WriteLine("Number of contestants" + TicketsList.Count());
+            Ticket<string>.GetProbabilities(TicketsList);
+
+            
 
             //foreach (PrizeBoardItem p in prizeList)
             //{
@@ -179,7 +184,7 @@ namespace WinnerWinnerChickenDinner
             rw = range.Rows.Count;
             cl = range.Columns.Count;
 
-            for (rCnt = 3; rCnt <= rw; rCnt++)
+            for (rCnt = 2; rCnt <= rw; rCnt++)
             {
 
                 Contestant contestant = new Contestant();
@@ -332,7 +337,7 @@ namespace WinnerWinnerChickenDinner
                         currentPrize = selectedPrize.PrizeName;
                         //final roll for winner, only roll that matters
                         string winnername = Ticket<string>.Pick(TicketsList);
-                        txt_WheelName.Text = "Congratulations " + winnername + "! You Won " + currentPrize;
+                        txt_WheelName.Text = "Congratulations " + winnername + "!\n You Won " + currentPrize;
 
 
                         Console.WriteLine("Winner: " + winnername);
@@ -346,7 +351,7 @@ namespace WinnerWinnerChickenDinner
                         lst_PrizeBoard.Items.Refresh();
                         System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(@"C:\Users\justi\source\repos\WinnerWinnerChickenDinner\WinnerWinnerChickenDinner\Assets\dingding.wav");
                         player2.Play();
-                        System.Windows.MessageBox.Show($"Congratulations {winnername} you have won {currentPrize}!");
+                        System.Windows.MessageBox.Show($"Congratulations {winnername} \nYou have won {currentPrize}!");
 
                         //remove winner from list after they win
                         if (!SettingsWindow.allowMultipleWins)

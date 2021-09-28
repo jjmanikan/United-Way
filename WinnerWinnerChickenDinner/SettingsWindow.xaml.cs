@@ -294,6 +294,12 @@ namespace WinnerWinnerChickenDinner
             MainWindow.prizeList.RemoveAt(prizeBoard.SelectedIndex);
             prizeBoard.Items.RemoveAt(prizeBoard.SelectedIndex);
         }
+
+        private void SettingsWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            System.Windows.Forms.Application.Exit();
+            this.mainWindow.Close();
+        }
     }
 
 }

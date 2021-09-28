@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WinnerWinnerChickenDinner"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="767" ResizeMode="NoResize">
+        Title="Settings" Height="450" Width="767" ResizeMode="NoResize" Closing="SettingsWindow_Closing">
     <Grid Margin="0,0,0,6">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="217*"/>

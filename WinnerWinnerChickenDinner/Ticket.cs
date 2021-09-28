@@ -42,7 +42,7 @@ namespace WinnerWinnerChickenDinner
             {
                 double probability = Convert.ToDouble(c.weight) / Convert.ToDouble(tSum);
                 
-                //Console.WriteLine("Name: " + c.key + " | Chances of winning: " + probability * 100 + "% | Tickets: " + c.weight);
+                Console.WriteLine("Name: " + c.key + " | Chances of winning: " + probability * 100 + "% | Tickets: " + c.weight);
             }
  
             return tickets;
