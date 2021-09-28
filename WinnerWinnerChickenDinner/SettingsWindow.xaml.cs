@@ -5,9 +5,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Media;
-//using ListViewScrollPosition.Commands;
-//using ListViewScrollPosition.Models;
-
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
 
@@ -19,14 +16,13 @@ namespace WinnerWinnerChickenDinner
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        private System.Windows.Forms.OpenFileDialog openFileDialog1;
+        //private System.Windows.Forms.OpenFileDialog openFileDialog1;
         MainWindow mainWindow = new MainWindow();
         public static bool allowMultipleWins = false;
 
         public SettingsWindow()
         {
             InitializeComponent();
-            //prizeBoard.ItemsSource = MainWindow.prizeList;
             GetSettings();
             LoadChanges();
         }
@@ -38,9 +34,6 @@ namespace WinnerWinnerChickenDinner
 
         public void AddNewPrize(string prize)
         {
-
-            //MainWindow.prizeList.Add(new PrizeBoardItem { PrizeName = prize, Winner = "" });
-            //SettingsWindow();
             if (prize != "")
             {
                 MainWindow.prizeList.Add(new PrizeBoardItem { PrizeName = prize, Winner = "" });
@@ -103,19 +96,9 @@ namespace WinnerWinnerChickenDinner
 
         }
 
-        //save the state when window is closing for the next time it is opened sp all changes are still there
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
-        {
-
-            
-        }
 
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
-            //if (MainWindow.ContestantList != null)
-            //{
-               // adding the message box that allows the user to choose if they want to overwrite current file uploaded or add to it
-            //}
             int size = -1;
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
@@ -149,6 +132,7 @@ namespace WinnerWinnerChickenDinner
                     size = text.Length;
                     mainWindow.ImportContestants();
                     DisplayContestants();
+                    btnUploadFile.IsEnabled = false;
                 }
                 catch (IOException)
                 {
@@ -160,14 +144,13 @@ namespace WinnerWinnerChickenDinner
         }
 
         //saves the prizes to a list and adds it to the scoreboard list
-        private void savePrizes(object sender, RoutedEventArgs e)
+        private void Save(object sender, RoutedEventArgs e)
         {
+            bool validation = false;
 
-            if ((contestName.Text != "") & (MainWindow.prizeList.Count() > 0))
+            validation = ValidateSettings();
+            if (validation)
             {
-                errorMessage1.Foreground = Brushes.Green;
-                errorMessage1.Content = "Saved!";
-                errorMessage2.Content = "";
                 contestTitle.Content = contestName.Text;
                 mainWindow.FillPrizeBoard();
                 contestantsListView.ItemsSource = null;
@@ -176,10 +159,9 @@ namespace WinnerWinnerChickenDinner
 
                 mainWindow.savePrizesToSettings(MainWindow.prizeList);
                 mainWindow.saveContestantsToSettings(MainWindow.ContestantList);
-                //Console.WriteLine("Prize List :" + Properties.Settings.Default.PrizeList);
-                //Console.WriteLine("ContestantList: " + Properties.Settings.Default.ContestantList);
 
                 Properties.Settings.Default.ContestName = contestName.Text;
+                Properties.Settings.Default.FilePath = filePathBox.Text;
                 Properties.Settings.Default.Save();
                 Properties.Settings.Default.Upgrade();
                 Properties.Settings.Default.Save();
@@ -188,25 +170,47 @@ namespace WinnerWinnerChickenDinner
 
                 mainWindow.Show();
             }
-            else if ((contestName.Text == "") & (MainWindow.prizeList.Count() == 0))
-            {
-                errorMessage1.Foreground = Brushes.Red;
-                errorMessage1.Content = "Could not Save";
-                errorMessage2.Content = " -    Missing Contest Name and Prize Items";
-            }
-            else if (contestName.Text == "")
-            {
-                errorMessage1.Foreground = Brushes.Red;
-                errorMessage1.Content = "Could not Save";
-                errorMessage2.Content = " -    Missing Contest Name";
-            }
-            else if (MainWindow.prizeList.Count() == 0)
-            {
-                errorMessage1.Foreground = Brushes.Red;
-                errorMessage1.Content = "Could not Save";
-                errorMessage2.Content = " -    Missing Prize Items";
-            }
 
+        }
+
+        public bool ValidateSettings()
+        {
+            bool validation = false;
+            contestName.BorderBrush = System.Windows.Media.Brushes.Gray;
+            prizeBoard.BorderBrush = System.Windows.Media.Brushes.Gray;
+            filePathBox.BorderBrush = System.Windows.Media.Brushes.Black;
+
+            if ((contestName.Text != "") & (MainWindow.prizeList.Count() > 0) & (filePathBox.Text != "Choose File to Upload"))
+            {
+                errorMessage1.Foreground = Brushes.Green;
+                errorMessage1.Content = "Saved!";
+                errorMessage2.Content = "";
+                validation = true;
+                return validation;
+            }
+            else
+            {
+                errorMessage1.Foreground = Brushes.Red;
+                errorMessage1.Content = "Could not Save";
+                errorMessage2.Content = " -    Please fill out the Required Fields";
+
+                if (contestName.Text == "")
+                {
+                    contestName.BorderBrush = System.Windows.Media.Brushes.Red;
+                }
+
+                if (MainWindow.prizeList.Count() == 0)
+                {
+                    prizeBoard.BorderBrush = System.Windows.Media.Brushes.Red;
+                }
+
+                if (filePathBox.Text == "Choose File to Upload")
+                {
+                    filePathBox.BorderBrush = System.Windows.Media.Brushes.Red;
+                }
+
+                    return validation;
+            }
         }
 
         public void LoadChanges()
@@ -214,7 +218,7 @@ namespace WinnerWinnerChickenDinner
             if (MainWindow.ContestantList != null)
             {
                 DisplayContestants();
-                filePathBox.Text = "File currently loaded";
+                //filePathBox.Text = "File currently loaded";
             }
             if (MainWindow.prizeList != null)
             {
@@ -232,6 +236,18 @@ namespace WinnerWinnerChickenDinner
             allowMultipleWins = Properties.Settings.Default.MultipleWins;
             contestName.Text = Properties.Settings.Default.ContestName;
             contestTitle.Content = Properties.Settings.Default.ContestName;
+            
+            if (Properties.Settings.Default.FilePath == "")
+            {
+                filePathBox.Text = "Choose File to Upload";
+                btnUploadFile.IsEnabled = true;
+            }
+            else
+            {
+                filePathBox.Text = Properties.Settings.Default.FilePath;
+                btnUploadFile.IsEnabled = false;
+            }
+
             if (allowMultipleWins)
             {
                 AllowMultipleWins.IsChecked = true;
@@ -242,7 +258,6 @@ namespace WinnerWinnerChickenDinner
                 AllowMultipleWins.IsChecked = false;
 
             }
-            //Console.WriteLine("Hey I am Settings : " + allowMultipleWins);
         }
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -284,11 +299,6 @@ namespace WinnerWinnerChickenDinner
             }
         }
 
-        private void prizeBoard_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void deleteBtn_Click(object sender, RoutedEventArgs e)
         {
             MainWindow.prizeList.RemoveAt(prizeBoard.SelectedIndex);
@@ -299,6 +309,16 @@ namespace WinnerWinnerChickenDinner
         {
             System.Windows.Forms.Application.Exit();
             this.mainWindow.Close();
+        }
+
+        public string loadPath()
+        {
+            using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.FilePath)))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                return (string)bf.Deserialize(ms);
+            }
+
         }
     }
 

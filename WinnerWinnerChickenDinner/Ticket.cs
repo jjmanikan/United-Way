@@ -14,11 +14,10 @@ namespace WinnerWinnerChickenDinner
        
         private static Random random = new Random();
         
-        //key will be full name
         public Ticket(T key, int weight)
         {
-            this.key = key;
-            this.weight = weight;
+            this.key = key;             //full name of contestant
+            this.weight = weight;       //number of tickets bought by contestant
         }
         
         
@@ -37,12 +36,9 @@ namespace WinnerWinnerChickenDinner
    
             }
 
-            //Console.WriteLine("\nTotal Number of Tickets: " + tSum);
             foreach(Ticket<T> c in tickets)
             {
                 double probability = Convert.ToDouble(c.weight) / Convert.ToDouble(tSum);
-                
-                Console.WriteLine("Name: " + c.key + " | Chances of winning: " + probability * 100 + "% | Tickets: " + c.weight);
             }
  
             return tickets;
@@ -55,8 +51,6 @@ namespace WinnerWinnerChickenDinner
 
             //number of contestants
             int count = tickets.Count();
-            //MainWindow.totalTickets = count.ToString();
-            //Console.WriteLine("Ticket Count : " + count);
 
             //totals number of tickets
             for (int i = 0; i < count; i++)
@@ -77,13 +71,10 @@ namespace WinnerWinnerChickenDinner
                 {
                     ticketSum2 = 0;
                 }
-
-                //Console.WriteLine("Name: " + tickets[i].key + " Tickets: " + tickets[i].weight + " Number Range Section: Between " + ticketSum2 + " and " + tickets[i].ticketSum);
             }
             MainWindow.totalTickets = tSum;
             //random number in total number of tickets
             double winningodd = random.NextDouble() * tSum;
-            //Console.WriteLine("Winning Number: " + winningodd);
             MainWindow.winningTicket = winningodd;
             
 
