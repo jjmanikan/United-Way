@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace WinnerWinnerChickenDinner
 {
-    // SaveFile.SaveNewFile(contestName.Text, MainWindow.prizeList ); - just here for now
+    
     public class SaveFile
     {
 
