@@ -319,8 +319,8 @@ namespace WinnerWinnerChickenDinner
                             //delay that gets longer and longer on each roll
                             var delay = 250 * i / rollCount;
 
-                            //TODO: change from absolute path to assets
-                            System.Media.SoundPlayer player = new System.Media.SoundPlayer(@"C:\Users\Marya\Source\Repos\United-Way\WinnerWinnerChickenDinner\Assets\click_wheel.wav");
+                            String clickWheelSoundFile = Directory.GetCurrentDirectory() + @"\..\..\Assets\click_wheel.wav";
+                            System.Media.SoundPlayer player = new System.Media.SoundPlayer(clickWheelSoundFile);
                             player.Play();
 
                             //wait
@@ -344,7 +344,8 @@ namespace WinnerWinnerChickenDinner
 
                         SaveFile.SaveToFile(contestTitle, ContestantList, prizeList, currentPrize, TicketsList, totalTickets, winningTicket, winnername);
                         lst_PrizeBoard.Items.Refresh();
-                        System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(@"C:\Users\Marya\source\repos\United-Way\WinnerWinnerChickenDinner\Assets\dingding.wav");
+                        String congratsSoundFile = Directory.GetCurrentDirectory() + @"\..\..\Assets\dingding.wav";
+                        System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(congratsSoundFile);
                         player2.Play();
                         System.Windows.MessageBox.Show($"Congratulations {winnername} you have won {currentPrize}!");
 
