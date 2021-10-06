@@ -389,7 +389,7 @@ namespace WinnerWinnerChickenDinner
             openSettings.Owner = null;
 
             openSettings.Show();
-            this.Hide();
+            this.Close();
         }
 
         //Does not seem to currently get the job done - needs to be fixed

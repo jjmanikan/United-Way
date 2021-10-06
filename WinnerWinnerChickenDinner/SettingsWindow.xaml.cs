@@ -19,6 +19,7 @@ namespace WinnerWinnerChickenDinner
         //private System.Windows.Forms.OpenFileDialog openFileDialog1;
         MainWindow mainWindow = new MainWindow();
         public static bool allowMultipleWins = false;
+        bool backbutton = false;
 
         public SettingsWindow()
         {
@@ -155,6 +156,7 @@ namespace WinnerWinnerChickenDinner
                 mainWindow.FillPrizeBoard();
                 contestantsListView.ItemsSource = null;
                 MainWindow.contestTitle = contestName.Text;
+                backbutton = true;
                 this.Close();
 
                 mainWindow.savePrizesToSettings(MainWindow.prizeList);
@@ -311,6 +313,14 @@ namespace WinnerWinnerChickenDinner
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 return (string)bf.Deserialize(ms);
+            }
+        }
+
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if(backbutton == false)
+            {
+                this.mainWindow.Close();
             }
         }
     }
