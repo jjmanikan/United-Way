@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace WinnerWinnerChickenDinner
 {
@@ -322,6 +323,12 @@ namespace WinnerWinnerChickenDinner
             {
                 this.mainWindow.Close();
             }
+        }
+
+        private void BtnInfo(object sender, RoutedEventArgs e)
+        {
+            String htmlPath = Directory.GetCurrentDirectory() + @"\..\..\Assets\helpPage.html";
+            Process.Start(htmlPath);
         }
     }
 

@@ -7,9 +7,11 @@
         xmlns:local="clr-namespace:WinnerWinnerChickenDinner"
         mc:Ignorable="d"
         Title="United Way Campaign" Height="450" Width="800"
-        ResizeMode="NoResize" Closing="KillApp">
+        ResizeMode="NoResize"
+        Closing="KillApp">
 
     <Grid RenderTransformOrigin="0.632,0.575">
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
@@ -29,7 +31,7 @@
 
         <Button Style="{StaticResource RoundButtonTemplate}" Background="LightSkyBlue" Content="ROLL" FontSize="15" Margin="0,323,217.667,-29.333" FontWeight="ExtraBold" FontFamily="Arial" Click="Button_Click" HorizontalAlignment="Right" Width="114" />
         <!--<Button Style="{StaticResource RoundButtonTemplate}" Content="NEW PRIZE" Margin="0,316,263,-99" FontWeight="ExtraBold" FontFamily="Calibri" HorizontalAlignment="Right" Width="122" Click="Button_Click_1"/>-->
-        <ListView Background= "LightGray"  FontWeight="Bold" FontSize="15" Foreground="White" FontFamily="Arial" BorderThickness="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="lst_PrizeBoard" SelectionChanged="lst_PrizeBoard_SelectionChanged" Margin="0,91,538,-29" HorizontalAlignment="Right" Width="235">
+        <ListView Background= "LightGray"  FontWeight="Bold" FontSize="15" Foreground="White" FontFamily="Arial" BorderThickness="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="lst_PrizeBoard" SelectionChanged="lst_PrizeBoard_SelectionChanged" Margin="25,91,534,-29" HorizontalAlignment="Center" Width="235">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource HeaderStyle}">
                     <GridViewColumn  DisplayMemberBinding="{Binding PrizeName}" HeaderContainerStyle="{StaticResource HeaderFontStyle}" Header="PRIZE"  Width="110"/>
@@ -38,19 +40,29 @@
             </ListView.View>
         </ListView>
         <Label x:Name="errorMain" Content="" Foreground="Red" FontWeight="Bold" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="257,363,0,-68" VerticalAlignment="Top" Width="517" Height="41"/>
+        <Button x:Name="infoBtn"
+                HorizontalAlignment="Left"
+                Margin="690,15,0,0"
+                VerticalAlignment="Top"
+                Height="40" Width="40"
+                Background="Transparent"
+                BorderThickness="0"   
+                Click="BtnInfo" RenderTransformOrigin="-0.794,0.527">
+            <Image Source="Assets/info.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
+        </Button>
 
         <Button x:Name="settingsBtn"
                 HorizontalAlignment="Left"
-                Margin="733,10,0,0"
+                Margin="737,10,0,0"
                 VerticalAlignment="Top"
                 Height="50" Width="41"
                 Background="Transparent"
                 BorderThickness="0"   
                 Click="BtnOpenSettings">
-            <Image Source="Assets/settings.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
+            <Image Source="Assets/settings.png" RenderTransformOrigin="-1,5.611" Height="40" Width="41"  />
         </Button>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="76" Stroke="Red" VerticalAlignment="Top" Width="256"/>
-        <TextBlock FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Left" Margin="292,19,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="57" Width="458" FontSize="31" Foreground="White">
+        <TextBlock FontFamily="Arial" FontWeight="Bold" HorizontalAlignment="Left" Margin="287,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="40" Width="398" FontSize="28" Foreground="White">
             <TextBlock.Effect>
                 <DropShadowEffect
                     ShadowDepth="1"
@@ -62,7 +74,7 @@
                 />
             </TextBlock.Effect><Run Text="United Way Campaign"/><Run Text=" Raffle"/></TextBlock>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="9,398,0,-102" Stroke="Red" VerticalAlignment="Top" Width="765"/>
-        <Image Source="Assets/logo1.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="384"/>
+        <Image Source="Assets/logo1.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="271" Margin="0,-1,0,0"/>
         <Image HorizontalAlignment="Left" Height="161" Margin="446,153,0,0" VerticalAlignment="Top" Width="155"
                gif:ImageBehavior.AnimatedSource="Assets/slotmachine2.gif"
                gif:ImageBehavior.AutoStart ="True"
@@ -103,7 +115,7 @@
                 </TransformGroup>
             </Rectangle.RenderTransform>
         </Rectangle>
-        <Image Source="Assets/logo3.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="63" Margin="229,0,0,0" RenderTransformOrigin="0.5,0.5"/>
+        <Image Source="Assets/logo3.png" HorizontalAlignment="Left" Height="76" VerticalAlignment="Top" Width="58" Margin="229,0,0,0" RenderTransformOrigin="0.5,0.5"/>
         <TextBlock FontWeight="ExtraBold" FontSize="25"  Foreground="Red" x:Name="txt_WheelName" Margin="0,81,3.667,165.333" TextWrapping="Wrap" HorizontalAlignment="Right" Text="" Width="530" TextAlignment="Center"/>
         <Rectangle Fill="White" HorizontalAlignment="Left" Height="22" Margin="591,218,0,0" Stroke="White" VerticalAlignment="Top" Width="9" RenderTransformOrigin="0.5,0.5">
             <Rectangle.RenderTransform>

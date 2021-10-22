@@ -1,0 +1,53 @@
+body
+{
+	background: url('background2.jpg') no-repeat center fixed;     
+    	background-size: cover;  
+    	
+	
+}
+
+.title
+{
+	color:darkblue;
+	font-family:arial;
+	font-size:50px;
+	border-style: solid black;
+	border-width: 2px 10px 4px 20px;
+}
+
+.heading
+{
+	font-size:30px;
+	color:red;
+}
+
+table
+{
+	background-color:#f2f2f2;
+	background: rgba(255,255,255,0.8);
+	font-family:calibri;
+	border:2px red solid;
+	color:#4d4d4d;
+}
+
+.textSection
+{
+	width:300px;
+	height:20px;
+	text-align:center;
+	font-size:20px;
+}
+
+h2
+{
+	
+	color:white;
+	font-size:40px;
+	font-family:Arial;
+	background-color:grey;
+	text-align:center;
+	border:2px red solid;
+	height: 70px;
+	
+	
+}
