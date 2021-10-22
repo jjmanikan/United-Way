@@ -264,9 +264,9 @@ namespace WinnerWinnerChickenDinner
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-                allowMultipleWins = true;
-                Properties.Settings.Default.MultipleWins = true;
-                Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
+            allowMultipleWins = true;
+            Properties.Settings.Default.MultipleWins = true;
+            Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
             Properties.Settings.Default.Save();
         }
 
@@ -322,6 +322,11 @@ namespace WinnerWinnerChickenDinner
             {
                 this.mainWindow.Close();
             }
+        }
+
+        public void newContest()
+        {
+
         }
     }
 
