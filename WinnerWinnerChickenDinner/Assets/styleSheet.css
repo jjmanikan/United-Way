@@ -1,8 +1,9 @@
 body
 {
-	background: url('background2.jpg') no-repeat center fixed;     
+	background: url('background2.jpg');    
     	background-size: cover;  
-    	
+    	background-attachment: fixed;
+	background-repeat: no-repeat;
 	
 }
 
@@ -40,14 +41,14 @@ table
 
 h2
 {
-	
+	padding: 10px;
 	color:white;
 	font-size:40px;
 	font-family:Arial;
 	background-color:grey;
 	text-align:center;
 	border:2px red solid;
-	height: 70px;
+	height: 45px;
 	
 	
 }
