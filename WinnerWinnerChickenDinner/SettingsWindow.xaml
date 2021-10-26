@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WinnerWinnerChickenDinner"
         mc:Ignorable="d"
         Title="Settings"
+        Loaded="GoFullscreen"
         Height="450" 
         Width="767"
         ResizeMode="NoResize"

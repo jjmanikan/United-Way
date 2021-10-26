@@ -56,6 +56,7 @@ namespace WinnerWinnerChickenDinner
 
         public MainWindow()
         {
+            GoFullscreen();
             InitializeComponent();
 
             
@@ -90,6 +91,14 @@ namespace WinnerWinnerChickenDinner
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
                 TicketsList.Add(contestant);
             }
+        }
+
+
+        public void GoFullscreen()
+        {
+            //FormBorderStyle FormBorderStyle = FormBorderStyle.None;
+            WindowState = (WindowState)FormWindowState.Maximized;
+            Topmost = true;
         }
 
         //retrieve the prizes from saved property settings

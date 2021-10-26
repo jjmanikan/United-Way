@@ -50,6 +50,13 @@ namespace WinnerWinnerChickenDinner
         }
 
 
+        public void GoFullscreen(object sender, RoutedEventArgs e)
+        {
+            //FormBorderStyle FormBorderStyle = FormBorderStyle.None;
+            WindowState = (WindowState)FormWindowState.Maximized;
+            Topmost = true;
+        }
+
         public string ShowDialog(string text, string caption)
         {
             Form prompt = new Form()
