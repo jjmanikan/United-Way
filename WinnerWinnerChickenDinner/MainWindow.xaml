@@ -7,8 +7,7 @@
         xmlns:local="clr-namespace:WinnerWinnerChickenDinner"
         mc:Ignorable="d"
         Title="United Way Campaign" Height="450" Width="800"
-        ResizeMode="NoResize"
-        Closing="KillApp">
+        Closing="KillApp" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
 
     <Grid RenderTransformOrigin="0.632,0.575">
         
