@@ -32,7 +32,7 @@
         <Label Content="Contest Name"  HorizontalAlignment="Left" Margin="31,80,0,0" VerticalAlignment="Top" Foreground="DimGray"  FontWeight="Bold" HorizontalContentAlignment="Center" Width="161" Height="24"/>
         <CheckBox x:Name="AllowMultipleWins" Content="Allow Multiple Wins" Foreground="DimGray"  FontWeight="Bold" HorizontalAlignment="Left" Margin="31,138,0,0" VerticalAlignment="Top" Width="161" Checked="CheckBox_Checked" Height="15"/>
         <Label x:Name="errorMessage2" Foreground="Red" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="159,367,0,0" VerticalAlignment="Top" Height="28" Width="369"  FontWeight="Bold" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <Label x:Name="errorMessage1"  HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Height="28" Width="382"  FontWeight="Bold" Grid.ColumnSpan="3"/>
+        <Label x:Name="errorMessage1"  HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Height="28" Width="88"  FontWeight="Bold"/>
         <Rectangle Fill="DimGray" HorizontalAlignment="Left" Height="69" Margin="212,0,0,0" Stroke="DimGray" VerticalAlignment="Top" Width="549" Grid.ColumnSpan="4"/>
         <Label x:Name="contestTitle"  Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="212,14,0,0" VerticalAlignment="Top" Width="549" FontFamily="Arial" FontWeight="Bold" Foreground="White" FontSize="31" Height="46" Grid.ColumnSpan="4"/>
         <Image Source="Assets/logo1.png" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="212"/>
@@ -51,5 +51,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
+        <Button x:Name="newContestBtn" Content="New Contest" Foreground="White" Background="Red" FontSize="15" BorderThickness ="1.5" FontWeight="Bold" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="32,372,0,0" VerticalAlignment="Top" Width="112" Click="NewContest" Height="23"/>
     </Grid>
 </Window>

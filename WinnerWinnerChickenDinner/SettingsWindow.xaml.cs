@@ -20,6 +20,7 @@ namespace WinnerWinnerChickenDinner
         MainWindow mainWindow = new MainWindow();
         public static bool allowMultipleWins = false;
         bool backbutton = false;
+        string currentContest = "";
 
         public SettingsWindow()
         {
@@ -161,6 +162,7 @@ namespace WinnerWinnerChickenDinner
 
                 mainWindow.savePrizesToSettings(MainWindow.prizeList);
                 mainWindow.saveContestantsToSettings(MainWindow.ContestantList);
+                mainWindow.saveContestsToSettings(MainWindow.ContestList);
 
                 Properties.Settings.Default.ContestName = contestName.Text;
                 Properties.Settings.Default.FilePath = filePathBox.Text;
@@ -325,6 +327,11 @@ namespace WinnerWinnerChickenDinner
         }
 
         public void newContest()
+        {
+
+        }
+
+        private void NewContest(object sender, RoutedEventArgs e)
         {
 
         }

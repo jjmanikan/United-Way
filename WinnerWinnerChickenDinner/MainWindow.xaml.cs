@@ -50,6 +50,7 @@ namespace WinnerWinnerChickenDinner
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
         public static List<Contestant> ContestantList = new List<Contestant>();
         public static List<Ticket<string>> TicketsList = new List<Ticket<string>>();
+        public static List<Contest> ContestList = new List<Contest>();
         public static string contestTitle = "";
         
 
@@ -140,6 +141,20 @@ namespace WinnerWinnerChickenDinner
                 byte[] buffer = new byte[(int)ms.Length];
                 ms.Read(buffer, 0, buffer.Length);
                 Properties.Settings.Default.ContestantList = Convert.ToBase64String(buffer);
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        public void saveContestsToSettings(List<Contest> contestList)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(ms, contestList);
+                ms.Position = 0;
+                byte[] buffer = new byte[(int)ms.Length];
+                ms.Read(buffer, 0, buffer.Length);
+                Properties.Settings.Default.ContestList = Convert.ToBase64String(buffer);
                 Properties.Settings.Default.Save();
             }
         }
@@ -397,6 +412,8 @@ namespace WinnerWinnerChickenDinner
         {
             System.Windows.Forms.Application.Exit();
         }
+
+
     }
 
 

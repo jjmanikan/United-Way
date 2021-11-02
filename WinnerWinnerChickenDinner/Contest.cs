@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace WinnerWinnerChickenDinner
 {
     [Serializable()]
-    class Contest
+    public class Contest
     {
         public string ContestName{get; set;}
         public List<Contestant> Contestants { get; set; }
