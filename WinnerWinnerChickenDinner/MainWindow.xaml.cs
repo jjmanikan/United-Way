@@ -28,6 +28,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace WinnerWinnerChickenDinner
 {
@@ -396,6 +397,12 @@ namespace WinnerWinnerChickenDinner
         private void KillApp(object sender, System.ComponentModel.CancelEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void BtnInfo(object sender, RoutedEventArgs e)
+        {
+            String htmlPath = Directory.GetCurrentDirectory() + @"\..\..\Assets\helpPage.html";
+            Process.Start(htmlPath);
         }
     }
 

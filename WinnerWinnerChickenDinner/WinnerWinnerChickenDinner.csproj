@@ -172,6 +172,7 @@
   <ItemGroup>
     <Content Include="Assets\click_wheel.wav" />
     <Content Include="Assets\dingding.wav" />
+    <Resource Include="Assets\info.png" />
     <Resource Include="Assets\logo.PNG" />
     <Resource Include="Assets\logo1.PNG" />
     <Resource Include="Assets\logo3.png" />
