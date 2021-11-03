@@ -169,17 +169,22 @@
     <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Assets\back3.png" />
+    <Resource Include="Assets\back1.png" />
     <Content Include="Assets\click_wheel.wav" />
     <Content Include="Assets\dingding.wav" />
+    <Resource Include="Assets\logo2.PNG" />
+    <Resource Include="Assets\unitedLogoCroppednbg.png" />
+    <Resource Include="Assets\slotmachineCropnbg.gif" />
+    <Resource Include="Assets\slotmachinenbg.gif" />
+    <Resource Include="Assets\unitedLogo1.png" />
     <Resource Include="Assets\info.png" />
     <Resource Include="Assets\logo.PNG" />
-    <Resource Include="Assets\logo1.PNG" />
     <Resource Include="Assets\logo3.png" />
     <Resource Include="Assets\plus.jpg" />
     <Resource Include="Assets\plus.png" />
     <Resource Include="Assets\settings.png" />
     <Resource Include="Assets\slotmachine.gif" />
-    <Resource Include="Assets\slotmachine2.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

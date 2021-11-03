@@ -5,9 +5,10 @@
              StartupUri="SettingsWindow.xaml">
     <Application.Resources>
         <Style x:Key="RoundButtonTemplate" TargetType="Button">
-            <Setter Property="Background" Value="LightBlue"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Background" Value="#FF9E2620"/>
+            <Setter Property="Foreground" Value="#FFFFB900"/>
             <Setter Property="Template">
+                
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border CornerRadius="10" Background="{TemplateBinding Background}" BorderThickness="1">
@@ -18,18 +19,27 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#66d9ff"/>
+                </Trigger>
+            </Style.Triggers>
         </Style>
         <Style x:Key="HeaderFontStyle" TargetType="GridViewColumnHeader">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Foreground" Value="#FFC3B2B2"/>
             <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="FontFamily" Value="Arial"/>
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="Padding" Value="0,0,5,0"/>
+            <Setter Property="FontSize" Value="15"/>
+            
             <Setter Property="Template">
+                
                 <Setter.Value>
                     <ControlTemplate TargetType="GridViewColumnHeader">
                         <Border Background="{TemplateBinding Background}" BorderThickness="0" >
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center">
 
                             </ContentPresenter>
                         </Border>
@@ -39,15 +49,16 @@
         </Style>
         <Style x:Key="HeaderStyle" TargetType="GridViewColumnHeader">
             <Setter Property="Background" Value="Transparent"/>
-            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Foreground" Value="#FFC3B2B2"/>
             <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Margin" Value="0"/>
-            <Setter Property="Padding" Value="0"/>
+            <Setter Property="FontFamily" Value="Arial"/>
+
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="GridViewColumnHeader">
                         <Border Background="{TemplateBinding Background}" BorderThickness="0" >
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <ContentPresenter HorizontalAlignment="Left" VerticalAlignment="Center">
                                 
                             </ContentPresenter>
                         </Border>

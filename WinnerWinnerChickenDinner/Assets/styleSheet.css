@@ -26,9 +26,10 @@ table
 {
 	background-color:#f2f2f2;
 	background: rgba(255,255,255,0.8);
-	font-family:calibri;
+	font-family:Arial;
 	border:2px red solid;
 	color:#4d4d4d;
+	border-radius: 10px;
 }
 
 .textSection
@@ -41,14 +42,59 @@ table
 
 h2
 {
-	padding: 10px;
+	padding:10px;
 	color:white;
 	font-size:40px;
 	font-family:Arial;
-	background-color:grey;
+	background-color:#262626;
 	text-align:center;
-	border:2px red solid;
 	height: 45px;
+	border-radius: 10px;
 	
 	
+}
+
+[data-tab-content] 
+{
+	display: none;
+}
+
+.active[data-tab-content] 
+{
+	display: block;
+}
+
+.tabs 
+{
+	display: flex;
+  	justify-content: space-around;
+  	font-size:20px;
+  	font-family:Arial;
+  	list-style-type: none;
+  	padding: 0;
+  	margins:0;
+  	font-weight: bold;
+  	color:#333333
+}
+
+.tab 
+{
+  	cursor: pointer;
+  	padding: 10px;
+}
+
+.tab.active 
+{
+  	background-color: #CCC;
+}
+
+.tab:hover 
+{
+  	background-color: #AAA;
+}
+
+.tab-content 
+{
+  	margin-left: 20px;
+  	margin-right: 20px;
 }
