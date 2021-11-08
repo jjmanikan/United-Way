@@ -14,7 +14,8 @@ namespace WinnerWinnerChickenDinner
         public static void SaveToFile(string name, List<Contestant> contestantList, List<PrizeBoardItem> prizeList, string currentPrize, List<Ticket<string>> tickets, int ticketsSum, double winningTicket, string winnername)
         {
             DateTime date = DateTime.Now;
-            string path = "../../Logs/" + name + ".txt";
+            System.IO.Directory.CreateDirectory(Directory.GetCurrentDirectory() + @"\..\..\Logs");
+            string path = Directory.GetCurrentDirectory() + @"\..\..\Logs\" + name + ".txt";
             int count = 1;
             string[] formatTitles = { "NAME", "DATE CREATED", "PRIZES", "" };
 
@@ -23,7 +24,7 @@ namespace WinnerWinnerChickenDinner
                 using (StreamWriter sw = File.CreateText(path))
                 {
                     sw.WriteLine("==============================================================================================================");
-                    sw.WriteLine("NAME               :", name);
+                    sw.WriteLine("NAME               :" + name);
                     sw.WriteLine("DATE CREATED       :" + date);
                     sw.Write("PRIZES             :");
                     foreach (PrizeBoardItem item in prizeList)

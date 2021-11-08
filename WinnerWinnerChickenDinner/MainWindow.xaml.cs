@@ -58,7 +58,6 @@ namespace WinnerWinnerChickenDinner
         {
             InitializeComponent();
 
-            
             Properties.Settings.Default.Upgrade();
             //Properties.Settings.Default.Save(); - keeping for testing
             try 
@@ -83,6 +82,8 @@ namespace WinnerWinnerChickenDinner
                 Console.WriteLine("Prize Exception: " + e.Message);
             }
 
+
+            TicketsList.Clear();
             //skip first line since its the header
             //for every contestant, retrieve full name and the number of tickets and add to a list that is used for determining the winner
             foreach (Contestant c in ContestantList)
@@ -90,6 +91,8 @@ namespace WinnerWinnerChickenDinner
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
                 TicketsList.Add(contestant);
             }
+
+            Console.WriteLine("Current total tickets after getting settings in main " + MainWindow.totalTickets);
         }
 
         //retrieve the prizes from saved property settings
