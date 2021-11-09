@@ -7,7 +7,10 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections.Generic;
+using Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
 using System.Diagnostics;
+
 
 namespace WinnerWinnerChickenDinner
 {
@@ -15,12 +18,13 @@ namespace WinnerWinnerChickenDinner
     /// <summary>
     /// Interaction logic for SettingsWindow.xaml
     /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class SettingsWindow : System.Windows.Window
     {
         //private System.Windows.Forms.OpenFileDialog openFileDialog1;
         MainWindow mainWindow = new MainWindow();
         public static bool allowMultipleWins = false;
         bool backbutton = false;
+        CheckContestantFile checkContestantFile = new CheckContestantFile();
 
         public SettingsWindow()
         {
@@ -101,6 +105,11 @@ namespace WinnerWinnerChickenDinner
 
         private void btnUploadFile_Click(object sender, RoutedEventArgs e)
         {
+            // Reset everything if user encountered an error previously
+            filePathBox.BorderBrush = Brushes.Black;
+            errorMessage1.Content = "";
+            errorMessage2.Content = "";
+
             int size = -1;
             OpenFileDialog openFileDialog1 = new OpenFileDialog
             {
@@ -132,17 +141,55 @@ namespace WinnerWinnerChickenDinner
                     filePathBox.Text = file;
                     string text = File.ReadAllText(file);
                     size = text.Length;
-                    mainWindow.ImportContestants();
-                    DisplayContestants();
-                    btnUploadFile.IsEnabled = false;
-                }
-                catch (IOException)
-                {
 
+                    Microsoft.Office.Interop.Excel.Application xlApp;
+                    Workbook xlWorkBook;
+                    Worksheet xlWorkSheet;
+                    Range range;
+
+                    xlApp = new Microsoft.Office.Interop.Excel.Application();
+                    xlWorkBook = xlApp.Workbooks.Open(file);
+                    xlWorkSheet = (Worksheet)xlWorkBook.Worksheets.get_Item(1);
+
+                    range = xlWorkSheet.UsedRange;
+
+                    if (checkContestantFile.checkFileHeadings(range) == false)
+                    {
+                        filePathBox.BorderBrush = Brushes.Red;
+                        errorMessage1.Foreground = Brushes.Red;
+                        errorMessage1.Content = "Hmm, that didn't work";
+                        errorMessage2.Content = " -    File has missing or misformatted headings";
+                        checkContestantFile.clearConestantDictionary();
+                        closeExcelFile(xlApp, xlWorkBook, xlWorkSheet);
+                    }
+                    else
+                    {
+                        closeExcelFile(xlApp, xlWorkBook, xlWorkSheet);
+
+                        mainWindow.ImportContestants();
+                        DisplayContestants();
+                        btnUploadFile.IsEnabled = false;
+                    }
+                }
+                catch (IOException exception)
+                {
+                    filePathBox.BorderBrush = Brushes.Red;
+                    errorMessage1.Foreground = Brushes.Red;
+                    errorMessage1.Content = "Failed to open file";
+                    errorMessage2.Content = " -    File is likely missing or open somewhere else";
                 }
             }
+        }
 
 
+        private void closeExcelFile(Microsoft.Office.Interop.Excel.Application xlApp, Workbook xlWorkBook, Worksheet xlWorkSheet)
+        {
+            //Closes workbook, excel will continue to run in the background if you don't
+            xlWorkBook.Close(true, null, null);
+            xlApp.Quit();
+            Marshal.ReleaseComObject(xlWorkSheet);
+            Marshal.ReleaseComObject(xlWorkBook);
+            Marshal.ReleaseComObject(xlApp);
         }
 
         //saves the prizes to a list and adds it to the scoreboard list
