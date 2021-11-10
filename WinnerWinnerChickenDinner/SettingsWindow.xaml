@@ -6,66 +6,174 @@
         xmlns:local="clr-namespace:WinnerWinnerChickenDinner"
         mc:Ignorable="d"
         Title="Settings"
-        Height="450" 
-        Width="767"
-        ResizeMode="NoResize"
-        Closing="OnClosing">
-    
-    <Grid Margin="0,0,0,6">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="217*"/>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition Width="479*"/>
-            <ColumnDefinition Width="65*"/>
-        </Grid.ColumnDefinitions>
+        Height="720"
+        Width="1024"
+        Closing="OnClosing" MinWidth="1024" MinHeight="720" WindowState="Maximized">
 
-        <ListView  FontWeight="Bold" FontSize="15" BorderBrush =" Gray" Foreground="LightSkyBlue" FontFamily="Arial" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="prizeBoard" Margin="31,165,24,102">
-            <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource HeaderStyle}">
-                    <GridViewColumn DisplayMemberBinding="{Binding PrizeName}" Header="PRIZES" Width="150"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button x:Name="AddPrizeBtn" Content="ADD" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" Margin="31,313,110,0" VerticalAlignment="Top" Click="AddPrize" Height="20"/>
-        <Button x:Name="deleteBtn" Content="REMOVE" Click="deleteBtn_Click" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" Margin="118,313,25,0" VerticalAlignment="Top"  Height="20"/>
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="152*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="10*"/>
+			<ColumnDefinition Width="90*"/>
+			<ColumnDefinition Width="17*"/>
+			<ColumnDefinition Width="88*"/>
+			<ColumnDefinition Width="12*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="8*"/>
+			<ColumnDefinition Width="341*"/>
+			<ColumnDefinition Width="14*"/>
+			<ColumnDefinition Width="80*"/>
+			<ColumnDefinition Width="44*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="2*"/>
+			<ColumnDefinition Width="152*"/>
+		</Grid.ColumnDefinitions>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="170*"/>
+			<RowDefinition Height="7*"/>
+			<RowDefinition Height="7*"/>
+			<RowDefinition Height="36*"/>
+			<RowDefinition Height="7*"/>
+			<RowDefinition Height="5*"/>
+			<RowDefinition Height="6*"/>
+			<RowDefinition Height="36*"/>
+			<RowDefinition Height="8*"/>
+			<RowDefinition Height="28*"/>
+			<RowDefinition Height="33*"/>
+			<RowDefinition Height="131*"/>
+			<RowDefinition Height="13*"/>
+			<RowDefinition Height="20*"/>
+			<RowDefinition Height="11*"/>
+			<RowDefinition Height="29*"/>
+			<RowDefinition Height="16*"/>
+			<RowDefinition Height="8*"/>
+			<RowDefinition Height="37*"/>
+			<RowDefinition Height="3*"/>
+			<RowDefinition Height="7*"/>
+			<RowDefinition Height="73*"/>
+		</Grid.RowDefinitions>
 
-        <Button x:Name="saveBtn" Content="SAVE AND CONTINUE" Foreground="White" Background="Red" FontSize="15" BorderThickness ="1.5" FontWeight="Bold" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="32,339,0,0" VerticalAlignment="Top" Width="160" Click="Save" Height="28"/>
-        <Button x:Name="btnUploadFile" Content="UPLOAD" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" HorizontalAlignment="Left" Margin="441,105,0,0" VerticalAlignment="Top" Width="67" Click="btnUploadFile_Click"  Height="23" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="filePathBox" HorizontalAlignment="Left" Height="23" Margin="4,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="437" IsEnabled="false" Grid.Column="2" BorderBrush="Black"/>
-        <Label x:Name="contestantsListLabel" Content="Current Contestants in the Raffle" HorizontalContentAlignment="Center" Foreground="DimGray" FontSize="18" FontWeight="Bold" FontFamily="Arial" HorizontalAlignment="Left" Height="36" Margin="4,131,0,0" VerticalAlignment="Top" Width="534" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="contestName" HorizontalAlignment="Left" Height="23" Margin="31,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontWeight="Bold" BorderBrush=" Gray" Foreground="Red"/>
-        <Label Content="Contest Name"  HorizontalAlignment="Left" Margin="31,80,0,0" VerticalAlignment="Top" Foreground="DimGray"  FontWeight="Bold" HorizontalContentAlignment="Center" Width="161" Height="24"/>
-        <CheckBox x:Name="AllowMultipleWins" Content="Allow Multiple Wins" Foreground="DimGray"  FontWeight="Bold" HorizontalAlignment="Left" Margin="31,138,0,0" VerticalAlignment="Top" Width="161" Checked="CheckBox_Checked" Height="15"/>
-        <Label x:Name="errorMessage2" Foreground="Red" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="159,367,0,0" VerticalAlignment="Top" Height="28" Width="369"  FontWeight="Bold" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <Label x:Name="errorMessage1"  HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Height="28" Width="382"  FontWeight="Bold" Grid.ColumnSpan="3"/>
-        <Rectangle Fill="DimGray" HorizontalAlignment="Left" Height="69" Margin="212,0,0,0"  VerticalAlignment="Top" Width="549" Grid.ColumnSpan="4"/>
-        <Button x:Name="infoBtn"
-                HorizontalAlignment="Left"
-                
-                Margin="473,15,0,0"
-                VerticalAlignment="Top"
+		<!--UW Logo-->
+		<Image
+            Source="Assets/unitedLogoCroppednbg.png"
+            Grid.ColumnSpan="13"
+            Grid.RowSpan="4"
+            Stretch="Uniform" Panel.ZIndex="1" Margin="0" Grid.Column="2"/>
+
+		<!--<Rectangle Grid.Column="1" Grid.ColumnSpan="9" Grid.Row="1" Grid.RowSpan="12" Fill="#FF9E2620" Stroke="#FFE3F3F5"/>
+        <Rectangle Grid.Column="2" Grid.ColumnSpan="7" Grid.Row="2" Grid.RowSpan="10" Fill="#FFE3F3F5" Stroke="#FFE3F3F5"/>-->
+
+		<Rectangle Grid.Column="5" Grid.ColumnSpan="7" Grid.Row="19" Fill="#FFE3F3F5" Stroke="#FFE3F3F5"/>
+		<Rectangle Grid.Column="2" Grid.ColumnSpan="3" Grid.Row="19" Fill="#FFE3F3F5" Stroke="#FFE3F3F5"/>
+		<Rectangle Grid.Column="12" Grid.ColumnSpan="2" Grid.Row="19" Fill="#FFE3F3F5" Stroke="#FFE3F3F5"/>
+		<Rectangle Grid.Column="1" Grid.ColumnSpan="14" Grid.Row="1" Fill="#FF9E2620"  />
+		<Rectangle Grid.Column="2" Grid.ColumnSpan="12" Grid.Row="3" Grid.RowSpan="2" Fill="#FFE3F3F5" Panel.ZIndex="0" />
+		<Rectangle Grid.Column="2" Grid.ColumnSpan="12" Grid.Row="4" Grid.RowSpan="2" Fill="#FFE3F3F5" />
+		<Rectangle Grid.Column="2" Grid.ColumnSpan="13" Grid.Row="2" Grid.RowSpan="2" Fill="#FFE3F3F5" />
+		<Rectangle Grid.Column="2" Grid.ColumnSpan="13" Grid.Row="18" Grid.RowSpan="1" Fill="#FFE3F3F5" />
+		<Rectangle Grid.Column="1" Grid.ColumnSpan="14" Grid.Row="20" Grid.RowSpan="1" Fill="#FF9E2620" />
+		<Rectangle Grid.Column="14" Grid.Row="3" Grid.RowSpan="17" Fill="#FFE3F3F5"/>
+		<Rectangle Grid.Column="2" Grid.Row="3" Grid.RowSpan="17" Fill="#FFE3F3F5"/>
+		<Rectangle Grid.Column="1" Grid.Row="2" Grid.RowSpan="18" Fill="#FF9E2620" />
+		<Rectangle Grid.Column="15" Grid.Row="1" Grid.RowSpan="20" Fill="#FF9E2620" />
+		<Rectangle Grid.Column="8" Grid.Row="4" Grid.RowSpan="15" Fill="#FFE3F3F5"/>
+
+		<Label x:Name="contestTitle"
+               Content="New Contest"
+               HorizontalContentAlignment="Center"
+               FontFamily="Arial"
+               FontWeight="Bold"
+               Foreground="White"
+               FontSize="30"
+               Background="LightGray"
+               Grid.Column="10" Grid.ColumnSpan="3"
+               Grid.Row="7" VerticalContentAlignment="Center" Padding="0"
+               />
+
+		<TextBox x:Name="filePathBox"
+                 IsEnabled="false"
+                 BorderBrush="Black"
+                 Grid.Column="10" Grid.ColumnSpan="1"
+                 Grid.Row="9"
+                 />
+
+		<Button x:Name="btnUploadFile" Content="UPLOAD" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" Click="btnUploadFile_Click"
+                Grid.Column="12"
+                Grid.Row="9"
+                />
+
+		<ListView x:Name="contestantsListView"
+                  Grid.Column="10" Grid.ColumnSpan="3"
+                  Grid.Row="11" Grid.RowSpan="6" >
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Header="Tickets" DisplayMemberBinding="{Binding Tickets}"/>
+					<GridViewColumn Header="Prefix" DisplayMemberBinding="{Binding Prefix}"/>
+					<GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
+					<GridViewColumn Header="Middle Name" DisplayMemberBinding="{Binding MiddleName}"/>
+					<GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
+					<GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding FullName}"/>
+					<GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
+					<GridViewColumn Header="Phone Number" DisplayMemberBinding="{Binding PhoneNumber}"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
+
+		<ListView x:Name="prizeBoard" FontWeight="Bold" FontSize="15" BorderBrush="Gray" Foreground="LightSkyBlue" FontFamily="Arial" BorderThickness="1"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                  Grid.Column="4" Grid.ColumnSpan="3"
+                  Grid.Row="11"
+                  >
+			<ListView.View>
+				<GridView ColumnHeaderContainerStyle="{StaticResource HeaderStyle}">
+					<GridViewColumn DisplayMemberBinding="{Binding PrizeName}" Header="PRIZES" Width="150"/>
+				</GridView>
+			</ListView.View>
+		</ListView>
+
+
+
+		<Button x:Name="AddPrizeBtn" Content="ADD" Foreground="White" FontWeight="Bold" Background="LightSkyBlue"
+                VerticalAlignment="Top" Click="AddPrize" Height="20"
+                Grid.Column="4"
+                Grid.Row="13"/>
+		<Button x:Name="deleteBtn" Content="REMOVE" Click="deleteBtn_Click" Foreground="White" FontWeight="Bold" Background="LightSkyBlue"
+                VerticalAlignment="Top"  Height="20"
+                Grid.Column="6"
+                Grid.Row="13" />
+
+		<Button x:Name="saveBtn" Content="SAVE AND CONTINUE" Foreground="White" Background="Red" FontSize="15" BorderThickness ="1.5" FontWeight="Bold" VerticalContentAlignment="Center" Click="Save" Height="28"
+                Grid.Column="4" Grid.ColumnSpan="3"
+                Grid.Row="15" Padding="0" VerticalAlignment="Top"
+                />
+
+
+
+		<Label x:Name="contestantsListLabel" Content="Current Contestants in the Raffle" HorizontalContentAlignment="Center" Foreground="DimGray" FontSize="18" FontWeight="Bold" FontFamily="Arial" Margin="0" Grid.Column="10" Grid.Row="10" Grid.ColumnSpan="3" Padding="0" ScrollViewer.CanContentScroll="True" VerticalContentAlignment="Center"/>
+
+		<Label Content="Contest Name" Margin="0" Foreground="DimGray"  FontWeight="Bold" HorizontalContentAlignment="Center" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="3" Padding="0" VerticalContentAlignment="Center" FontSize="18"/>
+		<TextBox x:Name="contestName" Margin="0" TextWrapping="Wrap" Text="" FontWeight="Bold" BorderBrush=" Gray" Foreground="Red" Grid.Row="9" Grid.ColumnSpan="3" Grid.Column="4"/>
+
+
+		<CheckBox x:Name="AllowMultipleWins" Content="Allow Multiple Wins" Foreground="DimGray"  FontWeight="Bold" Margin="17,9" Checked="CheckBox_Checked" Grid.Row="10" Grid.Column="4" Grid.ColumnSpan="3" Padding="5,0,0,0"/>
+
+		<Label x:Name="errorMessage1"  HorizontalContentAlignment="Right" Margin="0" Height="28"  FontWeight="Bold" Grid.Row="18" Grid.Column="4" Grid.ColumnSpan="3" Width="195" Padding="0"/>
+		<Label x:Name="errorMessage2" Foreground="Red" Margin="0" Height="28" Width="369"  FontWeight="Bold" Grid.Column="10" Grid.ColumnSpan="3" Grid.Row="18" Padding="0"/>
+		<Button x:Name="infoBtn"
+                Margin="0"
                 Height="40" Width="40"
                 Background="Transparent"
-                BorderThickness="0"   
-                Click="BtnInfo" RenderTransformOrigin="-0.794,0.527" Grid.ColumnSpan="2" Grid.Column="2">
-            <Image Source="Assets/info.png" RenderTransformOrigin="-1,5.613" Height="37" Width="34"  />
-        </Button>
-        <Label x:Name="contestTitle"  Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="70,14,0,0" VerticalAlignment="Top" Width="389" FontFamily="Arial" FontWeight="Bold" Foreground="White" FontSize="31" Height="46" Grid.Column="2"/>
-        <Image Source="Assets/logo1.png" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="212"/>
-        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="31,400,0,0" Stroke="Red" VerticalAlignment="Top" Width="700" Grid.ColumnSpan="4"/>
-        <ListView x:Name="contestantsListView" HorizontalAlignment="Left" Height="202" Margin="4,165,0,0" VerticalAlignment="Top" Width="504" Grid.Column="2" Grid.ColumnSpan="2">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Tickets" DisplayMemberBinding="{Binding Tickets}"/>
-                    <GridViewColumn Header="Prefix" DisplayMemberBinding="{Binding Prefix}"/>
-                    <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
-                    <GridViewColumn Header="Middle Name" DisplayMemberBinding="{Binding MiddleName}"/>
-                    <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
-                    <GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding FullName}"/>
-                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
-                    <GridViewColumn Header="Phone Number" DisplayMemberBinding="{Binding PhoneNumber}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-    </Grid>
+                BorderThickness="0"
+                Click="BtnInfo" RenderTransformOrigin="-0.794,0.527" Grid.Column="13" Grid.Row="7" Grid.RowSpan="2" Padding="1"
+                
+                >
+			<Image Source="Assets/info.png" RenderTransformOrigin="-1,5.613" Margin="0" Height="36" Width="44"  />
+		</Button>
+
+		<Rectangle Fill="Red" Height="6" Margin="0" Stroke="Red" Width="700" Grid.ColumnSpan="11" Grid.Row="21" Grid.Column="3"/>
+
+
+	</Grid>
 </Window>
