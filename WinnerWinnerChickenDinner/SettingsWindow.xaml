@@ -30,13 +30,14 @@
         <Label x:Name="contestantsListLabel" Content="Current Contestants in the Raffle" HorizontalContentAlignment="Center" Foreground="DimGray" FontSize="18" FontWeight="Bold" FontFamily="Arial" HorizontalAlignment="Left" Height="36" Margin="4,131,0,0" VerticalAlignment="Top" Width="534" Grid.Column="2" Grid.ColumnSpan="2"/>
         <TextBox x:Name="contestName" HorizontalAlignment="Left" Height="23" Margin="31,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontWeight="Bold" BorderBrush=" Gray" Foreground="Red"/>
         <Label Content="Contest Name"  HorizontalAlignment="Left" Margin="31,80,0,0" VerticalAlignment="Top" Foreground="DimGray"  FontWeight="Bold" HorizontalContentAlignment="Center" Width="161" Height="24"/>
-        <CheckBox x:Name="AllowMultipleWins" Content="Allow Multiple Wins" Foreground="DimGray"  FontWeight="Bold" HorizontalAlignment="Left" Margin="31,138,0,0" VerticalAlignment="Top" Width="161" Checked="CheckBox_Checked" Height="15"/>
+        <CheckBox x:Name="AllowMultipleWins" Content="Allow Multiple Wins" Foreground="DimGray"  FontWeight="Bold" HorizontalAlignment="Left" Margin="31,138,0,0" VerticalAlignment="Top" Width="161" Checked="CheckBox_Checked" Height="15" Unchecked="CheckBox_Unchecked"/>
         <Label x:Name="errorMessage2" Foreground="Red" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="159,367,0,0" VerticalAlignment="Top" Height="28" Width="369"  FontWeight="Bold" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <Label x:Name="errorMessage1"  HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Height="28" Width="88"  FontWeight="Bold"/>
+        <Label x:Name="errorMessage1"  HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Height="28" Width="382"  FontWeight="Bold" Grid.ColumnSpan="3"/>
         <Rectangle Fill="DimGray" HorizontalAlignment="Left" Height="69" Margin="212,0,0,0" Stroke="DimGray" VerticalAlignment="Top" Width="549" Grid.ColumnSpan="4"/>
         <Label x:Name="contestTitle"  Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="212,14,0,0" VerticalAlignment="Top" Width="549" FontFamily="Arial" FontWeight="Bold" Foreground="White" FontSize="31" Height="46" Grid.ColumnSpan="4"/>
         <Image Source="Assets/logo1.png" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="212"/>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="31,400,0,0" Stroke="Red" VerticalAlignment="Top" Width="700" Grid.ColumnSpan="4"/>
+        <ComboBox x:Name="contestCmbx" Width="120" SelectionChanged="ComboBox_SelectionChanged" IsEditable="True" Grid.Column="2" Margin="4,80,353,310" />
         <ListView x:Name="contestantsListView" HorizontalAlignment="Left" Height="202" Margin="4,165,0,0" VerticalAlignment="Top" Width="504" Grid.Column="2" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
@@ -51,6 +52,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ComboBox IsEditable="True" HorizontalAlignment="Left" Margin="32,372,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Delete Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="129,80,0,0" VerticalAlignment="Top" Width="95"/>
+        <Button Content="Restart Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="229,80,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.055,0.843"/>
     </Grid>
 </Window>
