@@ -78,6 +78,7 @@
                 HorizontalContentAlignment="Stretch" 
                 VerticalContentAlignment="Stretch"
                 BorderThickness="3" 
+                FontSize="16"
                 Content="ROLL"
                 FontWeight="ExtraBold" 
                 FontFamily="Arial" 
