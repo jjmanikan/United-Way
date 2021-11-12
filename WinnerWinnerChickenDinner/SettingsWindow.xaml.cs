@@ -165,10 +165,14 @@ namespace WinnerWinnerChickenDinner
                     else
                     {
                         closeExcelFile(xlApp, xlWorkBook, xlWorkSheet);
-
+                        
                         mainWindow.ImportContestants();
                         DisplayContestants();
                         btnUploadFile.IsEnabled = false;
+
+                        errorMessage1.Foreground = Brushes.Green;
+                        errorMessage2.Foreground = Brushes.Green;
+                        errorMessage2.Content = "Contestant file loaded successfully";
                     }
                 }
                 catch (IOException exception)
