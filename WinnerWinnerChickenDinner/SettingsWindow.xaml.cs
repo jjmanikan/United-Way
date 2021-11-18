@@ -386,8 +386,9 @@ namespace WinnerWinnerChickenDinner
             }
             else
             {
-                MainWindow.ContestantList.Clear();
-                MainWindow.prizeList.Clear();
+                //TODO: Change way of dereferencing static list
+                MainWindow.ContestantList = new List<Contestant>();
+                MainWindow.prizeList = new List<PrizeBoardItem>();
 
                 contestName.Text = "";
                 contestTitle.Content = "";

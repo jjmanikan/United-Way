@@ -53,6 +53,6 @@
             </ListView.View>
         </ListView>
         <Button Content="Delete Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="129,80,0,0" VerticalAlignment="Top" Width="95"/>
-        <Button Content="Restart Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="229,80,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.055,0.843"/>
+        <Button Content="Start New Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="229,80,0,0" VerticalAlignment="Top" Width="114" RenderTransformOrigin="-0.168,0.771"/>
     </Grid>
 </Window>
