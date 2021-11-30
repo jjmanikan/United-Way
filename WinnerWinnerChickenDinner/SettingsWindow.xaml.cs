@@ -108,7 +108,8 @@ namespace WinnerWinnerChickenDinner
             // Reset everything if user encountered an error previously
             filePathBox.BorderBrush = Brushes.Black;
             errorMessage1.Content = "";
-            errorMessage2.Content = "";
+            errorMessage2.Foreground = Brushes.Black;
+            errorMessage2.Content = "Loading file...";
 
             int size = -1;
             OpenFileDialog openFileDialog1 = new OpenFileDialog
