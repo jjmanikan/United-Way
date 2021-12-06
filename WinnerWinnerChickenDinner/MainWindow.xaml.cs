@@ -40,7 +40,7 @@ namespace WinnerWinnerChickenDinner
 
 
         //string output = "{0,-20}\t{1,-40}";
-       // int prizecount = 0;
+        // int prizecount = 0;
         public static string filePath = "";
         //int initializecount = 0;
         public static int totalTickets;
@@ -51,16 +51,18 @@ namespace WinnerWinnerChickenDinner
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
         public static List<Contestant> ContestantList = new List<Contestant>();
         public static List<Ticket<string>> TicketsList = new List<Ticket<string>>();
+        public static List<ContestN> ContestList = new List<ContestN>();
         public static string contestTitle = "";
-        
+
 
         public MainWindow()
         {
+            Console.WriteLine("Total Tickets after ini " + totalTickets);
             InitializeComponent();
 
             Properties.Settings.Default.Upgrade();
             //Properties.Settings.Default.Save(); - keeping for testing
-            try 
+            try
             {
                 //populate contestant list from the saved settings
                 ContestantList = loadContestants();
@@ -83,7 +85,9 @@ namespace WinnerWinnerChickenDinner
             }
 
 
+
             TicketsList.Clear();
+
             //skip first line since its the header
             //for every contestant, retrieve full name and the number of tickets and add to a list that is used for determining the winner
             foreach (Contestant c in ContestantList)
@@ -95,6 +99,15 @@ namespace WinnerWinnerChickenDinner
             Console.WriteLine("Current total tickets after getting settings in main " + MainWindow.totalTickets);
         }
 
+        private List<ContestN> loadContests()
+        {
+            using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.ContestList)))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                return (List<ContestN>)bf.Deserialize(ms);
+            }
+        }
+
         //retrieve the prizes from saved property settings
         List<PrizeBoardItem> loadPrizes()
         {
@@ -103,7 +116,7 @@ namespace WinnerWinnerChickenDinner
                 BinaryFormatter bf = new BinaryFormatter();
                 return (List<PrizeBoardItem>)bf.Deserialize(ms);
             }
-            
+
         }
 
 
@@ -111,7 +124,7 @@ namespace WinnerWinnerChickenDinner
         //retrieve the list of current contestants from saved property settings
         List<Contestant> loadContestants()
         {
-            using(MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.ContestantList)))
+            using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.ContestantList)))
             {
                 BinaryFormatter bf = new BinaryFormatter();
                 return (List<Contestant>)bf.Deserialize(ms);
@@ -144,6 +157,25 @@ namespace WinnerWinnerChickenDinner
                 byte[] buffer = new byte[(int)ms.Length];
                 ms.Read(buffer, 0, buffer.Length);
                 Properties.Settings.Default.ContestantList = Convert.ToBase64String(buffer);
+                Properties.Settings.Default.Save();
+            }
+        }
+
+        public void updateContestToSettings(List<ContestN> contestList)
+        {
+
+        }
+
+        public void saveContestToSettings(List<ContestN> contestList)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(ms, contestList);
+                ms.Position = 0;
+                byte[] buffer = new byte[(int)ms.Length];
+                ms.Read(buffer, 0, buffer.Length);
+                Properties.Settings.Default.ContestList = Convert.ToBase64String(buffer);
                 Properties.Settings.Default.Save();
             }
         }
@@ -218,7 +250,7 @@ namespace WinnerWinnerChickenDinner
                 }
 
                 contestant.LastName = (string)(range.Cells[rCnt, 5] as Range).Value2.ToString();
-                
+
                 try
                 {
                     contestant.FullName = (string)(range.Cells[rCnt, 6] as Range).Value2.ToString();
@@ -244,7 +276,7 @@ namespace WinnerWinnerChickenDinner
                 {
                     contestant.Email = " ";
                 }
-                
+
                 // add contestant to the list
                 ContestantList.Add(contestant);
 
@@ -288,7 +320,7 @@ namespace WinnerWinnerChickenDinner
         /// Additiionally, if the user has selected to not allow for multiple wins, the winner is removed from the current contestant list.
         /// </summary>
         private async void Button_Click(object sender, RoutedEventArgs e)
-        {  
+        {
             //error check that
             if (lst_PrizeBoard.SelectedItem == null)
             {
@@ -350,7 +382,7 @@ namespace WinnerWinnerChickenDinner
                         System.Media.SoundPlayer player2 = new System.Media.SoundPlayer(congratsSoundFile);
 
                         player2.Play();
-                       
+
 
                         //remove winner from list after they win
                         if (!SettingsWindow.allowMultipleWins)
