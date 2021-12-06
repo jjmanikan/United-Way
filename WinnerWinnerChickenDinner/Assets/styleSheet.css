@@ -1,0 +1,100 @@
+body
+{
+	background: url('background2.jpg');    
+    	background-size: cover;  
+    	background-attachment: fixed;
+	background-repeat: no-repeat;
+	
+}
+
+.title
+{
+	color:darkblue;
+	font-family:arial;
+	font-size:50px;
+	border-style: solid black;
+	border-width: 2px 10px 4px 20px;
+}
+
+.heading
+{
+	font-size:30px;
+	color:red;
+}
+
+table
+{
+	background-color:#f2f2f2;
+	background: rgba(255,255,255,0.8);
+	font-family:Arial;
+	border:2px red solid;
+	color:#4d4d4d;
+	border-radius: 10px;
+}
+
+.textSection
+{
+	width:300px;
+	height:20px;
+	text-align:center;
+	font-size:20px;
+}
+
+h2
+{
+	padding:10px;
+	color:white;
+	font-size:40px;
+	font-family:Arial;
+	background-color:#262626;
+	text-align:center;
+	height: 45px;
+	border-radius: 10px;
+	
+	
+}
+
+[data-tab-content] 
+{
+	display: none;
+}
+
+.active[data-tab-content] 
+{
+	display: block;
+}
+
+.tabs 
+{
+	display: flex;
+  	justify-content: space-around;
+  	font-size:20px;
+  	font-family:Arial;
+  	list-style-type: none;
+  	padding: 0;
+  	margins:0;
+  	font-weight: bold;
+  	color:#333333
+}
+
+.tab 
+{
+  	cursor: pointer;
+  	padding: 10px;
+}
+
+.tab.active 
+{
+  	background-color: #CCC;
+}
+
+.tab:hover 
+{
+  	background-color: #AAA;
+}
+
+.tab-content 
+{
+  	margin-left: 20px;
+  	margin-right: 20px;
+}
