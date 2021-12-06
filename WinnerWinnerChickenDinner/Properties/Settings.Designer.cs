@@ -59,18 +59,20 @@ namespace WinnerWinnerChickenDinner.Properties {
             }
         }
         
+
+
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Empty")]
-        public string ContestName {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ContestList {
             get {
-                return ((string)(this["ContestName"]));
+                return ((string)(this["ContestList"]));
             }
             set {
-                this["ContestName"] = value;
+                this["ContestList"] = value;
             }
         }
-
+        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Empty")]
@@ -83,6 +85,18 @@ namespace WinnerWinnerChickenDinner.Properties {
             set
             {
                 this["FilePath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Empty")]
+        public string ContestName {
+            get {
+                return ((string)(this["ContestName"]));
+            }
+            set {
+                this["ContestName"] = value;
             }
         }
     }

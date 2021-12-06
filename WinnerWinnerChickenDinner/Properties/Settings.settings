@@ -11,6 +11,15 @@
     <Setting Name="MultipleWins" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+
+    <Setting Name="FilePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    </Setting>
+    <Setting Name="ContestList" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+
+    </Setting>
     <Setting Name="ContestName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Empty</Value>
     </Setting>

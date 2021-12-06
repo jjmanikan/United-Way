@@ -352,7 +352,56 @@ namespace WinnerWinnerChickenDinner
             {
                 prizeBox.Text = "";
             }
+
         }
+        
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            contestantsListView.Items.Clear();
+            prizeBoard.Items.Clear();
+          
+            //TODO: Make combobox like a text box to replace textbox
+            string currentcontest = contestCmbx.SelectedItem.ToString();
+
+            if(MainWindow.ContestList.Any(c => c.ContestName == currentcontest))
+            {
+              
+                ContestN current = MainWindow.ContestList.Find(c => c.ContestName == currentcontest);
+                filePathBox.Text = current.FilePath;
+                contestTitle.Content = current.ContestName;
+
+                allowMultipleWins = current.MultipleWins;
+                AllowMultipleWins.IsChecked = allowMultipleWins;
+
+
+                foreach(var c in current.ContestantList)
+                {
+                    Console.WriteLine(c.FullName);
+                }
+
+
+                MainWindow.ContestantList = current.ContestantList;
+                MainWindow.prizeList = current.Prizes;
+
+                LoadChanges();
+            }
+            else
+            {
+                //TODO: Change way of dereferencing static list
+                MainWindow.ContestantList = new List<Contestant>();
+                MainWindow.prizeList = new List<PrizeBoardItem>();
+
+                contestName.Text = "";
+                contestTitle.Content = "";
+
+                filePathBox.Text = "";
+                btnUploadFile.IsEnabled = true;
+            }
+
+            Console.WriteLine(currentcontest);
+
+        }
+
 
         private void prizeBox_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -360,6 +409,42 @@ namespace WinnerWinnerChickenDinner
             {
                 prizeBox.Text = "Enter Prize Here...";
             }
+        }
+
+        /// <summary>
+        /// TODO: Refactor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteContest(object sender, RoutedEventArgs e)
+        {
+            var contest = MainWindow.ContestList.SingleOrDefault(c => c.ContestName == contestName.Text);
+
+            if(contest != null)
+            {
+                MainWindow.ContestList.Remove(contest);
+
+                contestCmbx.Items.Remove(contestName.Text);
+
+                //TODO: Put this in a different method, repetitive
+                contestName.Text = "Empty";
+                contestTitle.Content = "Empty";
+
+                filePathBox.Text = "Choose File to Upload";
+                btnUploadFile.IsEnabled = true;
+
+                MainWindow.ContestantList.Clear();
+                MainWindow.prizeList.Clear();
+
+                prizeBoard.Items.Clear();
+                contestantsListView.Items.Clear();
+
+                Properties.Settings.Default.Reset();
+                mainWindow.saveContestToSettings(MainWindow.ContestList);
+            }
+
+            
+
         }
     }
 
