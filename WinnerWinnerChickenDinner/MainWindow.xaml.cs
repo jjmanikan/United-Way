@@ -184,7 +184,7 @@ namespace WinnerWinnerChickenDinner
         }
 
         /// <summary>
-        /// Accesses the excel file chosen by the user and walks through each cell populating each contestant information
+        /// Accesses the excel file chosen by the user and walks through each cell populating each contestant information, move method to appropriate class
         /// </summary>
         public void ImportContestants()
         {
@@ -310,7 +310,7 @@ namespace WinnerWinnerChickenDinner
 
 
         /// <summary>
-        /// fill prize board (UI component) with prizes added by user in Settings
+        /// fill prize board (UI component) with prizes added by user in Settings, move method to prizeboard class
         /// </summary>
         public void FillPrizeBoard()
         {

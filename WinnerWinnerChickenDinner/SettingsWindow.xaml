@@ -37,7 +37,7 @@
         <Label x:Name="contestTitle"  Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="212,14,0,0" VerticalAlignment="Top" Width="549" FontFamily="Arial" FontWeight="Bold" Foreground="White" FontSize="31" Height="46" Grid.ColumnSpan="4"/>
         <Image Source="Assets/logo1.png" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="212"/>
         <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="31,400,0,0" Stroke="Red" VerticalAlignment="Top" Width="700" Grid.ColumnSpan="4"/>
-        <ComboBox x:Name="contestCmbx" Width="120" SelectionChanged="ComboBox_SelectionChanged" IsEditable="True" Grid.Column="2" Margin="4,80,353,310" />
+        <ComboBox x:Name="contestCmbx" Width="120" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="2" Margin="4,80,353,310" />
         <ListView x:Name="contestantsListView" HorizontalAlignment="Left" Height="202" Margin="4,165,0,0" VerticalAlignment="Top" Width="504" Grid.Column="2" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
@@ -52,7 +52,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button Content="Delete Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="129,80,0,0" VerticalAlignment="Top" Width="95"/>
+        <Button Content="Delete Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="129,80,0,0" VerticalAlignment="Top" Width="95" Click="DeleteContest"/>
         <Button Content="Start New Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="229,80,0,0" VerticalAlignment="Top" Width="114" RenderTransformOrigin="-0.168,0.771"/>
     </Grid>
 </Window>

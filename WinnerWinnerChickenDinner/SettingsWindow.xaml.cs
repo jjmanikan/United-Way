@@ -400,6 +400,42 @@ namespace WinnerWinnerChickenDinner
             Console.WriteLine(currentcontest);
 
         }
+
+        /// <summary>
+        /// TODO: Refactor
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DeleteContest(object sender, RoutedEventArgs e)
+        {
+            var contest = MainWindow.ContestList.SingleOrDefault(c => c.ContestName == contestName.Text);
+
+            if(contest != null)
+            {
+                MainWindow.ContestList.Remove(contest);
+
+                contestCmbx.Items.Remove(contestName.Text);
+
+                //TODO: Put this in a different method, repetitive
+                contestName.Text = "Empty";
+                contestTitle.Content = "Empty";
+
+                filePathBox.Text = "Choose File to Upload";
+                btnUploadFile.IsEnabled = true;
+
+                MainWindow.ContestantList.Clear();
+                MainWindow.prizeList.Clear();
+
+                prizeBoard.Items.Clear();
+                contestantsListView.Items.Clear();
+
+                Properties.Settings.Default.Reset();
+                mainWindow.saveContestToSettings(MainWindow.ContestList);
+            }
+
+            
+
+        }
     }
 }
 
