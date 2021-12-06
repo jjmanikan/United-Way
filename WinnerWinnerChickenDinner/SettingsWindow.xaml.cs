@@ -33,19 +33,6 @@ namespace WinnerWinnerChickenDinner
             InitializeComponent();
             GetSettings();
             LoadChanges();
-
-            if (MainWindow.ContestList != null)
-            {
-                foreach (var c in MainWindow.ContestList)
-                {
-                    contestCmbx.Items.Add(c.ContestName);
-
-                }
-            }
-
-
-            contestCmbx.Items.Add("{Start New Contest}");
-            
         }
 
         private void AddPrize(object sender, RoutedEventArgs e)
@@ -189,22 +176,6 @@ namespace WinnerWinnerChickenDinner
                 mainWindow.savePrizesToSettings(MainWindow.prizeList);
                 mainWindow.saveContestantsToSettings(MainWindow.ContestantList);
 
-                if (MainWindow.ContestList.Any(contest => contest.ContestName == contestName.Text))
-                {
-                    //update
-                   // MainWindow.ContestList.Where(c => c.ContestName == contestName.Text).
-                }
-                else
-                {
-                    ContestN contest = new ContestN(contestName.Text, Properties.Settings.Default.MultipleWins, filePathBox.Text, MainWindow.prizeList, MainWindow.ContestantList);
-                    MainWindow.ContestList.Add(contest);
-                    
-                    mainWindow.saveContestToSettings(MainWindow.ContestList);
-                    
-
-                    
-                }
-
                 Properties.Settings.Default.ContestName = contestName.Text;
                 Properties.Settings.Default.FilePath = filePathBox.Text;
                 Properties.Settings.Default.Save();
@@ -254,7 +225,7 @@ namespace WinnerWinnerChickenDinner
                     filePathBox.BorderBrush = System.Windows.Media.Brushes.Red;
                 }
 
-                return validation;
+                    return validation;
             }
         }
 
@@ -272,17 +243,16 @@ namespace WinnerWinnerChickenDinner
                     prizeBoard.Items.Add(prizeItem);
                 }
             }
-            
         }
+
+
 
         public void GetSettings()
         {
             allowMultipleWins = Properties.Settings.Default.MultipleWins;
             contestName.Text = Properties.Settings.Default.ContestName;
             contestTitle.Content = Properties.Settings.Default.ContestName;
-
             
-
             if (Properties.Settings.Default.FilePath == "")
             {
                 filePathBox.Text = "Choose File to Upload";
@@ -308,9 +278,9 @@ namespace WinnerWinnerChickenDinner
 
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            allowMultipleWins = true;
-            Properties.Settings.Default.MultipleWins = true;
-            Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
+                allowMultipleWins = true;
+                Properties.Settings.Default.MultipleWins = true;
+                Console.WriteLine("Allow Multiple Wins : " + allowMultipleWins);
             Properties.Settings.Default.Save();
         }
 
@@ -363,12 +333,11 @@ namespace WinnerWinnerChickenDinner
 
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            if (backbutton == false)
+            if(backbutton == false)
             {
                 this.mainWindow.Close();
             }
         }
-
 
         private void BtnInfo(object sender, RoutedEventArgs e)
         {
@@ -394,52 +363,5 @@ namespace WinnerWinnerChickenDinner
         }
     }
 
-
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            contestantsListView.Items.Clear();
-            prizeBoard.Items.Clear();
-          
-            //TODO: Make combobox like a text box to replace textbox
-            string currentcontest = contestCmbx.SelectedItem.ToString();
-
-            if(MainWindow.ContestList.Any(c => c.ContestName == currentcontest))
-            {
-              
-                ContestN current = MainWindow.ContestList.Find(c => c.ContestName == currentcontest);
-                filePathBox.Text = current.FilePath;
-                contestTitle.Content = current.ContestName;
-
-                allowMultipleWins = current.MultipleWins;
-                AllowMultipleWins.IsChecked = allowMultipleWins;
-
-
-                foreach(var c in current.ContestantList)
-                {
-                    Console.WriteLine(c.FullName);
-                }
-
-
-                MainWindow.ContestantList = current.ContestantList;
-                MainWindow.prizeList = current.Prizes;
-
-                LoadChanges();
-            }
-            else
-            {
-                MainWindow.ContestantList.Clear();
-                MainWindow.prizeList.Clear();
-
-                contestName.Text = "";
-                contestTitle.Content = "";
-
-                filePathBox.Text = "";
-                btnUploadFile.IsEnabled = true;
-            }
-
-            Console.WriteLine(currentcontest);
-
-        }
-    }
 }
 

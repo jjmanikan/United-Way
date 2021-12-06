@@ -331,47 +331,5 @@
         </Button>
 
 
-
-        <ListView  FontWeight="Bold" FontSize="15" BorderBrush =" Gray" Foreground="LightSkyBlue" FontFamily="Arial" BorderThickness="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" x:Name="prizeBoard" Margin="31,165,24,102">
-            <ListView.View>
-                <GridView ColumnHeaderContainerStyle="{StaticResource HeaderStyle}">
-                    <GridViewColumn DisplayMemberBinding="{Binding PrizeName}" Header="PRIZES" Width="150"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button x:Name="AddPrizeBtn" Content="ADD" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" Margin="31,313,110,0" VerticalAlignment="Top" Click="AddPrize" Height="20"/>
-        <Button x:Name="deleteBtn" Content="REMOVE" Click="deleteBtn_Click" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" Margin="118,313,25,0" VerticalAlignment="Top"  Height="20"/>
-
-        <Button x:Name="saveBtn" Content="SAVE AND CONTINUE" Foreground="White" Background="Red" FontSize="15" BorderThickness ="1.5" FontWeight="Bold" HorizontalAlignment="Left" VerticalContentAlignment="Center" Margin="32,339,0,0" VerticalAlignment="Top" Width="160" Click="Save" Height="28"/>
-        <Button x:Name="btnUploadFile" Content="UPLOAD" Foreground="White" FontWeight="Bold" Background="LightSkyBlue" HorizontalAlignment="Left" Margin="441,105,0,0" VerticalAlignment="Top" Width="67" Click="btnUploadFile_Click"  Height="23" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="filePathBox" HorizontalAlignment="Left" Height="23" Margin="4,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="437" IsEnabled="false" Grid.Column="2" BorderBrush="Black"/>
-        <Label x:Name="contestantsListLabel" Content="Current Contestants in the Raffle" HorizontalContentAlignment="Center" Foreground="DimGray" FontSize="18" FontWeight="Bold" FontFamily="Arial" HorizontalAlignment="Left" Height="36" Margin="4,131,0,0" VerticalAlignment="Top" Width="534" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <TextBox x:Name="contestName" HorizontalAlignment="Left" Height="23" Margin="31,105,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="161" FontWeight="Bold" BorderBrush=" Gray" Foreground="Red"/>
-        <Label Content="Contest Name"  HorizontalAlignment="Left" Margin="31,80,0,0" VerticalAlignment="Top" Foreground="DimGray"  FontWeight="Bold" HorizontalContentAlignment="Center" Width="161" Height="24"/>
-        <CheckBox x:Name="AllowMultipleWins" Content="Allow Multiple Wins" Foreground="DimGray"  FontWeight="Bold" HorizontalAlignment="Left" Margin="31,138,0,0" VerticalAlignment="Top" Width="161" Checked="CheckBox_Checked" Height="15" Unchecked="CheckBox_Unchecked"/>
-        <Label x:Name="errorMessage2" Foreground="Red" HorizontalContentAlignment="Left" HorizontalAlignment="Left" Margin="159,367,0,0" VerticalAlignment="Top" Height="28" Width="369"  FontWeight="Bold" Grid.Column="2" Grid.ColumnSpan="2"/>
-        <Label x:Name="errorMessage1"  HorizontalContentAlignment="Right" HorizontalAlignment="Left" Margin="0,367,0,0" VerticalAlignment="Top" Height="28" Width="382"  FontWeight="Bold" Grid.ColumnSpan="3"/>
-        <Rectangle Fill="DimGray" HorizontalAlignment="Left" Height="69" Margin="212,0,0,0" Stroke="DimGray" VerticalAlignment="Top" Width="549" Grid.ColumnSpan="4"/>
-        <Label x:Name="contestTitle"  Content="New Contest" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="212,14,0,0" VerticalAlignment="Top" Width="549" FontFamily="Arial" FontWeight="Bold" Foreground="White" FontSize="31" Height="46" Grid.ColumnSpan="4"/>
-        <Image Source="Assets/logo1.png" HorizontalAlignment="Left" Height="75" VerticalAlignment="Top" Width="212"/>
-        <Rectangle Fill="Red" HorizontalAlignment="Left" Height="6" Margin="31,400,0,0" Stroke="Red" VerticalAlignment="Top" Width="700" Grid.ColumnSpan="4"/>
-        <ComboBox x:Name="contestCmbx" Width="120" SelectionChanged="ComboBox_SelectionChanged" IsEditable="True" Grid.Column="2" Margin="4,80,353,310" />
-        <ListView x:Name="contestantsListView" HorizontalAlignment="Left" Height="202" Margin="4,165,0,0" VerticalAlignment="Top" Width="504" Grid.Column="2" Grid.ColumnSpan="2">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="Tickets" DisplayMemberBinding="{Binding Tickets}"/>
-                    <GridViewColumn Header="Prefix" DisplayMemberBinding="{Binding Prefix}"/>
-                    <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding FirstName}"/>
-                    <GridViewColumn Header="Middle Name" DisplayMemberBinding="{Binding MiddleName}"/>
-                    <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding LastName}"/>
-                    <GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding FullName}"/>
-                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"/>
-                    <GridViewColumn Header="Phone Number" DisplayMemberBinding="{Binding PhoneNumber}"/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Button Content="Delete Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="129,80,0,0" VerticalAlignment="Top" Width="95"/>
-        <Button Content="Restart Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="229,80,0,0" VerticalAlignment="Top" Width="94" RenderTransformOrigin="-0.055,0.843"/>
-
     </Grid>
 </Window>
