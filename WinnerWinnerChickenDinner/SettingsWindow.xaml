@@ -329,12 +329,40 @@
                 >
             <Image Source="Assets/info.png" />
         </Button>
-        
-        <ComboBox x:Name="contestCmbx" Width="120" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="2" Margin="4,80,353,310" />
-   
-       
-        <Button Content="Delete Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="129,80,0,0" VerticalAlignment="Top" Width="95" Click="DeleteContest"/>
-        <Button Content="Start New Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="229,80,0,0" VerticalAlignment="Top" Width="114" RenderTransformOrigin="-0.168,0.771"/>
+        <Border
+            BorderBrush="Gray"
+            BorderThickness="0.7"
+            CornerRadius="4"
+            Grid.Row="10" 
+            Grid.ColumnSpan="3"
+            Grid.Column="12" Margin="0,2,5,6">
+
+            <ComboBox x:Name="contestCmbx" SelectionChanged="ComboBox_SelectionChanged" Grid.Column="11" Margin="-1,-1,0,-2" Grid.ColumnSpan="4" Grid.Row="10" Height="25" VerticalAlignment="Top" HorizontalAlignment="Left" Width="127" />
+
+        </Border>
+        <Border
+            BorderBrush="Gray"
+            BorderThickness="0.7"
+            CornerRadius="4"
+            Grid.Row="20"
+            Grid.Column="11" Margin="186,18,102,34">
+            <Button Content="Delete Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="2,-1,-1,0" VerticalAlignment="Top" Width="95" Click="DeleteContest"/>
+        </Border>
+
+
+        <Border
+            BorderBrush="Gray"
+            BorderThickness="0.7"
+            CornerRadius="4"
+            Grid.Row="20"
+            Grid.Column="11" Margin="289,3,0,41" Grid.ColumnSpan="3">
+
+            <Button Content="Start New Contest" Grid.Column="2" HorizontalAlignment="Left" Margin="9,9,0,0" VerticalAlignment="Top" Width="114" RenderTransformOrigin="-0.168,0.771"/>
+        </Border>
+
+
+
+
 
     </Grid>
 </Window>
