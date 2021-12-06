@@ -440,7 +440,7 @@ namespace WinnerWinnerChickenDinner
                 contestantsListView.Items.Clear();
 
                 Properties.Settings.Default.Reset();
-                mainWindow.saveContestToSettings(MainWindow.ContestList);
+                mainWindow.saveContestsToSettings(MainWindow.ContestList);
             }
 
             

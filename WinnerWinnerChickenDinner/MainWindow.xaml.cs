@@ -51,6 +51,7 @@ namespace WinnerWinnerChickenDinner
         private Random _rnd = new Random(DateTime.UtcNow.Millisecond);
         public static List<Contestant> ContestantList = new List<Contestant>();
         public static List<Ticket<string>> TicketsList = new List<Ticket<string>>();
+        public static List<ContestN> ContestList = new List<ContestN>();
         public static string contestTitle = "";
         
 
@@ -132,6 +133,21 @@ namespace WinnerWinnerChickenDinner
                 Properties.Settings.Default.Save();
             }
         }
+
+        public void saveContestsToSettings(List<ContestN> contestList)
+        {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                bf.Serialize(ms, contestList);
+                ms.Position = 0;
+                byte[] buffer = new byte[(int)ms.Length];
+                ms.Read(buffer, 0, buffer.Length);
+                Properties.Settings.Default.ContestList = Convert.ToBase64String(buffer);
+                Properties.Settings.Default.Save();
+            }
+        }
+
 
         //saves current contestant list to property settings so that it can be retreived next time this window is opened
         public void saveContestantsToSettings(List<Contestant> contestantList)
