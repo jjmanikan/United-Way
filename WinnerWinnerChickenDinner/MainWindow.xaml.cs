@@ -83,6 +83,15 @@ namespace WinnerWinnerChickenDinner
                 Console.WriteLine("Prize Exception: " + e.Message);
             }
 
+            try
+            {
+                ContestList = loadContests();
+            }
+            catch (SerializationException e)
+            {
+                Console.WriteLine("Contest Exception: " + e.Message);
+            }
+
 
             TicketsList.Clear();
             //skip first line since its the header
@@ -107,6 +116,14 @@ namespace WinnerWinnerChickenDinner
             
         }
 
+        private List<ContestN> loadContests()
+        {
+            using (MemoryStream ms = new MemoryStream(Convert.FromBase64String(Properties.Settings.Default.ContestList)))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                return (List<ContestN>)bf.Deserialize(ms);
+            }
+        }
 
 
         //retrieve the list of current contestants from saved property settings

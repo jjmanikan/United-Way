@@ -33,6 +33,18 @@ namespace WinnerWinnerChickenDinner
             InitializeComponent();
             GetSettings();
             LoadChanges();
+
+            if (MainWindow.ContestList != null)
+            {
+                foreach (var c in MainWindow.ContestList)
+                {
+                    contestCmbx.Items.Add(c.ContestName);
+
+                }
+            }
+
+
+            contestCmbx.Items.Add("{Start New Contest}");
         }
 
         private void AddPrize(object sender, RoutedEventArgs e)
@@ -175,6 +187,22 @@ namespace WinnerWinnerChickenDinner
 
                 mainWindow.savePrizesToSettings(MainWindow.prizeList);
                 mainWindow.saveContestantsToSettings(MainWindow.ContestantList);
+
+                if (MainWindow.ContestList.Any(contest => contest.ContestName == contestName.Text))
+                {
+                    //update
+                    // MainWindow.ContestList.Where(c => c.ContestName == contestName.Text).
+                }
+                else
+                {
+                    ContestN contest = new ContestN(contestName.Text, Properties.Settings.Default.MultipleWins, filePathBox.Text, MainWindow.prizeList, MainWindow.ContestantList);
+                    MainWindow.ContestList.Add(contest);
+
+                    mainWindow.saveContestsToSettings(MainWindow.ContestList);
+
+
+
+                }
 
                 Properties.Settings.Default.ContestName = contestName.Text;
                 Properties.Settings.Default.FilePath = filePathBox.Text;
@@ -369,6 +397,7 @@ namespace WinnerWinnerChickenDinner
                 ContestN current = MainWindow.ContestList.Find(c => c.ContestName == currentcontest);
                 filePathBox.Text = current.FilePath;
                 contestTitle.Content = current.ContestName;
+                contestName.Text = current.ContestName;
 
                 allowMultipleWins = current.MultipleWins;
                 AllowMultipleWins.IsChecked = allowMultipleWins;
