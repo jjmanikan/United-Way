@@ -28,6 +28,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace WinnerWinnerChickenDinner
 {
@@ -59,7 +60,6 @@ namespace WinnerWinnerChickenDinner
             Console.WriteLine("Total Tickets after ini " + totalTickets);
             InitializeComponent();
 
-
             Properties.Settings.Default.Upgrade();
             //Properties.Settings.Default.Save(); - keeping for testing
             try
@@ -84,14 +84,9 @@ namespace WinnerWinnerChickenDinner
                 Console.WriteLine("Prize Exception: " + e.Message);
             }
 
-            try
-            {
-                ContestList = loadContests();
-            }
-            catch (SerializationException e)
-            {
-                Console.WriteLine("Contest Exception: " + e.Message);
-            }
+
+
+            TicketsList.Clear();
 
             //skip first line since its the header
             //for every contestant, retrieve full name and the number of tickets and add to a list that is used for determining the winner
@@ -100,6 +95,8 @@ namespace WinnerWinnerChickenDinner
                 Ticket<string> contestant = new Ticket<string>(c.FullName, Int32.Parse(c.Tickets));
                 TicketsList.Add(contestant);
             }
+
+            Console.WriteLine("Current total tickets after getting settings in main " + MainWindow.totalTickets);
         }
 
         private List<ContestN> loadContests()
@@ -435,6 +432,12 @@ namespace WinnerWinnerChickenDinner
         private void KillApp(object sender, System.ComponentModel.CancelEventArgs e)
         {
             System.Windows.Forms.Application.Exit();
+        }
+
+        private void BtnInfo(object sender, RoutedEventArgs e)
+        {
+            String htmlPath = Directory.GetCurrentDirectory() + @"\..\..\Assets\helpPage.html";
+            Process.Start(htmlPath);
         }
     }
 
